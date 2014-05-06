@@ -23,4 +23,9 @@
 		<item value="16" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+		<item value="true" key="uncategorizedFilter"/>
+		<item value="true" key="internalFilter"/>
+		<item value="true" key="actionSetFilter"/>
+	</section>
 </section>
