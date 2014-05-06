@@ -1,12 +1,7 @@
-/*
- * @author	Elijah Freestone 
- *
- * Project	Java2Project1
- * 
- * Package	com.elijahfreestone.java2project1
- * 
- * date		May 6, 2014
- */
+//Elijah Freestone
+//Java 2 term 1405
+//Week 1
+//May 5th, 2014
 
 package com.elijahfreestone.java2project1;
 
@@ -14,15 +9,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class MainActivity.
- */
 public class MainActivity extends Activity {
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreate(android.os.Bundle)
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +18,6 @@ public class MainActivity extends Activity {
     }
 
 
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
