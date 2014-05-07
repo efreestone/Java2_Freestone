@@ -10,6 +10,8 @@
 
 package com.elijahfreestone.java2project1;
 
+
+
 import com.elijahfreestone.cities.NetworkConnection;
 
 import android.app.Activity;
@@ -40,11 +42,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
         myContext = this;
-
+        
+        System.out.println("onCreate Working");
         
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				System.out.println("Button Clicked");
@@ -56,18 +60,66 @@ public class MainActivity extends Activity {
 				} else {
 					// Create alert dialog for no connection
 					AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+					// Set dialog title to Connection Error
 					alertDialog.setTitle(R.string.noConnectionTitle);
 					// Set alert message. setMessage only has a charSequence
-					// version so getString must be used.
+					// version so egtString must be used.
 					alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
+					// Set OK Button
 					alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+					// Show Alert Dailog
 					alertDialog.show();
 				}
-			} //onClick Close
-		}); //onClickListener Close
-		
-		
-    } //onCreate Close
+			}
+
+
+//			@Override
+//			public void onClick(View v) {
+//
+//				// Check network connection
+//				if (NetworkConnection.connectionStatus(myContext)) {
+//					// displayTempView.setText("Yay it works!!");
+//					// Create instance of get data class which is located in
+//					// NetworkConnection.jar
+//					getData data = new getData();
+//					// Call get data and pass the full URL for the api call
+//					data.execute(fullURLString);
+//
+//					// Check viewInflated bool
+//					if (viewInflated == false) {
+//						// Set bool to true
+//						viewInflated = true;
+//						inflateView.addView(myView);
+//						// Change style of displayed temp/forecast
+//						displayTempView.setTextAppearance(myContext,
+//								R.style.displayStyle);
+//					}
+//				} else {
+//					// viewInflated = false;
+//					// Create alert dialog for no connection
+//					AlertDialog alertDialog = new AlertDialog.Builder(
+//							MainActivity.this).create();
+//					// Set dialog title to Connection Error
+//					alertDialog.setTitle(R.string.noConnectionTitle);
+//					// Set alert message. setMessage only has a charSequence
+//					// version so egtString must be used.
+//					alertDialog.setMessage(myContext
+//							.getString(R.string.noConnectionAlert));
+//					// Set OK Button
+//					alertDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+//							"OK", (DialogInterface.OnClickListener) null);
+//					// Show Alert Dailog
+//					alertDialog.show();
+//				}
+//			}
+//
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+		});
+    }
 
 
     /* (non-Javadoc)
