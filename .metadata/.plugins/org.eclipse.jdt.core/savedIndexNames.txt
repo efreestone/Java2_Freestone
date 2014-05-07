@@ -1,6 +1,3 @@
 INDEX VERSION 1.126+/Volumes/Second HD/elijahfreestone/Desktop/Java2_Freestone/.metadata/.plugins/org.eclipse.jdt.core
 598610079.index
 3149514972.index
-235819918.index
-2044674412.index
-1022266448.index

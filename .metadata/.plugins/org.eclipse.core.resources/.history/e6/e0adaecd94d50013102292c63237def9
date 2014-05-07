@@ -10,6 +10,8 @@
 
 package com.elijahfreestone.java2project1;
 
+//import com.elijahfreestone.cities.NetworkConnection;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
