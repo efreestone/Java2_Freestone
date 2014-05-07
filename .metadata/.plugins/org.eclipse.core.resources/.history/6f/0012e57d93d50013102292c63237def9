@@ -7,19 +7,19 @@
  * 
  * date		May 6, 2014
  */
-
 package com.elijahfreestone.networkConnection;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-
+// TODO: Auto-generated Javadoc
 /**
- * The Class NetworkConnection tests is used to check for a network connection using ConnectivityManager and NetworkInfo.
+ * The Class NetworkConnection tests for a network connection and displays an alert if one does not exist.
  */
 public class NetworkConnection {
 	
+	// Method to test network
 	/**
 	 * Connection status.
 	 *
@@ -27,17 +27,24 @@ public class NetworkConnection {
 	 * @return the boolean
 	 */
 	public static Boolean connectionStatus(Context myContext) {
+		// Set connection bool to false
 		Boolean connectionBool = false;
 
-		ConnectivityManager connectionManager = (ConnectivityManager) myContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-		
+		// Create connectivity manager
+		ConnectivityManager connectionManager = (ConnectivityManager) myContext
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		// Create Network info
 		NetworkInfo networkInfo = connectionManager.getActiveNetworkInfo();
-		
+		// Check if network info is null
 		if (networkInfo != null) {
+			// Check if network info is connected
 			if (networkInfo.isConnected()) {
+				// Set connection bool to true
 				connectionBool = true;
 			}
 		}
+		// Return connection bool
 		return connectionBool;
 	}
+
 }
