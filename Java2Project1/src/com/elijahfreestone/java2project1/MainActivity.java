@@ -14,10 +14,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -27,7 +34,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
  */
 public class MainActivity extends Activity {
 	static Context myContext;
-	static String TAG = "MAIN ACTIVITY";
+	static String TAG = "NETWORK DATA - MAINACTIVITY";
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -41,15 +48,62 @@ public class MainActivity extends Activity {
 
         
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+        final TextView testTextView = (TextView) findViewById(R.id.test_textview);
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				String testString = "10";
 				System.out.println("Button Clicked");
 				//Toast.makeText(myContext, "Button Clicked", Toast.LENGTH_LONG).show();
 				
 				if (NetworkConnection.connectionStatus(myContext)) {
 					System.out.println("Network Works!!");
+//					if (testString.length() == 0) {
+//						//Toast.makeText(this, "Please enter a number", Toast.LENGTH_LONG).show();
+//						Toast.makeText(myContext, "Please enter a number", Toast.LENGTH_LONG).show();
+//						
+//					}
+					
+					//Create Handler for Service
+					Handler dataHandler = new Handler() {
+
+						@Override
+						public void handleMessage(Message msg) {
+							// TODO Auto-generated method stub
+							//super.handleMessage(msg);
+							String responseString = null;
+							
+							if (msg.arg1 == RESULT_OK && msg.obj != null) {
+								try {
+									responseString = (String) msg.obj;
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									Log.e("handleMessage", e.getMessage().toString());
+									
+									e.printStackTrace();
+								}
+								
+								//Toast.makeText(myContext, responseString, Toast.LENGTH_LONG).show();
+								testTextView.setText(responseString);
+							}
+						}
+					};
+					
+					//Create Messenger class for ref to handler
+					Messenger dataMessenger = new Messenger(dataHandler);
+					
+					//Create Intent to start service
+					Intent startDataIntent = new Intent(myContext, DataService.class);
+					startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+					startDataIntent.putExtra(DataService.TIME_KEY, testString);
+					
+					//Start the service
+					startService(startDataIntent);
+					
+					testTextView.setText("Waiting");
+					
+					
 					
 				} else {
 					// Create alert dialog for no connection
@@ -66,7 +120,6 @@ public class MainActivity extends Activity {
 		
 		
     } //onCreate Close
-
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
