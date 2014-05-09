@@ -66,8 +66,11 @@ public class MainActivity extends Activity {
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						Log.e("handleMessage", e.getMessage().toString());
+						
+						e.printStackTrace();
 					}
-
+					
+					//Toast.makeText(myContext, responseString, Toast.LENGTH_LONG).show();
 					testTextView.setText(responseString);
 				}
 			}
@@ -90,10 +93,11 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				String testString = "10";
-				//System.out.println("Button Clicked");
+				System.out.println("Button Clicked");
+				//Toast.makeText(myContext, "Button Clicked", Toast.LENGTH_LONG).show();
 				
 				if (NetworkConnection.connectionStatus(myContext)) {
-					//System.out.println("Network Works!!");
+					System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 					
 //					//Create Handler for Service
@@ -145,8 +149,6 @@ public class MainActivity extends Activity {
 					alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
 					alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 					alertDialog.show();
-					
-					Log.i(TAG, "No Network!!");
 				}
 			} //onClick Close
 		}); //onClickListener Close

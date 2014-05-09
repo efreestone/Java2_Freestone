@@ -66,6 +66,8 @@ public class MainActivity extends Activity {
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						Log.e("handleMessage", e.getMessage().toString());
+						
+						e.printStackTrace();
 					}
 
 					testTextView.setText(responseString);
