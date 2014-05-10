@@ -20,6 +20,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 public class DataService extends IntentService {
+	static String TAG = "DataService";
 	
 	public static final String MESSENGER_KEY = "messenger";
 	public static final String TIME_KEY = "time";
@@ -31,9 +32,9 @@ public class DataService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		// TODO Auto-generated method stub
+		TAG = "onHandleIntent";
 		
-		Log.i("onHandleIntent", "started");
+		Log.i(TAG, "started");
 		
 		Bundle extras = intent.getExtras();
 		Messenger messenger = (Messenger) extras.get(MESSENGER_KEY);
@@ -46,7 +47,7 @@ public class DataService extends IntentService {
 			countdown = Integer.parseInt(timer);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			Log.e("onHandleIntent", e.getMessage().toString());
+			Log.e(TAG, e.getMessage().toString());
 			
 		}
 		
@@ -61,7 +62,7 @@ public class DataService extends IntentService {
 			
 			countdown--;
 			
-			Log.i("onHandleIntent", "counter = " + String.valueOf(countdown));
+			Log.i(TAG, "counter = " + String.valueOf(countdown));
 		}
 		
 		Log.i("onHandleIntent", "counter is done");
@@ -74,7 +75,7 @@ public class DataService extends IntentService {
 			messenger.send(message);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
-			Log.e("onHandleIntent", e.getMessage().toString());
+			Log.e(TAG, e.getMessage().toString());
 		}	
 	}
 

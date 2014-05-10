@@ -26,9 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.elijahfreestone.networkConnection.NetworkConnection;
+import com.elijahfreestone.networkConnection.JSONData;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,7 +34,12 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
  */
 public class MainActivity extends Activity {
 	static Context myContext;
-	static String TAG = "MAINACTIVITY";
+	static String TAG = "MainActivity";
+	static String responseString = null;
+	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
+	String testString = "10";
+	
+	
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -46,11 +49,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
+        //final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
         
         myContext = this;
         
-        String testString = "10";
+        //String testString = "10";
         
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
         final TextView testTextView = (TextView) findViewById(R.id.test_textview);
@@ -60,7 +63,6 @@ public class MainActivity extends Activity {
 //
 //			@Override
 //			public void handleMessage(Message msg) {
-//				// TODO Auto-generated method stub
 //				//super.handleMessage(msg);
 //				String responseString = null;
 //				
@@ -68,7 +70,6 @@ public class MainActivity extends Activity {
 //					try {
 //						responseString = (String) msg.obj;
 //					} catch (Exception e) {
-//						// TODO Auto-generated catch block
 //						Log.e("handleMessage", e.getMessage().toString());
 //					}
 //
@@ -77,26 +78,28 @@ public class MainActivity extends Activity {
 //			}
 //		}; //handleMessage Close
 		
-		//Create Messenger class for ref to handler
-		Messenger dataMessenger = new Messenger(myServiceHandler);
-		
-		//Create Intent to start service
-		Intent startDataIntent = new Intent(myContext, DataService.class);
-		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
-		startDataIntent.putExtra(DataService.TIME_KEY, testString);
-		
-		//Start the service
-		startService(startDataIntent);
+//		//Create Messenger class for ref to handler
+//		Messenger dataMessenger = new Messenger(myServiceHandler);
+//		
+//		//Create Intent to start service
+//		Intent startDataIntent = new Intent(myContext, DataService.class);
+//		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+//		startDataIntent.putExtra(DataService.TIME_KEY, testString);
+//		
+//		//Start the service
+//		startService(startDataIntent);
+        
+        retrieveData();
 		
 		testTextView.setText("Waiting");
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String testString = "10";
+				//String testString = "10";
 				//System.out.println("Button Clicked");
 				
-				if (NetworkConnection.connectionStatus(myContext)) {
+				if (JSONData.connectionStatus(myContext)) {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 					
@@ -117,16 +120,6 @@ public class MainActivity extends Activity {
 		}); //onClickListener Close
 		
     } //onCreate Close
-
-    /* (non-Javadoc)
-     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-     */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
     
     private static class MyServiceHandler extends Handler {
     	
@@ -143,9 +136,15 @@ public class MainActivity extends Activity {
     		if (activity != null) {
 				Object returnObject = message.obj;
 				if (message.arg1 == RESULT_OK && returnObject != null) {
-					Log.i(TAG, "handleMessage");
+					try {
+						responseString = (String) message.obj;
+						Log.i(TAG, "handleMessage " + responseString);
+					} catch (Exception e) {
+						Log.e("handleMessage", e.getMessage().toString());
+					}
 //***********************Display data from file here***********************//
 					//displatDataFromFile
+					//testTextView.setText(responseString);
 					
 					
 				} else {
@@ -155,5 +154,20 @@ public class MainActivity extends Activity {
     		
     	} //HandleMessage Close
     } //MyHandler Close
+    
+    public void retrieveData() {
+    	Log.i(TAG, "retrieveData called");
+    	//Create Messenger class for ref to handler
+    	Messenger dataMessenger = new Messenger(myServiceHandler);
+    			
+    	//Create Intent to start service
+    	Intent startDataIntent = new Intent(myContext, DataService.class);
+    	startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+    	startDataIntent.putExtra(DataService.TIME_KEY, testString);
+    			
+    	//Start the service
+    	startService(startDataIntent);
+    	
+    }
     
 }
