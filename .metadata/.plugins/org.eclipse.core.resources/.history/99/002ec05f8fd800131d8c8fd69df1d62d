@@ -18,6 +18,8 @@ import java.net.URLConnection;
 
 import org.json.JSONException;
 
+import com.elijahfreestone.networkConnection.NetworkConnection;
+
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
