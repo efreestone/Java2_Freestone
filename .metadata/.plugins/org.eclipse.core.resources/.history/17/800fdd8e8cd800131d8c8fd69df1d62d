@@ -64,6 +64,8 @@ public class MainActivity extends Activity {
         retrieveData();
 		
 		testTextView.setText("Waiting");
+		
+		myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -80,7 +82,7 @@ public class MainActivity extends Activity {
 //						
 //					}
 					
-					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
+					//myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
 					
 				} else {
 					// Create alert dialog for no connection

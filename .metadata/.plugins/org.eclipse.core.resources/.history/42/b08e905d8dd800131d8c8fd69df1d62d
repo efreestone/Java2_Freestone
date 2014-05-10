@@ -63,7 +63,7 @@ public class DataManager {
 		//Create and open file input stream
 		FileInputStream fileInputStream = null;
 		try {
-			fileInputStream = context.openFileInput(fileName);
+			fileInputStream = context.openFileInput(fileName);s
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 			byte[] contentBytes = new byte[1024];
 			int bytesRead = 0;

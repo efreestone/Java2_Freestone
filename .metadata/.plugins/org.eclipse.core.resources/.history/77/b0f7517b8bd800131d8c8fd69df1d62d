@@ -63,21 +63,11 @@ public class DataManager {
 		//Create and open file input stream
 		FileInputStream fileInputStream = null;
 		try {
-			fileInputStream = context.openFileInput(fileName);
 			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
 			byte[] contentBytes = new byte[1024];
-			int bytesRead = 0;
-			StringBuffer contentBuffer = new StringBuffer();
-			//Loop through file and read
-			while ((bytesRead = bufferedInputStream.read(contentBytes)) != -1) {
-				fileContent = new String(contentBytes, 0, bytesRead);
-				//Append data to the content buffer
-				contentBuffer.append(fileContent);
-			}
-			
 		} catch (Exception e) {
 			Log.e("readStringToFile", e.getMessage().toString());
-		} finally { //closes file no matter what
+		} finally {
 			try {
 				fileInputStream.close();
 			} catch (IOException e) {
@@ -87,6 +77,6 @@ public class DataManager {
 		
 		
 		return fileContent;
-	} //readStringFromFile Close
+	}
 
 }

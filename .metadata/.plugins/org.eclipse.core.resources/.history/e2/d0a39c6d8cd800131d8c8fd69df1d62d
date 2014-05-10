@@ -74,11 +74,10 @@ public class MainActivity extends Activity {
 				if (JSONData.connectionStatus(myContext)) {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
-//					String
-//					
-//					if (condition) {
-//						
-//					}
+					
+					if (condition) {
+						
+					}
 					
 					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
 					

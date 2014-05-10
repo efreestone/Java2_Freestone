@@ -64,6 +64,8 @@ public class MainActivity extends Activity {
         retrieveData();
 		
 		testTextView.setText("Waiting");
+		
+		myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -74,13 +76,13 @@ public class MainActivity extends Activity {
 				if (JSONData.connectionStatus(myContext)) {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
-//					String
-//					
-//					if (condition) {
-//						
-//					}
+					String
 					
-					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
+					if (condition) {
+						
+					}
+					
+					//myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
 					
 				} else {
 					// Create alert dialog for no connection

@@ -60,6 +60,37 @@ public class MainActivity extends Activity {
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
         final TextView testTextView = (TextView) findViewById(R.id.test_textview);
         
+//        //Create Handler for Service
+//		Handler dataHandler = new Handler() {
+//
+//			@Override
+//			public void handleMessage(Message msg) {
+//				//super.handleMessage(msg);
+//				String responseString = null;
+//				
+//				if (msg.arg1 == RESULT_OK && msg.obj != null) {
+//					try {
+//						responseString = (String) msg.obj;
+//					} catch (Exception e) {
+//						Log.e("handleMessage", e.getMessage().toString());
+//					}
+//
+//					testTextView.setText(responseString);
+//				}
+//			}
+//		}; //handleMessage Close
+		
+//		//Create Messenger class for ref to handler
+//		Messenger dataMessenger = new Messenger(myServiceHandler);
+//		
+//		//Create Intent to start service
+//		Intent startDataIntent = new Intent(myContext, DataService.class);
+//		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+//		startDataIntent.putExtra(DataService.TIME_KEY, testString);
+//		
+//		//Start the service
+//		startService(startDataIntent);
+        
         //Call retrieveData to start the Service and get JSON data from the API
         retrieveData();
 		
@@ -74,11 +105,6 @@ public class MainActivity extends Activity {
 				if (JSONData.connectionStatus(myContext)) {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
-//					String
-//					
-//					if (condition) {
-//						
-//					}
 					
 					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
 					
