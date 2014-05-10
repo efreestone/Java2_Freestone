@@ -18,7 +18,7 @@ import java.net.URLConnection;
 
 import org.json.JSONException;
 
-import com.elijahfreestone.networkConnection.NetworkConnection;
+import com.elijahfreestone.networkConnection.JSONData;
 
 import android.app.Activity;
 import android.app.IntentService;
@@ -62,7 +62,7 @@ public class DataService extends IntentService {
 			Log.i(TAG, "Response String");
 			try {
 				//Call readJSON on JSONData and pass responseString
-				NetworkConnection.readJSON(responseString);
+				JSONData.readJSON(responseString);
 				Log.i(TAG, "readJSON called");
 			} catch (JSONException e) {
 				Log.e(TAG, e.getMessage().toString());

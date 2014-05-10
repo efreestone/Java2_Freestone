@@ -26,7 +26,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import com.elijahfreestone.networkConnection.NetworkConnection;
+import com.elijahfreestone.networkConnection.JSONData;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 				//String testString = "10";
 				//System.out.println("Button Clicked");
 				
-				if (NetworkConnection.connectionStatus(myContext)) {
+				if (JSONData.connectionStatus(myContext)) {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 //					String
