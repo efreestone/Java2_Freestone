@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
         //Call retrieveData to start the Service and get JSON data from the API
         retrieveData();
 		
-		testTextView.setText("Waiting");
+		//testTextView.setText("Waiting");
         
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override

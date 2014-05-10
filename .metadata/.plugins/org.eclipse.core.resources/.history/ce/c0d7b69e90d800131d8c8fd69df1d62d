@@ -68,6 +68,7 @@ public class MainActivity extends Activity {
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//String testString = "10";
 				//System.out.println("Button Clicked");
 				
 				if (NetworkConnection.connectionStatus(myContext)) {
