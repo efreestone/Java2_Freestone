@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 					
-					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
+					myDataManger.writeStringToFile(myContext, fileName, content)
 					
 				} else {
 					// Create alert dialog for no connection

@@ -37,9 +37,6 @@ public class MainActivity extends Activity {
 	static String TAG = "MainActivity";
 	static String responseString = null;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
-	DataManager myDataManger;
-	String myFileName = "string_from_url.txt";
-	
 	String testString = "10";
 	
 	
@@ -52,10 +49,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        //Grab instance of DataManager
-        myDataManger= DataManager.getInstance();
+        //final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
         
         myContext = this;
+        
+        //String testString = "10";
         
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
         final TextView testTextView = (TextView) findViewById(R.id.test_textview);
@@ -106,7 +104,6 @@ public class MainActivity extends Activity {
 					//System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 					
-					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
 					
 				} else {
 					// Create alert dialog for no connection
