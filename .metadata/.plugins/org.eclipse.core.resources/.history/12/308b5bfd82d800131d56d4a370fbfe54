@@ -62,9 +62,9 @@ public class JSONData {
 		for (int i = 0; i < newReleaseArray.length(); i++) {
 			dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
 			Log.i("newReleaseArray", "Title: " + dvdTitle);
-			releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
-			Log.i("newReleaseArray", "Release Date: " + releaseDate);
+			
 		}
+		
 		
 		
 		objectInfo = "";

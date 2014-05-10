@@ -89,7 +89,6 @@ public class MainActivity extends Activity {
 //		//Start the service
 //		startService(startDataIntent);
         
-        //Call retrieveData to start the Service and get JSON data from the API
         retrieveData();
 		
 		testTextView.setText("Waiting");

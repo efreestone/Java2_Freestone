@@ -61,7 +61,6 @@ public class DataService extends IntentService {
 			
 			Log.i(TAG, "Response String");
 			try {
-				//Call readJSON on JSONData and pass responseString
 				JSONData.readJSON(responseString);
 				Log.i(TAG, "readJSON called");
 			} catch (JSONException e) {

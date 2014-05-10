@@ -61,11 +61,10 @@ public class DataService extends IntentService {
 			
 			Log.i(TAG, "Response String");
 			try {
-				//Call readJSON on JSONData and pass responseString
 				JSONData.readJSON(responseString);
-				Log.i(TAG, "readJSON called");
 			} catch (JSONException e) {
-				Log.e(TAG, e.getMessage().toString());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		} catch (MalformedURLException e1) {
 			responseString = "something went wrong";

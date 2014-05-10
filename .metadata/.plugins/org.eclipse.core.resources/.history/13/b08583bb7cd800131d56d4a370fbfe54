@@ -16,10 +16,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.json.JSONException;
-
-import com.elijahfreestone.networkConnection.JSONData;
-
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
@@ -35,7 +31,7 @@ public class DataService extends IntentService {
 	public static final String MESSENGER_KEY = "messenger";
 	public static final String TIME_KEY = "time";
 	
-	public static String responseString;
+	static String responseString;
 	
 	String urlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=xxnu68qnz6ap2ygf4qvu659t&page_limit=10";
 
@@ -46,11 +42,11 @@ public class DataService extends IntentService {
 
 	@Override
 	protected void onHandleIntent(Intent intent) {
-		//TAG = "onHandleIntent";
+		TAG = "onHandleIntent";
 		
 		responseString = "";
 		
-		Log.i(TAG, "handle intent started");
+		Log.i(TAG, "intent started");
 		
 		Bundle extras = intent.getExtras();
 		Messenger messenger = (Messenger) extras.get(MESSENGER_KEY);
@@ -59,18 +55,38 @@ public class DataService extends IntentService {
 			URL url = new URL(urlString);
 			responseString = getResponse(url);
 			
-			Log.i(TAG, "Response String");
-			try {
-				//Call readJSON on JSONData and pass responseString
-				JSONData.readJSON(responseString);
-				Log.i(TAG, "readJSON called");
-			} catch (JSONException e) {
-				Log.e(TAG, e.getMessage().toString());
-			}
+			//Log.i(TAG, "++++++ " + responseString);
 		} catch (MalformedURLException e1) {
-			responseString = "something went wrong";
 			Log.e(TAG, e1.getMessage().toString());
 		}
+		
+//		String timer = extras.getString(TIME_KEY);
+//		
+//		int countdown = 0;
+//		
+//		try {
+//			countdown = Integer.parseInt(timer);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			Log.e(TAG, e.getMessage().toString());
+//			
+//		}
+//		
+//		while (countdown > 0) {
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				Log.e("Sleep", e.getMessage().toString());
+//				
+//			}
+//			
+//			countdown--;
+//			
+//			Log.i(TAG, "counter = " + String.valueOf(countdown));
+//		}
+		
+		//Log.i(TAG, "counter is done");
 			
 		Message message = Message.obtain();
 		message.arg1 = Activity.RESULT_OK;
@@ -88,8 +104,6 @@ public class DataService extends IntentService {
 	public static String getResponse(URL url) {
 		// Create string for response
 		String response = "";
-		
-		Log.i(TAG, "Get Response called");
 
 		try {
 			// Open connection

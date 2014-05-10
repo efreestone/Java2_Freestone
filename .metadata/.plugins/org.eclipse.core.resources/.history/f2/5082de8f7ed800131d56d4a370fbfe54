@@ -20,7 +20,6 @@ import com.elijahfreestone.java2project1.MainActivity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 
 
 /**
@@ -51,21 +50,11 @@ public class JSONData {
 		return connectionBool;
 	} //connectionStatus Close
 	
-	public static String readJSON(String responseString2) throws JSONException {
+	public static String readJSON() throws JSONException {
 		String results, dvdTitle, releaseDate, criticRating, audienceRating, objectInfo;
 		StringBuffer newReleaseBuffer;
 		
-		JSONObject newReleaseObject = new JSONObject(responseString2);
-		
-		JSONArray newReleaseArray = newReleaseObject.getJSONArray("movies");
-		
-		for (int i = 0; i < newReleaseArray.length(); i++) {
-			dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
-			Log.i("newReleaseArray", "Title: " + dvdTitle);
-			releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
-			Log.i("newReleaseArray", "Release Date: " + releaseDate);
-		}
-		
+		JSONObject newReleaseObject = new JSONObject(DataService.responseString);
 		
 		objectInfo = "";
 		newReleaseBuffer = new StringBuffer();
@@ -74,7 +63,7 @@ public class JSONData {
 		
 		
 		
-		return null;
+		return results;
 	} //readJSON Close
 	
 }
