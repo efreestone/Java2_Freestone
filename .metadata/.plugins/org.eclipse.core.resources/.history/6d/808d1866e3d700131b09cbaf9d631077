@@ -36,7 +36,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
  */
 public class MainActivity extends Activity {
 	static Context myContext;
-	static String TAG = "MAINACTIVITY";
+	static String TAG = "NETWORK DATA - MAINACTIVITY";
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
+        final MyDataHandler myDataHandler = new MyDataHandler(this);
         
         myContext = this;
         
@@ -153,7 +153,9 @@ public class MainActivity extends Activity {
 				}
 			}
     		
-    	} //HandleMessage Close
+    	}
+    	
+    	
     } //MyHandler Close
     
 }

@@ -36,7 +36,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
  */
 public class MainActivity extends Activity {
 	static Context myContext;
-	static String TAG = "MAINACTIVITY";
+	static String TAG = "NETWORK DATA - MAINACTIVITY";
 
     /* (non-Javadoc)
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -46,8 +46,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
-        
         myContext = this;
         
         String testString = "10";
@@ -55,30 +53,30 @@ public class MainActivity extends Activity {
         Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
         final TextView testTextView = (TextView) findViewById(R.id.test_textview);
         
-//        //Create Handler for Service
-//		Handler dataHandler = new Handler() {
-//
-//			@Override
-//			public void handleMessage(Message msg) {
-//				// TODO Auto-generated method stub
-//				//super.handleMessage(msg);
-//				String responseString = null;
-//				
-//				if (msg.arg1 == RESULT_OK && msg.obj != null) {
-//					try {
-//						responseString = (String) msg.obj;
-//					} catch (Exception e) {
-//						// TODO Auto-generated catch block
-//						Log.e("handleMessage", e.getMessage().toString());
-//					}
-//
-//					testTextView.setText(responseString);
-//				}
-//			}
-//		}; //handleMessage Close
+        //Create Handler for Service
+		Handler dataHandler = new Handler() {
+
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				//super.handleMessage(msg);
+				String responseString = null;
+				
+				if (msg.arg1 == RESULT_OK && msg.obj != null) {
+					try {
+						responseString = (String) msg.obj;
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						Log.e("handleMessage", e.getMessage().toString());
+					}
+
+					testTextView.setText(responseString);
+				}
+			}
+		}; //handleMessage Close
 		
 		//Create Messenger class for ref to handler
-		Messenger dataMessenger = new Messenger(myServiceHandler);
+		Messenger dataMessenger = new Messenger(dataHandler);
 		
 		//Create Intent to start service
 		Intent startDataIntent = new Intent(myContext, DataService.class);
@@ -128,11 +126,11 @@ public class MainActivity extends Activity {
 //        return true;
 //    }
     
-    private static class MyServiceHandler extends Handler {
+    private static class MyHandler extends Handler {
     	
     	private final WeakReference<MainActivity> myActivity;
     	
-    	public MyServiceHandler(MainActivity activity) {
+    	public MyHandler(MainActivity activity) {
     		myActivity = new WeakReference<MainActivity>(activity);
     	}
     	
@@ -142,18 +140,16 @@ public class MainActivity extends Activity {
     		MainActivity activity = myActivity.get();
     		if (activity != null) {
 				Object returnObject = message.obj;
-				if (message.arg1 == RESULT_OK && returnObject != null) {
+				if (message.arg1 = message.obj) {
 					Log.i(TAG, "handleMessage");
-//***********************Display data from file here***********************//
-					//displatDataFromFile
-					
-					
-				} else {
-					Log.i(TAG, "Data NOT created!!");
+//***********************Display data from file here***********************/
+					//displayDataFromFile();
 				}
 			}
     		
-    	} //HandleMessage Close
+    	}
+    	
+    	
     } //MyHandler Close
     
 }
