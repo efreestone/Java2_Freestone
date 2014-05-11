@@ -87,13 +87,10 @@ public class MainActivity extends Activity {
         	Log.i("File", "File exists");
         } else {
         	//Show No File alert
-        	noFileAlert();
+        	noFileAlert()
         	
-        	if (NetworkConnection.connectionStatus(myContext)) {
-        		//Call retrieveData to start the Service and get JSON data from the API
-                retrieveData();
-			}
-        	
+        	//Call retrieveData to start the Service and get JSON data from the API
+            retrieveData();
         	Log.i("File", "File DOESN'T exist!!");
         } 
 		

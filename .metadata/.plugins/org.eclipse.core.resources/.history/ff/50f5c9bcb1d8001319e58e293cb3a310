@@ -86,14 +86,19 @@ public class MainActivity extends Activity {
         	displayDataFromFile();
         	Log.i("File", "File exists");
         } else {
-        	//Show No File alert
-        	noFileAlert();
+//        	// Create alert dialog for no file
+//			AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+//			alertDialog.setTitle(R.string.noFileTitle);
+//			// Set alert message. setMessage only has a charSequence
+//			// version so getString must be used.
+//			alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
+//			alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+//			alertDialog.show();
         	
-        	if (NetworkConnection.connectionStatus(myContext)) {
-        		//Call retrieveData to start the Service and get JSON data from the API
-                retrieveData();
-			}
-        	
+        	noConnectionAlert();
+			
+        	//Call retrieveData to start the Service and get JSON data from the API
+            retrieveData();
         	Log.i("File", "File DOESN'T exist!!");
         } 
 		
@@ -112,8 +117,14 @@ public class MainActivity extends Activity {
 					displayDataFromFile();
 					
 				} else {
-					//Show no connection alert
-					noConnectionAlert();
+//					// Create alert dialog for no connection
+//					AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+//					alertDialog.setTitle(R.string.noConnectionTitle);
+//					// Set alert message. setMessage only has a charSequence
+//					// version so getString must be used.
+//					alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
+//					alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+//					alertDialog.show();
 					
 					Log.i(TAG, "No Network!!");
 				}
@@ -219,7 +230,6 @@ public class MainActivity extends Activity {
 		}
     }
     
-    //Custom methods to show no connection or no file alerts
     public void noConnectionAlert() {
     	// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -229,17 +239,7 @@ public class MainActivity extends Activity {
 		alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
 		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
-    }
-    
-    public void noFileAlert() {
-		// Create alert dialog for no file
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-		alertDialog.setTitle(R.string.noFileTitle);
-		// Set alert message. setMessage only has a charSequence
-		// version so getString must be used.
-		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
-		alertDialog.show();
+    	
     }
     
 }
