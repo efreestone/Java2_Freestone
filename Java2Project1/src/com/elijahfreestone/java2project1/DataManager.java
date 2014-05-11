@@ -76,6 +76,7 @@ public class DataManager {
 				//Append data to the content buffer
 				contentBuffer.append(fileContent);
 			}
+			//Pass/cast contentBuffer to my fileContent string
 			fileContent = contentBuffer.toString();
 		} catch (Exception e) {
 			Log.e("readStringToFile", e.getMessage().toString());

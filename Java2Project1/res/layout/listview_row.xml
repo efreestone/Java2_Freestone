@@ -6,23 +6,26 @@
     
     <TextView 
         android:id="@+id/dvdTitle"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:paddingLeft="5dp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"/>
     
     <TextView 
         android:id="@+id/releaseDate"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:paddingLeft="5dp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"/>
     
     <TextView 
         android:id="@+id/criticRating"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:paddingLeft="5dp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"/>
 
 </LinearLayout>
