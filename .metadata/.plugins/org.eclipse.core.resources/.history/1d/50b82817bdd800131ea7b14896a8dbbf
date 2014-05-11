@@ -16,6 +16,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;

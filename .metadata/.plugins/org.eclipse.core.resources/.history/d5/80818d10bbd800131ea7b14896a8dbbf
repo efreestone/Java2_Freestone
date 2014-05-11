@@ -58,7 +58,8 @@ public class DataManager {
 		return result;
 	} //writeStringToFile Close
 	
-	//Method to read JSON file from the device. The string created is passed to be parsed and displayed
+	//
+	
 	public static String readStringFromFile (Context context, String fileName) {
 		String fileContent = "";
 		
@@ -87,6 +88,7 @@ public class DataManager {
 				Log.e("readStringToFile", e.getMessage().toString());
 			}
 		}
+		
 		
 		return fileContent;
 	} //readStringFromFile Close

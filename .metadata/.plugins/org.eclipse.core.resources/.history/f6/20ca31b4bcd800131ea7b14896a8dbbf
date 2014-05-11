@@ -16,6 +16,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.json.JSONException;
+
 import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
@@ -56,9 +58,13 @@ public class DataService extends IntentService {
 			responseString = getResponse(url);
 			
 			Log.i(TAG, "Response String");
-			//Call readJSON on JSONData and pass responseString
-			//JSONData.readJSON(responseString);
-			Log.i(TAG, "readJSON called");
+			try {
+				//Call readJSON on JSONData and pass responseString
+				JSONData.readJSON(responseString);
+				Log.i(TAG, "readJSON called");
+			} catch (JSONException e) {
+				Log.e(TAG, e.getMessage().toString());
+			}
 		} catch (MalformedURLException e1) {
 			responseString = "something went wrong";
 			Log.e(TAG, e1.getMessage().toString());

@@ -22,19 +22,17 @@ import android.util.Log;
 import android.widget.SimpleAdapter;
 
 public class JSONData {
-	static Context myContext;
+	
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
 	
-	public static void displayDataFromFile() {
+	public void displayDataFromFile(String responseString) {
 		//Grab instance of DataManager
         myDataManager = DataManager.getInstance();
         
-        myContext = MainActivity.myContext;
-        
     	String dvdTitle, releaseDate, criticRating;
     	
-    	String JSONString = DataManager.readStringFromFile(myContext, myFileName);
+    	String JSONString = myDataManager.readStringFromFile(this, myFileName);
     	
     	Log.i("JSONString", JSONString);
     	
@@ -73,7 +71,7 @@ public class JSONData {
 			SimpleAdapter listAdapter = new SimpleAdapter(myContext, myList, R.layout.listview_row, 
 					new String[] {"dvdTitle",  "releaseDate", "criticRating"}, new int[] {R.id.dvdTitle, R.id.releaseDate, R.id.criticRating});
 			
-			MainActivity.myListView.setAdapter(listAdapter);
+			myListView.setAdapter(listAdapter);
 			
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile", e.getMessage().toString());

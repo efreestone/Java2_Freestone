@@ -26,7 +26,7 @@ public class JSONData {
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
 	
-	public static void displayDataFromFile() {
+	public void displayDataFromFile() {
 		//Grab instance of DataManager
         myDataManager = DataManager.getInstance();
         

@@ -79,6 +79,8 @@ public class MainActivity extends Activity {
         	JSONData.displayDataFromFile();
         	Log.i("File", "File exists");
         } else {
+        	//Show No File alert
+        	//noFileAlert();
         	
         	if (NetworkConnection.connectionStatus(myContext)) {
         		//Show No File alert
@@ -139,7 +141,9 @@ public class MainActivity extends Activity {
 					} catch (Exception e) {
 						Log.e("handleMessage", e.getMessage().toString());
 					}
-					//Write the file to the system
+//***********************Display data from file here***********************//
+					//displayDataFromFile();
+					//testTextView.setText(responseString);
 					myDataManager.writeStringToFile(myContext, myFileName, DataService.responseString);
 				
 				} else {

@@ -22,19 +22,27 @@ import android.util.Log;
 import android.widget.SimpleAdapter;
 
 public class JSONData {
-	static Context myContext;
+	
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
 	
-	public static void displayDataFromFile() {
+	public void displayDataFromFile(String JSONString) {
 		//Grab instance of DataManager
         myDataManager = DataManager.getInstance();
         
-        myContext = MainActivity.myContext;
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            myContext = getApplicationContext();
+        }
+        
+        public static Context getContext() {
+            return myContext;
+        }
         
     	String dvdTitle, releaseDate, criticRating;
     	
-    	String JSONString = DataManager.readStringFromFile(myContext, myFileName);
+    	//String JSONString = myDataManager.readStringFromFile(this, myFileName);
     	
     	Log.i("JSONString", JSONString);
     	

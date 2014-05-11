@@ -46,10 +46,11 @@
 <fullyQualifiedTypeName name="org.json.JSONArray"/>
 <fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.DataManager"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.MainActivity"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="android.widget.SimpleAdapter"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.R.layout"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.MainActivity"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.JSONData"/>
 </qualifiedTypeNameHistroy>

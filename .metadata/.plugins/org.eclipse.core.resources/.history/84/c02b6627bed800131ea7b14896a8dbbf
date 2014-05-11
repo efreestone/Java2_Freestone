@@ -79,6 +79,8 @@ public class MainActivity extends Activity {
         	JSONData.displayDataFromFile();
         	Log.i("File", "File exists");
         } else {
+        	//Show No File alert
+        	//noFileAlert();
         	
         	if (NetworkConnection.connectionStatus(myContext)) {
         		//Show No File alert
