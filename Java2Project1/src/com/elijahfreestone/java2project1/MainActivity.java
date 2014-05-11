@@ -11,6 +11,12 @@
 package com.elijahfreestone.java2project1;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +31,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -36,12 +44,14 @@ public class MainActivity extends Activity {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
+	static ListView myListView;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
-	DataManager myDataManger;
-	String myFileName = "string_from_url.txt";
+	static DataManager myDataManager;
+	static String myFileName = "string_from_url.txt";
 	
 	String testString = "10";
 	
+	static TextView testTextView;
 	
 	
     /* (non-Javadoc)
@@ -52,8 +62,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        //Instantiate the list view and add header
+        myListView = (ListView) this.findViewById(R.id.listView);
+        View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
+        myListView.addHeaderView(listHeader);
+        
         //Grab instance of DataManager
-        myDataManger= DataManager.getInstance();
+        myDataManager = DataManager.getInstance();
         
         myContext = this;
         
@@ -79,7 +94,7 @@ public class MainActivity extends Activity {
 //						
 //					}
 					
-					myDataManger.writeStringToFile(myContext, myFileName, DataService.responseString);
+					myDataManager.writeStringToFile(myContext, myFileName, DataService.responseString);
 					
 				} else {
 					// Create alert dialog for no connection
@@ -120,7 +135,7 @@ public class MainActivity extends Activity {
 						Log.e("handleMessage", e.getMessage().toString());
 					}
 //***********************Display data from file here***********************//
-					//displatDataFromFile
+					displayDataFromFile();
 					//testTextView.setText(responseString);
 					
 					
@@ -140,11 +155,60 @@ public class MainActivity extends Activity {
     	//Create Intent to start service
     	Intent startDataIntent = new Intent(myContext, DataService.class);
     	startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
-    	startDataIntent.putExtra(DataService.TIME_KEY, testString);
     			
     	//Start the service
     	startService(startDataIntent);
     	
     } //retrieveData Close
+    
+    public static void displayDataFromFile() {
+    	String results, dvdTitle, releaseDate, criticRating, audienceRating, objectInfo;
+    	
+    	String JSONString = myDataManager.readStringFromFile(myContext, myFileName);
+    	
+    	Log.i("JSONString", JSONString);
+    	
+    	//Create ArrayList with hashmap
+    	ArrayList<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
+    	JSONObject jsonObject = null;
+    	JSONArray newReleaseArray =  null;
+    	
+    	
+    	try {
+			jsonObject = new JSONObject(JSONString);
+			newReleaseArray = jsonObject.getJSONArray("movies");
+			int arraySize = newReleaseArray.length();
+			//testTextView.setText("There are " + String.valueOf(arraySize) + "movies.");
+			
+			//Loop through array from file and extract fields
+			for (int i = 0; i < arraySize; i++) {
+				
+				dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
+				//Log.i("displayData newReleaseArray", "Title: " + dvdTitle);
+				releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
+				//Log.i("displayData newReleaseArray", "Release Date: " + releaseDate);
+				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
+				//Log.i("displayData newReleaseArray", "Rating: " + criticRating);
+				
+				//Instantiate Hash Map for array and pass in strings with key/value pairs
+				HashMap<String, String> displayMap = new HashMap<String, String>();
+				displayMap.put("dvdTitle", dvdTitle);
+				displayMap.put("releaseDate", releaseDate);
+				displayMap.put("criticRating", criticRating);
+				
+				//Add hash maps to array list
+				myList.add(displayMap);
+			}
+			
+			//Create simple adapter and set up with array
+			SimpleAdapter listAdapter = new SimpleAdapter(myContext, myList, R.layout.listview_row, 
+					new String[] {"dvdTitle",  "releaseDate", "criticRating"}, new int[] {R.id.dvdTitle, R.id.releaseDate, R.id.criticRating});
+			
+			myListView.setAdapter(listAdapter);
+			
+		} catch (JSONException e) {
+			Log.e("displayDataFromFile", e.getMessage().toString());
+		}
+    }
     
 }

@@ -47,17 +47,19 @@ public class DataManager {
 			fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
 			fileOutputStream.write(content.getBytes());
 			Log.i("writeStringToFile", "Write Successful!");
+			MainActivity.myFileName = fileName;
 		} catch (FileNotFoundException e) {
 			Log.e("writeStringToFile", e.getMessage().toString());
 		} catch (IOException e) {
 			Log.e("writeStringToFile", e.getMessage().toString());
 		}
 		
+		
 		return result;
 	} //writeStringToFile Close
 	
 	//
-	public String readStringFromFile (Context context, String fileName) {
+	public static String readStringFromFile (Context context, String fileName) {
 		String fileContent = "";
 		
 		//Create and open file input stream
@@ -74,7 +76,7 @@ public class DataManager {
 				//Append data to the content buffer
 				contentBuffer.append(fileContent);
 			}
-			
+			fileContent = contentBuffer.toString();
 		} catch (Exception e) {
 			Log.e("readStringToFile", e.getMessage().toString());
 		} finally { //closes file no matter what
