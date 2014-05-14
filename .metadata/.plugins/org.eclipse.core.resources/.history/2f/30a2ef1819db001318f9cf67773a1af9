@@ -67,7 +67,7 @@ public class JSONData {
 				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
 				// Log.i("displayData newReleaseArray", "Rating: " + criticRating);
 
-				// Instantiate Hash Map for array and pass in strings with key/value pairs
+				// Instantiate Hash Map for array and pass in strings withkey/value pairs
 				HashMap<String, String> displayMap = new HashMap<String, String>();
 				displayMap.put("dvdTitle", dvdTitle);
 				displayMap.put("releaseDate", releaseDate);
@@ -79,14 +79,16 @@ public class JSONData {
 
 			// Create simple adapter and set up with array
 			SimpleAdapter listAdapter = new SimpleAdapter(myContext, myList,
-					R.layout.listview_row, new String[] { "dvdTitle", "releaseDate", "criticRating" },
-					new int[] { R.id.dvdTitle, R.id.releaseDate, R.id.criticRating });
+					R.layout.listview_row, new String[] { "dvdTitle",
+							"releaseDate", "criticRating" },
+					new int[] { R.id.dvdTitle, R.id.releaseDate,
+							R.id.criticRating });
 
 			MainActivity.myListView.setAdapter(listAdapter);
 
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile", e.getMessage().toString());
 		}
-	} //displayDataFromFile Close
+	}
 
 }

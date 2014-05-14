@@ -113,7 +113,6 @@ public class MainActivity extends Activity {
 		}); // onClickListener Close
 
 	} // onCreate Close
-	
 
 	/**
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is

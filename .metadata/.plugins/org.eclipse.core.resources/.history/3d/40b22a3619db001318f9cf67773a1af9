@@ -79,14 +79,16 @@ public class JSONData {
 
 			// Create simple adapter and set up with array
 			SimpleAdapter listAdapter = new SimpleAdapter(myContext, myList,
-					R.layout.listview_row, new String[] { "dvdTitle", "releaseDate", "criticRating" },
-					new int[] { R.id.dvdTitle, R.id.releaseDate, R.id.criticRating });
+					R.layout.listview_row, new String[] { "dvdTitle",
+							"releaseDate", "criticRating" },
+					new int[] { R.id.dvdTitle, R.id.releaseDate,
+							R.id.criticRating });
 
 			MainActivity.myListView.setAdapter(listAdapter);
 
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile", e.getMessage().toString());
 		}
-	} //displayDataFromFile Close
+	}
 
 }

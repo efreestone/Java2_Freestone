@@ -20,6 +20,8 @@ import android.net.NetworkInfo;
  * creation of JSON Data from the API call that takes place in DataService.
  */
 public class NetworkConnection {
+	
+	/** The response string. */
 	static String responseString;
 
 	/**

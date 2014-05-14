@@ -113,7 +113,6 @@ public class MainActivity extends Activity {
 		}); // onClickListener Close
 
 	} // onCreate Close
-	
 
 	/**
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is
@@ -143,7 +142,7 @@ public class MainActivity extends Activity {
 						Log.e("handleMessage", e.getMessage().toString());
 					}
 					// Write the file to the system
-					//myDataManager.writeStringToFile(myContext, myFileName, DataService.responseString);
+					myDataManager.writeStringToFile(myContext, myFileName, DataService.responseString);
 
 				} else {
 					Log.i(TAG, "Data NOT created!!");
@@ -154,7 +153,6 @@ public class MainActivity extends Activity {
 	} // MyHandler Close
 
 	/**
-	 * 
 	 * Retrieve data.
 	 */
 	public void retrieveData() {
