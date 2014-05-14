@@ -37,14 +37,35 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
  * The Class MainActivity.
  */
 public class MainActivity extends Activity {
+	
+	/** The my context. */
 	static Context myContext;
+	
+	/** The tag. */
 	static String TAG = "MainActivity";
+	
+	/** The response string. */
 	static String responseString = null;
+	
+	/** The my list view. */
 	static ListView myListView;
+	
+	/** The my service handler. */
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
+	
+	/** The my data manager. */
 	static DataManager myDataManager;
+	
+	/** The my file name. */
 	static String myFileName = "string_from_url.txt";
+	
+	/** The file path dir. */
 	static String filePathDir = "com.elijahfreestone.java2project1/file/string_from_url.txt";
+
+	/** The test string. */
+	String testString = "10";
+
+	/** The test text view. */
 	static TextView testTextView;
 
 	/*
@@ -68,7 +89,9 @@ public class MainActivity extends Activity {
 
 		myContext = this;
 
-		//Check if file exists on the device and alert the user if it doesn't
+		Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+		final TextView testTextView = (TextView) findViewById(R.id.test_textview);
+
 		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
 		Log.i("File", fileDirectory);
 		File file = new File(filePathDir);
@@ -81,7 +104,8 @@ public class MainActivity extends Activity {
 			if (NetworkConnection.connectionStatus(myContext)) {
 				// Show No File alert
 				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
+				// Call retrieveData to start the Service and get JSON data from
+				// the API
 				retrieveData();
 			} else {
 				// Show No Connection alert
@@ -91,8 +115,8 @@ public class MainActivity extends Activity {
 			Log.i("File", "File DOESN'T exist!!");
 		}
 
-		//Grab button by id and set onClick with network connection check
-		Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+		// testTextView.setText("Waiting");
+
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -115,12 +139,18 @@ public class MainActivity extends Activity {
 	} // onCreate Close
 
 	/**
-	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is
-	 * done to avoid the memory leak 
+	 * The Class MyServiceHandler.
 	 */
 	private static class MyServiceHandler extends Handler {
+
+		/** The my activity. */
 		private final WeakReference<MainActivity> myActivity;
-		//Instantiate the handler
+
+		/**
+		 * Instantiates a new my service handler.
+		 *
+		 * @param activity the activity
+		 */
 		public MyServiceHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}
@@ -166,9 +196,13 @@ public class MainActivity extends Activity {
 
 		// Start the service
 		startService(startDataIntent);
+
 	} // retrieveData Close
 
 	// Custom methods to show no connection or no file alerts
+	/**
+	 * No connection alert.
+	 */
 	public void noConnectionAlert() {
 		// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -180,6 +214,9 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	}
 
+	/**
+	 * No file alert.
+	 */
 	public void noFileAlert() {
 		// Create alert dialog for no file
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -189,5 +226,5 @@ public class MainActivity extends Activity {
 		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
 		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
-	} //Alert methods Close
+	}
 }

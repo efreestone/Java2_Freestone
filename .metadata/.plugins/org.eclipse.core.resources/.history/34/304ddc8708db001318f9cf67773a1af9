@@ -68,7 +68,6 @@ public class MainActivity extends Activity {
 
 		myContext = this;
 
-		//Check if file exists on the device and alert the user if it doesn't
 		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
 		Log.i("File", fileDirectory);
 		File file = new File(filePathDir);
@@ -81,7 +80,8 @@ public class MainActivity extends Activity {
 			if (NetworkConnection.connectionStatus(myContext)) {
 				// Show No File alert
 				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
+				// Call retrieveData to start the Service and get JSON data from
+				// the API
 				retrieveData();
 			} else {
 				// Show No Connection alert
@@ -91,7 +91,7 @@ public class MainActivity extends Activity {
 			Log.i("File", "File DOESN'T exist!!");
 		}
 
-		//Grab button by id and set onClick with network connection check
+		//
 		Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -115,12 +115,18 @@ public class MainActivity extends Activity {
 	} // onCreate Close
 
 	/**
-	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is
-	 * done to avoid the memory leak 
+	 * The Class MyServiceHandler.
 	 */
 	private static class MyServiceHandler extends Handler {
+
+		/** The my activity. */
 		private final WeakReference<MainActivity> myActivity;
-		//Instantiate the handler
+
+		/**
+		 * Instantiates a new my service handler.
+		 *
+		 * @param activity the activity
+		 */
 		public MyServiceHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}
@@ -166,9 +172,13 @@ public class MainActivity extends Activity {
 
 		// Start the service
 		startService(startDataIntent);
+
 	} // retrieveData Close
 
 	// Custom methods to show no connection or no file alerts
+	/**
+	 * No connection alert.
+	 */
 	public void noConnectionAlert() {
 		// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -180,6 +190,9 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	}
 
+	/**
+	 * No file alert.
+	 */
 	public void noFileAlert() {
 		// Create alert dialog for no file
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -189,5 +202,5 @@ public class MainActivity extends Activity {
 		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
 		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
-	} //Alert methods Close
+	}
 }

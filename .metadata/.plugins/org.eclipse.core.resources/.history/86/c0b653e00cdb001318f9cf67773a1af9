@@ -120,7 +120,12 @@ public class MainActivity extends Activity {
 	 */
 	private static class MyServiceHandler extends Handler {
 		private final WeakReference<MainActivity> myActivity;
-		//Instantiate the handler
+
+		/**
+		 * Instantiates a new my service handler.
+		 *
+		 * @param activity the activity
+		 */
 		public MyServiceHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}

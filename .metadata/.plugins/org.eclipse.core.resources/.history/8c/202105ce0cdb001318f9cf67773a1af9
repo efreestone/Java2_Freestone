@@ -115,12 +115,18 @@ public class MainActivity extends Activity {
 	} // onCreate Close
 
 	/**
-	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is
-	 * done to avoid the memory leak 
+	 * The Class MyServiceHandler.
 	 */
 	private static class MyServiceHandler extends Handler {
+
+		/** The my activity. */
 		private final WeakReference<MainActivity> myActivity;
-		//Instantiate the handler
+
+		/**
+		 * Instantiates a new my service handler.
+		 *
+		 * @param activity the activity
+		 */
 		public MyServiceHandler(MainActivity activity) {
 			myActivity = new WeakReference<MainActivity>(activity);
 		}
