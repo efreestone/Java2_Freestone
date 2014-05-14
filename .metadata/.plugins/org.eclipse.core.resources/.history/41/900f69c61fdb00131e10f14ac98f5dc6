@@ -117,11 +117,11 @@ public class DataManager {
 		} catch (Exception e) {
 			try {
 				fileInputStream.close();
-				Log.i("readStringFromFile", "File Input Stream Closed");
+				Log.i("readStringToFile", "File Input Stream Closed");
 			} catch (IOException e2) {
-				Log.e("readStringFromFile", e2.getMessage().toString());
+				Log.e("readStringToFile", e2.getMessage().toString());
 			}
-			Log.e("readStringFromFile", e.getMessage().toString());
+			Log.e("readStringToFile", e.getMessage().toString());
 		} 
 
 		return fileContent;
