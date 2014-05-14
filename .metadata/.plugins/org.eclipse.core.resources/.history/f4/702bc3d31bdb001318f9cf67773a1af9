@@ -41,7 +41,8 @@ public class JSONData {
 
 		String dvdTitle, releaseDate, criticRating;
 
-		String JSONString = DataManager.readStringFromFile(myContext, myFileName);
+		String JSONString = DataManager.readStringFromFile(myContext,
+				myFileName);
 
 		Log.i("JSONString", JSONString);
 
@@ -60,7 +61,8 @@ public class JSONData {
 
 				dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
 				// Log.i("displayData newReleaseArray", "Title: " + dvdTitle);
-				releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
+				releaseDate = newReleaseArray.getJSONObject(i)
+						.getJSONObject("release_dates").getString("dvd");
 				// Log.i("displayData newReleaseArray", "Release Date: " + releaseDate);
 				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
 				// Log.i("displayData newReleaseArray", "Rating: " + criticRating);

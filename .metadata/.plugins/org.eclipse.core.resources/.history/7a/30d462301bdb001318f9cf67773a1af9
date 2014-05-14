@@ -94,8 +94,6 @@ public class DataManager {
 	public static String readStringFromFile(Context context, String fileName) {
 		String fileContent = "";
 
-		Log.i("readStringToFile", "Read String From File Called");
-		
 		// Create and open file input stream
 		FileInputStream fileInputStream = null;
 		try {
@@ -111,25 +109,17 @@ public class DataManager {
 				// Append data to the content buffer
 				contentBuffer.append(fileContent);
 			}
-			Log.i("readStringToFile", "Loop Done");
 			// Pass/cast contentBuffer to my fileContent string
 			fileContent = contentBuffer.toString();
 		} catch (Exception e) {
+			Log.e("readStringToFile", e.getMessage().toString());
+		} finally { // closes file no matter what
 			try {
 				fileInputStream.close();
-				Log.i("readStringToFile", "File Input Stream Closed");
-			} catch (IOException e2) {
-				Log.e("readStringToFile", e2.getMessage().toString());
+			} catch (IOException e) {
+				Log.e("readStringToFile", e.getMessage().toString());
 			}
-			Log.e("readStringToFile", e.getMessage().toString());
-		} //finally { // closes file no matter what
-//			try {
-//				fileInputStream.close();
-//				Log.i("readStringToFile", "File Input Stream Closed");
-//			} catch (IOException e) {
-//				Log.e("readStringToFile", e.getMessage().toString());
-//			}
-//		}
+		}
 
 		return fileContent;
 	} // readStringFromFile Close

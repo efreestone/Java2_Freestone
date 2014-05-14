@@ -129,7 +129,7 @@ public class DataManager {
 //			} catch (IOException e) {
 //				Log.e("readStringToFile", e.getMessage().toString());
 //			}
-//		}
+		}
 
 		return fileContent;
 	} // readStringFromFile Close

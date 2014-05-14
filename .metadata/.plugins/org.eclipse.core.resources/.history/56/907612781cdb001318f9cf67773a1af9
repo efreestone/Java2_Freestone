@@ -118,8 +118,8 @@ public class DataManager {
 			try {
 				fileInputStream.close();
 				Log.i("readStringToFile", "File Input Stream Closed");
-			} catch (IOException e2) {
-				Log.e("readStringToFile", e2.getMessage().toString());
+			} catch (IOException e) {
+				Log.e("readStringToFile", e.getMessage().toString());
 			}
 			Log.e("readStringToFile", e.getMessage().toString());
 		} //finally { // closes file no matter what
@@ -129,7 +129,7 @@ public class DataManager {
 //			} catch (IOException e) {
 //				Log.e("readStringToFile", e.getMessage().toString());
 //			}
-//		}
+		}
 
 		return fileContent;
 	} // readStringFromFile Close
