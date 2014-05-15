@@ -140,7 +140,6 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				//Grab object selected from ArrayList as a HashMap and split into details strings.
 				selectedMovie = JSONData.myList.get(position-1);
 				dvdTitle = selectedMovie.get("dvdTitle");
 				releaseDate = selectedMovie.get("releaseDate");
@@ -208,7 +207,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * 
-	 * Retrieve data creates the Service Intent, adds extras and finally starts the Service.
+	 * Retrieve data.
 	 */
 	public void retrieveData() {
 		Log.i(TAG, "retrieveData called");
@@ -272,4 +271,10 @@ public class MainActivity extends Activity {
 		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
 		startActivity(detailsIntent);
 	}
+	
+//	@Override
+//	public void startActivityForResult(Intent intent, int requestCode) {
+//		
+//		super.startActivityForResult(intent, requestCode);
+//	}
 }

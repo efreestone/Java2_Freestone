@@ -35,29 +35,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Audience Rating" />
-    
-    <TextView 
-        android:id="@+id/ratingsBarTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:text="@string/ratingBarTitleString" />
-    
-    <RatingBar 
-        android:id="@+id/movieRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:paddingBottom="15dp" />
-    
-    <Button
-        android:id="@+id/moreInfoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:background="@drawable/button_background"
-        android:clickable="true"
-        android:text="@string/moreInfoButtonString"
-        android:width="250dp" />
 
 </LinearLayout>

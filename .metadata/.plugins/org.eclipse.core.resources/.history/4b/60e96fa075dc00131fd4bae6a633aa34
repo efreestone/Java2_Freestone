@@ -7,9 +7,6 @@
     <string name="titleString">DVD New Releases</string>
     
     <string name="buttonString">Get New Releases</string>
-    <string name="moreInfoButtonString">Get More Info</string>
-    
-    <string name="ratingBarTitleString">Seen this Movie? Rate it!</string>
     
     <!-- Connection Alert strings -->
     <string name="noConnectionTitle">Connection Error</string>

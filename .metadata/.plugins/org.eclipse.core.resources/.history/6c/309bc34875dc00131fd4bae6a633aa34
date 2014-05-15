@@ -208,7 +208,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * 
-	 * Retrieve data creates the Service Intent, adds extras and finally starts the Service.
+	 * Retrieve data.
 	 */
 	public void retrieveData() {
 		Log.i(TAG, "retrieveData called");
@@ -272,4 +272,10 @@ public class MainActivity extends Activity {
 		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
 		startActivity(detailsIntent);
 	}
+	
+//	@Override
+//	public void startActivityForResult(Intent intent, int requestCode) {
+//		
+//		super.startActivityForResult(intent, requestCode);
+//	}
 }

@@ -272,4 +272,10 @@ public class MainActivity extends Activity {
 		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
 		startActivity(detailsIntent);
 	}
+	
+//	@Override
+//	public void startActivityForResult(Intent intent, int requestCode) {
+//		
+//		super.startActivityForResult(intent, requestCode);
+//	}
 }
