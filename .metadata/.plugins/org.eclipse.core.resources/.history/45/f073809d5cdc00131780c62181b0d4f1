@@ -33,7 +33,7 @@ public class JSONData {
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
 	
 	static String JSONString;
-	static ArrayList<HashMap<String, String>> myList;
+	protected static ArrayList<HashMap<String, String>> myList;
 
 	/**
 	 * Display data from file.
@@ -58,7 +58,7 @@ public class JSONData {
 		Log.i("JSONString", JSONString);
 
 		// Create ArrayList with hashmap
-		myList = new ArrayList<HashMap<String, String>>();
+		ArrayList<HashMap<String, String>> myList = new ArrayList<HashMap<String, String>>();
 		JSONObject jsonObject = null;
 		JSONArray newReleaseArray = null;
 
@@ -85,7 +85,6 @@ public class JSONData {
 				displayMap.put("releaseDate", releaseDate);
 				displayMap.put("movieRating", movieRating);
 				displayMap.put("criticRating", criticRating);
-				displayMap.put("audienceRating", audienceRating);
 
 				// Add hash maps to array list
 				myList.add(displayMap);

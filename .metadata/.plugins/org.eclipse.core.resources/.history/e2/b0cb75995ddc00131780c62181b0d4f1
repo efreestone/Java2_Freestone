@@ -85,7 +85,6 @@ public class JSONData {
 				displayMap.put("releaseDate", releaseDate);
 				displayMap.put("movieRating", movieRating);
 				displayMap.put("criticRating", criticRating);
-				displayMap.put("audienceRating", audienceRating);
 
 				// Add hash maps to array list
 				myList.add(displayMap);

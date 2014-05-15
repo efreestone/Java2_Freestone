@@ -138,8 +138,6 @@ public class MainActivity extends Activity {
 				Toast.makeText(getApplicationContext(),
 						"DVD Title: " + selectedTitle, Toast.LENGTH_LONG)
 						.show();
-				
-				Log.i("File Selected", "" + selectedTitle);
 			}
 		});
 
