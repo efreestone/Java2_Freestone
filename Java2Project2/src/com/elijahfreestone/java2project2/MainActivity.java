@@ -52,6 +52,10 @@ public class MainActivity extends Activity {
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
 	static TextView testTextView;
 	
+	static final String DVD_TITLE = "dvdTitle";
+	static final String RELEASE_DATE = "releaseDate";
+	static final String MOVIE_RATING = "movieRating";
+	
 	static Boolean fileFlag;
 
 	/*
@@ -127,19 +131,36 @@ public class MainActivity extends Activity {
 			} // onClick Close
 		}); // onClickListener Close
 		
-		//
+		//Create onItemClickListener for the listview. This grabs details of the object selected,
+		//creates new intent, and passes object details to Deatils Activty for display
 		myListView.setOnItemClickListener(new OnItemClickListener() {
-			HashMap<String, String> selectedTitle;
+			HashMap<String, String> selectedMovie;
+			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				selectedTitle = JSONData.myList.get(position);
-				Toast.makeText(getApplicationContext(),
-						"DVD Title: " + selectedTitle, Toast.LENGTH_LONG)
-						.show();
+				selectedMovie = JSONData.myList.get(position-1);
+				dvdTitle = selectedMovie.get("dvdTitle");
+				releaseDate = selectedMovie.get("releaseDate");
+				movieRating = selectedMovie.get("movieRating");
+				criticRating = selectedMovie.get("criticRating");
+				audienceRating = selectedMovie.get("audienceRating");
+				Log.i("File Selected", dvdTitle);
 				
-				Log.i("File Selected", "" + selectedTitle);
+				Toast.makeText(getApplicationContext(), "DVD Title: " + selectedMovie, Toast.LENGTH_LONG).show();
+				
+				Log.i("File Selected", "" + selectedMovie);
+				
+				//Create explicit intent and pass dvd details as extras
+				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+				detailsIntent.putExtra("dvdTitle", dvdTitle);
+				detailsIntent.putExtra("releaseDate", releaseDate);
+				detailsIntent.putExtra("movieRating", movieRating);
+				detailsIntent.putExtra("criticRating", criticRating);
+				detailsIntent.putExtra("audienceRating", audienceRating);
+				
+				startActivityForResult(detailsIntent, 0);
 			}
 		});
 
@@ -239,5 +260,21 @@ public class MainActivity extends Activity {
 //		
 //		return false;
 //		
+//	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		
+	}
+	
+	public void goToDetailsActivity() {
+		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+		startActivity(detailsIntent);
+	}
+	
+//	@Override
+//	public void startActivityForResult(Intent intent, int requestCode) {
+//		
+//		super.startActivityForResult(intent, requestCode);
 //	}
 }

@@ -7,9 +7,33 @@
     android:paddingTop="20dp">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Details Activity" />
+    
+    <TextView
+        android:id="@+id/releaseTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Release Date" />
+    
+    <TextView
+        android:id="@+id/movieRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Movie Rating" />
+    
+    <TextView
+        android:id="@+id/criticRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Critic Rating" />
+    
+    <TextView
+        android:id="@+id/audienceRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Audience Rating" />
 
 </LinearLayout>
