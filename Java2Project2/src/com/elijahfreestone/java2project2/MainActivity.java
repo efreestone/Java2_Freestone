@@ -12,6 +12,7 @@ package com.elijahfreestone.java2project2;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -30,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
@@ -49,6 +51,8 @@ public class MainActivity extends Activity {
 	static String myFileName = "string_from_url.txt";
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
 	static TextView testTextView;
+	
+	ArrayList<HashMap<String, String>> currentMovieList;
 	
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
@@ -244,30 +248,33 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	} //Alert methods Close
 	
-//	public Boolean doesFileExist(String filePath) {
-//		try {
-//			File file = new File(filePathDir);
-//			Log.i("File", "Bool File Exists");
-//			//fileFlag = true;
-//			Log.i("File", "fileFlag in Bool = " + fileFlag);
-//			return file.exists();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			Log.i("File", "Bool File DOESN'T Exist!!");
-//		}
-//		
-//		return false;
-//		
-//	}
-	
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-		
-	}
+		super.onSaveInstanceState(savedInstanceState);
+		//Grab entire array list from JSON Data
+		currentMovieList = JSONData.myList;
+		if (currentMovieList != null && !currentMovieList.isEmpty()) {
+			savedInstanceState.putSerializable("stored", currentMovieList);
+			//Log.i("Save", "" + currentMovieList);
+			Log.i("Save", "Movie List Instance State Saved");
+		}
+	} // onSaveInstanceState Close
 	
-	public void goToDetailsActivity() {
-		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
-		startActivity(detailsIntent);
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		//Grab stored Array List from Bundle
+		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
+		if (currentMovieList != null && !currentMovieList.isEmpty()) {
+			Log.i("Save", "Array List Being Restored");
+			
+			// Create simple adapter and set up with array
+			SimpleAdapter listAdapter = new SimpleAdapter(myContext, currentMovieList,
+					R.layout.listview_row, new String[] { "dvdTitle",
+							"releaseDate", "movieRating" }, new int[] {
+							R.id.dvdTitle, R.id.releaseDate, R.id.movieRating });
+
+			myListView.setAdapter(listAdapter);
+		}
 	}
 }

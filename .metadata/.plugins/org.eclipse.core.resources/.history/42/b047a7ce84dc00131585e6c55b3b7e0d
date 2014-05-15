@@ -86,6 +86,7 @@ public class DetailsActivity extends Activity {
 			} // onClick Close
 		}); // onClickListener Close
 		
+		
 	} // onCreate Close
 
 }

@@ -12,6 +12,7 @@ package com.elijahfreestone.java2project2;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +26,8 @@ import android.os.Messenger;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,6 +49,10 @@ public class MainActivity extends Activity {
 	static String myFileName = "string_from_url.txt";
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
 	static TextView testTextView;
+	
+	static final String DVD_TITLE = "dvdTitle";
+	static final String RELEASE_DATE = "releaseDate";
+	static final String MOVIE_RATING = "movieRating";
 	
 	static Boolean fileFlag;
 
@@ -70,15 +77,18 @@ public class MainActivity extends Activity {
 
 		myContext = this;
 
-		//Check if file exists on the device and alert the user if it doesn't
+		// Check if file exists on the device and alert the user if it doesn't
 		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
 		//Log.i("File", fileDirectory);
-		//File file = new File(filePathDir);
+		File file = new File(fileDirectory);
 		//File testFile = new File(myFileName);
 		
-		fileFlag = false;
+		//File file = myContext.getFileStreamPath(myFileName);
 		
-		if (new File(filePathDir).exists()) {
+		//fileFlag = false;
+		
+/*------Always returning false as of now!!------*/
+		if (file.isFile() && !file.isDirectory()) {
 			// Display the data to the listview automatically
 			JSONData.displayDataFromFile();
 			
@@ -94,11 +104,11 @@ public class MainActivity extends Activity {
 				noConnectionAlert();
 			}
 
+			
 			Log.i("File", "File DOESN'T exist!!");
-
 		}
 
-		//Grab button by id and set onClick with network connection check
+		// Grab button by id and set onClick with network connection check
 		Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -118,8 +128,43 @@ public class MainActivity extends Activity {
 				}
 			} // onClick Close
 		}); // onClickListener Close
+		
+		// Create onItemClickListener for the listview. This grabs details of the object selected,
+		// creates new intent, and passes object details to Deatils Activty for display
+		myListView.setOnItemClickListener(new OnItemClickListener() {
+			HashMap<String, String> selectedMovie;
+			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// Grab object selected from ArrayList as a HashMap and split into details strings.
+				selectedMovie = JSONData.myList.get(position-1);
+				dvdTitle = selectedMovie.get("dvdTitle");
+				releaseDate = selectedMovie.get("releaseDate");
+				movieRating = selectedMovie.get("movieRating");
+				criticRating = selectedMovie.get("criticRating");
+				audienceRating = selectedMovie.get("audienceRating");
+				Log.i("File Selected", dvdTitle);
+				
+				//Toast.makeText(getApplicationContext(), "DVD Title: " + selectedMovie, Toast.LENGTH_LONG).show();
+				
+				//Log.i("File Selected", "" + selectedMovie);
+				
+				// Create explicit intent and pass dvd details as extras
+				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+				detailsIntent.putExtra("dvdTitle", dvdTitle);
+				detailsIntent.putExtra("releaseDate", releaseDate);
+				detailsIntent.putExtra("movieRating", movieRating);
+				detailsIntent.putExtra("criticRating", criticRating);
+				detailsIntent.putExtra("audienceRating", audienceRating);
+				
+				startActivityForResult(detailsIntent, 0);
+			}
+		});
 
 	} // onCreate Close
+	
 
 	/**
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to the MainActivty. This is
@@ -161,7 +206,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * 
-	 * Retrieve data.
+	 * Retrieve data creates the Service Intent, adds extras and finally starts the Service.
 	 */
 	public void retrieveData() {
 		Log.i(TAG, "retrieveData called");
@@ -187,7 +232,6 @@ public class MainActivity extends Activity {
 		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	}
-	
 
 	public void noFileAlert() {
 		// Create alert dialog for no file
@@ -200,20 +244,30 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	} //Alert methods Close
 	
-	public Boolean doesFileExist(String filePath) {
-		try {
-			File file = new File(filePathDir);
-			Log.i("File", "Bool File Exists");
-			//fileFlag = true;
-			Log.i("File", "fileFlag in Bool = " + fileFlag);
-			return file.exists();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Log.i("File", "Bool File DOESN'T Exist!!");
-		}
+//	public Boolean doesFileExist(String filePath) {
+//		try {
+//			File file = new File(filePathDir);
+//			Log.i("File", "Bool File Exists");
+//			//fileFlag = true;
+//			Log.i("File", "fileFlag in Bool = " + fileFlag);
+//			return file.exists();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			Log.i("File", "Bool File DOESN'T Exist!!");
+//		}
+//		
+//		return false;
+//		
+//	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
 		
-		return false;
-		
+	}
+	
+	public void goToDetailsActivity() {
+		Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+		startActivity(detailsIntent);
 	}
 }

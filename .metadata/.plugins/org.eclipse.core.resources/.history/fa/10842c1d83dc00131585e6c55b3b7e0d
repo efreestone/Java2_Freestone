@@ -83,6 +83,7 @@ public class DetailsActivity extends Activity {
 				//moreInfoIntent.putExtra();
 				
 				startActivity(moreInfoIntent);
+				
 			} // onClick Close
 		}); // onClickListener Close
 		

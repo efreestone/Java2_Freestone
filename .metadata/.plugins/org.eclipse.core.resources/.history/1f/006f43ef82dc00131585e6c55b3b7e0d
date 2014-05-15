@@ -78,11 +78,12 @@ public class DetailsActivity extends Activity {
 				String baseURLString = "http://www.rottentomatoes.com/m/";
 				String moddedTitle = dvdTitle.replace(" ", "_");
 				String urlSearchMod = baseURLString + moddedTitle;
-				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSearchMod));
+				Intent moreInfoIntent = new Intent(Intent.ACTION_WEB_SEARCH, Uri.parse(urlSearchMod));
 				//moreInfoIntent.setType(HTTP.PLAIN_TEXT_TYPE);
 				//moreInfoIntent.putExtra();
 				
 				startActivity(moreInfoIntent);
+				
 			} // onClick Close
 		}); // onClickListener Close
 		
