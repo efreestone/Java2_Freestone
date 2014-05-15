@@ -72,17 +72,28 @@ public class DetailsActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				//System.out.println("More Info Button Clicked");
-				//Create implicit intent. This will pass a custom URL searching for the movie
-				//title on RottenTomatoes.com and open it in a browser
+				//Create implicit intent. This will pass a custom URL and open it in a browser
+				
 				
 				String baseURLString = "http://www.rottentomatoes.com/m/";
-				String moddedTitle = dvdTitle.replace(" ", "_");
-				String urlSearchMod = baseURLString + moddedTitle;
+				String urlSearchMod = baseURLString + dvdTitle;
 				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSearchMod));
 				//moreInfoIntent.setType(HTTP.PLAIN_TEXT_TYPE);
 				//moreInfoIntent.putExtra();
 				
 				startActivity(moreInfoIntent);
+//				URI dvdSearchURL;
+//				try {
+//					dvdSearchURL = new URI(baseURLString + dvdTitle);
+//				} catch (URISyntaxException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//					Log.e("URL", e.getMessage().toString());
+//					dvdSearchURL = new URI(baseURLString);
+//				}
+//				moreInfoIntent.putExtra("URL", dvdSearchURL);
+				
+
 				
 			} // onClick Close
 		}); // onClickListener Close
