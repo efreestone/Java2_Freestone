@@ -10,6 +10,7 @@
 
 package com.elijahfreestone.java2project2;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 

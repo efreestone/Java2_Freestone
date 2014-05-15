@@ -58,7 +58,7 @@ public class DataService extends IntentService {
 	protected void onHandleIntent(Intent intent) {
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
-		// Set context to myContext on MainActivity
+		//Set context to myContext on MainActivity
 		myContext = MainActivity.myContext;
 
 		responseString = "";

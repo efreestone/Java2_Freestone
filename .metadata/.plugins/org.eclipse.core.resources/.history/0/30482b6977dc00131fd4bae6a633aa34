@@ -10,6 +10,7 @@
 
 package com.elijahfreestone.java2project2;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,6 +96,6 @@ public class JSONData {
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile ERROR", e.getMessage().toString());
 		}
-	} // displayDataFromFile Close
+	} //displayDataFromFile Close
 
 }
