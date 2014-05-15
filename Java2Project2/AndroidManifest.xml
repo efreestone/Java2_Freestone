@@ -24,6 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity 
+            android:name="com.elijahfreestone.java2project2.DetailsActivity" 
+            android:label="@string/detail_name" />
         <service android:name="DataService"></service>
     </application>
 

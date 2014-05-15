@@ -87,6 +87,8 @@ public class DataService extends IntentService {
 			
 			// Write the file to the system
 			myDataManager.writeStringToFile(myContext, myFileName, responseString);
+			
+			MainActivity.fileFlag = true;
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			Log.e(TAG, e.getMessage().toString());
