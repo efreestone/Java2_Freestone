@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">What 2 Watch</string>
+    <string name="detail_name">Details Activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="titleString">DVD New Releases</string>
+    
+    <string name="buttonString">Get New Releases</string>
+    <string name="moreInfoButtonString">Get More Info</string>
+    
+    <string name="ratingBarTitleString">Seen this Movie? Rate it!</string>
+    
+    <!-- Connection Alert strings -->
+    <string name="noConnectionTitle">Connection Error</string>
+    <string name="noConnectionAlert">This application requires internet access. Please check your network connection and try again.</string>
+    
+    <string name="noFileTitle">File does not exist</string>
+    <string name="noFileAlert">The file does not exist on your device so it was requested from the API. Select Get New Releases to update the ListView</string>
+    
+    <string name="ratingSelectedTitle">Movie Rated</string>
+
+</resources>
