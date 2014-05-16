@@ -10,13 +10,6 @@
 
 package com.elijahfreestone.java2project2;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import org.apache.http.protocol.HTTP;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -25,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
@@ -35,6 +30,7 @@ public class DetailsActivity extends Activity {
 	String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
 	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
 	Float ratingSelected;
+	RatingBar movieRatingBar;
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -43,6 +39,8 @@ public class DetailsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details);
+		
+		ratingSelected = 0.0f;
 		
 		// Grab all text views by id
 		titleTextView = (TextView) findViewById(R.id.titleTextView);
@@ -71,7 +69,6 @@ public class DetailsActivity extends Activity {
 		moreInfoButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//System.out.println("More Info Button Clicked");
 				//Create implicit intent. This will pass a custom URL searching for the movie
 				//title on RottenTomatoes.com and open it in a browser
 				
@@ -79,13 +76,30 @@ public class DetailsActivity extends Activity {
 				String moddedTitle = dvdTitle.replace(" ", "_");
 				String urlSearchMod = baseURLString + moddedTitle;
 				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSearchMod));
-				//moreInfoIntent.setType(HTTP.PLAIN_TEXT_TYPE);
-				//moreInfoIntent.putExtra();
 				
 				startActivity(moreInfoIntent);
 			} // onClick Close
 		}); // onClickListener Close
 		
+		movieRatingBar = (RatingBar) findViewById(R.id.movieRatingBar);
+		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+			
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				ratingSelected = movieRatingBar.getRating();
+			}
+		});		
+		
 	} // onCreate Close
-
+	
+	@Override
+	public void finish() {
+		Log.i("Details Activity", "Finish called");
+		Intent detailsBackIntent = new Intent();
+		detailsBackIntent.putExtra("dvdTitle", dvdTitle);
+		detailsBackIntent.putExtra("ratingSelected", ratingSelected);
+		setResult(RESULT_OK, detailsBackIntent);
+		super.finish();
+	}
 }

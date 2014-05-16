@@ -17,5 +17,7 @@
     
     <string name="noFileTitle">File does not exist</string>
     <string name="noFileAlert">The file does not exist on your device so it was requested from the API. Select Get New Releases to update the ListView</string>
+    
+    <string name="ratingSelectedTitle">Movie Rated</string>
 
 </resources>

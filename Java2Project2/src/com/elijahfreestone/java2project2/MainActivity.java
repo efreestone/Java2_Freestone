@@ -52,13 +52,13 @@ public class MainActivity extends Activity {
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
 	static TextView testTextView;
 	
+	Boolean restoreFlag;
+	
 	ArrayList<HashMap<String, String>> currentMovieList;
 	
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
-	
-	static Boolean fileFlag;
 
 	/*
 	 * (non-Javadoc)
@@ -80,35 +80,47 @@ public class MainActivity extends Activity {
 		myDataManager = DataManager.getInstance();
 
 		myContext = this;
-
+		
+		currentMovieList = new ArrayList<HashMap<String,String>>();
+		Log.i("File", "Size = " + currentMovieList.size());
+		
+		restoreFlag = currentMovieList.isEmpty();
+		
 		// Check if file exists on the device and alert the user if it doesn't
 		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
 		//Log.i("File", fileDirectory);
 		File file = new File(fileDirectory);
-		//File testFile = new File(myFileName);
 		
-		//File file = myContext.getFileStreamPath(myFileName);
-		
-		//fileFlag = false;
-		
-/*------Always returning false as of now!!------*/
+		/*
+		 * Always returning false as of now. Everything works fine if the file
+		 * already exists but causes a Null pointer exception if it doesn't when
+		 * the file path is correct but the file has been created. It still shows
+		 * the path exists and I haven't been able to figure out why
+		 */
 		if (file.isFile() && !file.isDirectory()) {
 			// Display the data to the listview automatically
 			JSONData.displayDataFromFile();
-			
+		
 			Log.i("File", "File exists");
 		} else {
 			if (NetworkConnection.connectionStatus(myContext)) {
-				// Show No File alert
-				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
-				retrieveData();
+				/*
+				 * Check currentMovieList. This feels a bit hacky to me. Its a
+				 * workaround for saving state without retriggering the API call
+				 * until I can figure out the File exists issues I've been
+				 * having.
+				 */
+				if (currentMovieList.size() < 10) { //restoreFlag == false || restoreFlag != null
+					// Show No File alert
+					noFileAlert();
+					// Call retrieveData to start the Service and get JSON data from the API
+					retrieveData();
+				}
 			} else {
 				// Show No Connection alert
 				noConnectionAlert();
 			}
 
-			
 			Log.i("File", "File DOESN'T exist!!");
 		}
 
@@ -150,10 +162,6 @@ public class MainActivity extends Activity {
 				criticRating = selectedMovie.get("criticRating");
 				audienceRating = selectedMovie.get("audienceRating");
 				Log.i("File Selected", dvdTitle);
-				
-				//Toast.makeText(getApplicationContext(), "DVD Title: " + selectedMovie, Toast.LENGTH_LONG).show();
-				
-				//Log.i("File Selected", "" + selectedMovie);
 				
 				// Create explicit intent and pass dvd details as extras
 				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
@@ -220,12 +228,17 @@ public class MainActivity extends Activity {
 		// Create Intent to start service
 		Intent startDataIntent = new Intent(myContext, DataService.class);
 		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+		
+		//Instantiate currentMovieList. This is a workaround for saving state until I can
+		//figure out the No File exists issues I've been having.
+		//currentMovieList = null;
 
 		// Start the service
 		startService(startDataIntent);
 	} // retrieveData Close
 
-	// Custom methods to show no connection or no file alerts
+	// Custom methods to show no connection, no file, and rating alerts
+	// noConnectionAlert provides an alert dialog when no network connection is available
 	public void noConnectionAlert() {
 		// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -237,6 +250,7 @@ public class MainActivity extends Activity {
 		alertDialog.show();
 	}
 
+	// noFileAlert provides an alert dialog when a file doesn't exist on the device
 	public void noFileAlert() {
 		// Create alert dialog for no file
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -246,11 +260,24 @@ public class MainActivity extends Activity {
 		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
 		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
+	} 
+	
+	// ratingSelectedAlert provides an alert dialog when a movie was rated on the detail activity
+	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
+		// Create alert dialog for rating selected
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		alertDialog.setTitle(R.string.ratingSelectedTitle);
+		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected + " stars";
+		alertDialog.setMessage(setMessage);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.show();
 	} //Alert methods Close
 	
+	// onSaveInstanceState grabs my array list and saves it to the bundle
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
+		restoreFlag = true;
 		//Grab entire array list from JSON Data
 		currentMovieList = JSONData.myList;
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {
@@ -260,11 +287,13 @@ public class MainActivity extends Activity {
 		}
 	} // onSaveInstanceState Close
 	
+	// onRestore grabs my array list from the bundle if it exists and redisplays it
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		//Grab stored Array List from Bundle
 		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
+		Log.i("File", "Size = " + currentMovieList.size());
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {
 			Log.i("Save", "Array List Being Restored");
 			
@@ -276,5 +305,17 @@ public class MainActivity extends Activity {
 
 			myListView.setAdapter(listAdapter);
 		}
-	}
+	} // onRestoreInstanceState Close
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
+		Log.i(TAG, "On Activity Result");
+		if (resultCode == RESULT_OK && requestCode == 0) {
+			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
+				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+				ratingSelectedAlert(dvdTitle, ratingSelected);
+			}
+			
+		}
+	} // onActivityResult Close
 }
