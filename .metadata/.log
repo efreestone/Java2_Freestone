@@ -9582,3 +9582,13 @@ org.eclipse.core.runtime.CoreException: The value of key 'xml-attr-name' is not 
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:121)
 !SUBENTRY 1 org.eclipse.ltk.core.refactoring 4 10007 2014-05-15 20:02:55.701
 !MESSAGE The value of key 'xml-attr-name' is not a string
+!SESSION 2014-05-15 21:16:19.532 -----------------------------------------------
+eclipse.buildId=v22.3.0-887826
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product com.android.ide.eclipse.adt.package.product -keyring /Volumes/Second HD/elijahfreestone/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product com.android.ide.eclipse.adt.package.product -keyring /Volumes/Second HD/elijahfreestone/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-05-15 21:16:54.028
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

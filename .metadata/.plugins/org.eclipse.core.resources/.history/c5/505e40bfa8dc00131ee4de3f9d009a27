@@ -21,7 +21,7 @@ import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataManager handles reading and writing files to the device.
+ * The Class DataManager.
  */
 public class DataManager {
 
@@ -86,8 +86,7 @@ public class DataManager {
 	// Method to read JSON file from the device. The string created is passed to
 	// be parsed and displayed
 	/**
-	 * Read string from file. This method pulls in the file input stream
-	 * and appends the content buffer to a string for parsing
+	 * Read string from file.
 	 *
 	 * @param context the context
 	 * @param fileName the file name

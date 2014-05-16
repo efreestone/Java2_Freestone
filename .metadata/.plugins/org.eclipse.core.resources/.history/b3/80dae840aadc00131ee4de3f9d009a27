@@ -93,8 +93,6 @@ public class DetailsActivity extends Activity {
 		
 	} // onCreate Close
 	
-	// finish is called when the activity is exited (such as the back button)
-	// This creates a new intent and passes the title and rating back
 	@Override
 	public void finish() {
 		Log.i("Details Activity", "Finish called");

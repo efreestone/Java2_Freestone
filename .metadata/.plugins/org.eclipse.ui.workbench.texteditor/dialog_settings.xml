@@ -13,16 +13,16 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="startS" key="selection"/>
+		<item value="urlS" key="selection"/>
 		<list key="findhistory">
+			<item value="urlS"/>
+			<item value="noFile"/>
 			<item value="startS"/>
 			<item value="displayD"/>
 			<item value="read"/>
 			<item value="JSONSt"/>
 			<item value="readStr"/>
 			<item value="readS"/>
-			<item value="Info"/>
-			<item value="Component"/>
 		</list>
 		<list key="replacehistory">
 		</list>

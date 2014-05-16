@@ -38,6 +38,7 @@ public class DataService extends IntentService {
 	
 	static String TAG = "DataService";
 	public static final String MESSENGER_KEY = "messenger";
+	public static final String TIME_KEY = "time";
 	public static String responseString;
 
 	String urlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=xxnu68qnz6ap2ygf4qvu659t&page_limit=10";

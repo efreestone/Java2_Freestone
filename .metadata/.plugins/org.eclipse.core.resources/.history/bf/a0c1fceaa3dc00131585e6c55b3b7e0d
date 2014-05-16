@@ -81,8 +81,22 @@ public class MainActivity extends Activity {
 
 		myContext = this;
 		
-		// Check if the file already exists
+		currentMovieList = new ArrayList<HashMap<String,String>>();
+		Log.i("File", "Size = " + currentMovieList.size());
+		
+		restoreFlag = currentMovieList.isEmpty();
+		
+		// Check if file exists on the device and alert the user if it doesn't
+		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
+		//Log.i("File", fileDirectory);
 		File file = this.getFileStreamPath(myFileName);
+		
+		/*
+		 * Always returning false as of now. Everything works fine if the file
+		 * already exists but causes a Null pointer exception if it doesn't when
+		 * the file path is correct but the file has been created. It still shows
+		 * the path exists and I haven't been able to figure out why
+		 */
 		Boolean fileExists = file.exists();
 		if (fileExists) {
 			// Display the data to the listview automatically
@@ -184,6 +198,9 @@ public class MainActivity extends Activity {
 					} catch (Exception e) {
 						Log.e("handleMessage", e.getMessage().toString());
 					}
+					// Write the file to the system
+					//myDataManager.writeStringToFile(myContext, myFileName, DataService.responseString);
+
 				} else {
 					Log.i(TAG, "Data NOT created!!");
 				}
