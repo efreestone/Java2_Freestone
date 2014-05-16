@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,7 +90,8 @@ public class MainActivity extends Activity {
 		// Check if file exists on the device and alert the user if it doesn't
 		String fileDirectory = android.os.Environment.getRootDirectory() + filePathDir;
 		//Log.i("File", fileDirectory);
-		File file = this.getFileStreamPath(myFileName);
+		//Path filePath = Path.set(filePathDir);
+		File file = new File(fileDirectory);
 		
 		/*
 		 * Always returning false as of now. Everything works fine if the file
@@ -97,18 +99,25 @@ public class MainActivity extends Activity {
 		 * the file path is correct but the file has been created. It still shows
 		 * the path exists and I haven't been able to figure out why
 		 */
-		Boolean fileExists = file.exists();
-		if (fileExists) {
+		if (file.isFile() && !file.isDirectory()) {
 			// Display the data to the listview automatically
 			JSONData.displayDataFromFile();
-	
+		
 			Log.i("File", "File exists");
 		} else {
-			if (NetworkConnection.connectionStatus(myContext)) {	
-				// Show No File alert
-				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
-				retrieveData();
+			if (NetworkConnection.connectionStatus(myContext)) {
+				/*
+				 * Check currentMovieList. This feels a bit hacky to me. Its an
+				 * workaround for saving state without retriggering the API call
+				 * until I can figure out the File exists issues I've been
+				 * having.
+				 */
+				if (currentMovieList.size() < 10) { //restoreFlag == false || restoreFlag != null
+					// Show No File alert
+					noFileAlert();
+					// Call retrieveData to start the Service and get JSON data from the API
+					retrieveData();
+				}
 			} else {
 				// Show No Connection alert
 				noConnectionAlert();
@@ -221,6 +230,10 @@ public class MainActivity extends Activity {
 		// Create Intent to start service
 		Intent startDataIntent = new Intent(myContext, DataService.class);
 		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+		
+		//Instantiate currentMovieList. This is a workaround for saving state until I can
+		//figure out the No File exists issues I've been having.
+		//currentMovieList = null;
 
 		// Start the service
 		startService(startDataIntent);

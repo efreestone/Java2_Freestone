@@ -221,6 +221,10 @@ public class MainActivity extends Activity {
 		// Create Intent to start service
 		Intent startDataIntent = new Intent(myContext, DataService.class);
 		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+		
+		//Instantiate currentMovieList. This is a workaround for saving state until I can
+		//figure out the No File exists issues I've been having.
+		//currentMovieList = null;
 
 		// Start the service
 		startService(startDataIntent);
