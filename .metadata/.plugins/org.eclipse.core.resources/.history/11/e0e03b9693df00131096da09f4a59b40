@@ -112,7 +112,8 @@ public class DataService extends IntentService {
 			// Open connection
 			URLConnection connection = url.openConnection();
 			// Create buffered input stream
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(connection.getInputStream());
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(
+					connection.getInputStream());
 			// Create byte and set to 1024
 			byte[] contextByte = new byte[1024];
 			// Create int for bytes read

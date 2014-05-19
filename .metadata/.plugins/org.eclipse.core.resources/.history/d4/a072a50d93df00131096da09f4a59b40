@@ -213,35 +213,44 @@ public class MainActivity extends Activity {
 	// noConnectionAlert provides an alert dialog when no network connection is available
 	public void noConnectionAlert() {
 		// Create alert dialog for no connection
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+				.create();
 		alertDialog.setTitle(R.string.noConnectionTitle);
 		// Set alert message. setMessage only has a charSequence
 		// version so getString must be used.
 		alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+				(DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	}
 
-	// noFileAlert provides an alert dialog when a file doesn't exist on the device
+	// noFileAlert provides an alert dialog when a file doesn't exist on the
+	// device
 	public void noFileAlert() {
 		// Create alert dialog for no file
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+				.create();
 		alertDialog.setTitle(R.string.noFileTitle);
 		// Set alert message. setMessage only has a charSequence
 		// version so getString must be used.
 		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+				(DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	}
 
-	// ratingSelectedAlert provides an alert dialog when a movie was rated on the detail activity
+	// ratingSelectedAlert provides an alert dialog when a movie was rated on
+	// the detail activity
 	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
 		// Create alert dialog for rating selected
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+				.create();
 		alertDialog.setTitle(R.string.ratingSelectedTitle);
-		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected + " stars";
+		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected
+				+ " stars";
 		alertDialog.setMessage(setMessage);
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+				(DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	} // Alert methods Close
 
@@ -259,12 +268,14 @@ public class MainActivity extends Activity {
 		}
 	} // onSaveInstanceState Close
 
-	// onRestore grabs my array list from the bundle if it exists and redisplays it
+	// onRestore grabs my array list from the bundle if it exists and redisplays
+	// it
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		// Grab stored Array List from Bundle
-		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
+		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState
+				.getSerializable("stored");
 		Log.i("File", "Size = " + currentMovieList.size());
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {
 			Log.i("Save", "Array List Being Restored");
@@ -280,14 +291,19 @@ public class MainActivity extends Activity {
 		}
 	} // onRestoreInstanceState Close
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
 		if (resultCode == RESULT_OK && requestCode == 0) {
-			if (detailsBackIntent.hasExtra("dvdTitle")&& detailsBackIntent.hasExtra("ratingSelected")) {
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
-				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+			if (detailsBackIntent.hasExtra("dvdTitle")
+					&& detailsBackIntent.hasExtra("ratingSelected")) {
+				String dvdTitle = detailsBackIntent.getExtras().getString(
+						"dvdTitle");
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat(
+						"ratingSelected");
 				ratingSelectedAlert(dvdTitle, ratingSelected);
 			}
+
 		}
 	} // onActivityResult Close
 }

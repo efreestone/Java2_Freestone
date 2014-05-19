@@ -87,7 +87,8 @@ public class DetailsActivity extends Activity {
 		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 					@Override
-					public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+					public void onRatingChanged(RatingBar ratingBar,
+							float rating, boolean fromUser) {
 						ratingSelected = movieRatingBar.getRating();
 					}
 				});

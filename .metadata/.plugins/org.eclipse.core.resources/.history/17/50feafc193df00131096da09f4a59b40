@@ -84,10 +84,12 @@ public class DetailsActivity extends Activity {
 		}); // onClickListener Close
 
 		movieRatingBar = (RatingBar) findViewById(R.id.movieRatingBar);
-		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+		movieRatingBar
+				.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 					@Override
-					public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+					public void onRatingChanged(RatingBar ratingBar,
+							float rating, boolean fromUser) {
 						ratingSelected = movieRatingBar.getRating();
 					}
 				});

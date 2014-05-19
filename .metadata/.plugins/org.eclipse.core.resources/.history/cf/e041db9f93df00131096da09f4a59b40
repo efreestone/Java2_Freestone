@@ -28,7 +28,8 @@ import android.widget.TextView;
  */
 public class DetailsActivity extends Activity {
 	String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
-	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
+	TextView titleTextView, releaseTextView, movieRatingTextView,
+			criticRatingTextView, audienceRatingTextView;
 	Float ratingSelected;
 	RatingBar movieRatingBar;
 
@@ -71,23 +72,27 @@ public class DetailsActivity extends Activity {
 		moreInfoButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Create implicit intent. This will pass a custom URL searching for the movie
+				// Create implicit intent. This will pass a custom URL searching
+				// for the movie
 				// title on RottenTomatoes.com and open it in a browser
 
 				String baseURLString = "http://www.rottentomatoes.com/m/";
 				String moddedTitle = dvdTitle.replace(" ", "_");
 				String urlSearchMod = baseURLString + moddedTitle;
-				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSearchMod));
+				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse(urlSearchMod));
 
 				startActivity(moreInfoIntent);
 			} // onClick Close
 		}); // onClickListener Close
 
 		movieRatingBar = (RatingBar) findViewById(R.id.movieRatingBar);
-		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+		movieRatingBar
+				.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 					@Override
-					public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+					public void onRatingChanged(RatingBar ratingBar,
+							float rating, boolean fromUser) {
 						ratingSelected = movieRatingBar.getRating();
 					}
 				});

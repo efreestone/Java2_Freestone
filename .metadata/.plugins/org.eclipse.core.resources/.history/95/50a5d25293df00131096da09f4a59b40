@@ -288,6 +288,7 @@ public class MainActivity extends Activity {
 				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 				ratingSelectedAlert(dvdTitle, ratingSelected);
 			}
+
 		}
 	} // onActivityResult Close
 }

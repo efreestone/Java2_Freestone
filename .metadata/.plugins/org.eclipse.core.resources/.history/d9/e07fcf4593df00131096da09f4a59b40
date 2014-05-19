@@ -280,14 +280,19 @@ public class MainActivity extends Activity {
 		}
 	} // onRestoreInstanceState Close
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
 		if (resultCode == RESULT_OK && requestCode == 0) {
-			if (detailsBackIntent.hasExtra("dvdTitle")&& detailsBackIntent.hasExtra("ratingSelected")) {
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
-				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+			if (detailsBackIntent.hasExtra("dvdTitle")
+					&& detailsBackIntent.hasExtra("ratingSelected")) {
+				String dvdTitle = detailsBackIntent.getExtras().getString(
+						"dvdTitle");
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat(
+						"ratingSelected");
 				ratingSelectedAlert(dvdTitle, ratingSelected);
 			}
+
 		}
 	} // onActivityResult Close
 }

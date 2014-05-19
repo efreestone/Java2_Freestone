@@ -59,13 +59,15 @@ public class DataManager {
 	 *            the content
 	 * @return the boolean
 	 */
-	public Boolean writeStringToFile(Context context, String fileName, String content) {
+	public Boolean writeStringToFile(Context context, String fileName,
+			String content) {
 		Boolean result = false;
 
 		// Create and open file output stream
 		FileOutputStream fileOutputStream = null;
 		try {
-			fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+			fileOutputStream = context.openFileOutput(fileName,
+					Context.MODE_PRIVATE);
 			fileOutputStream.write(content.getBytes());
 			Log.i("writeStringToFile", "Write Successful!");
 
@@ -100,7 +102,8 @@ public class DataManager {
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = context.openFileInput(fileName);
-			BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+			BufferedInputStream bufferedInputStream = new BufferedInputStream(
+					fileInputStream);
 			byte[] contentBytes = new byte[1024];
 			int bytesRead = 0;
 			StringBuffer contentBuffer = new StringBuffer();

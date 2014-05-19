@@ -66,14 +66,21 @@ public class JSONData {
 
 				dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
 				// Log.i("displayData newReleaseArray", "Title: " + dvdTitle);
-				releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
-				// Log.i("displayData newReleaseArray", "Release Date: " + releaseDate);
-				movieRating = newReleaseArray.getJSONObject(i).getString("mpaa_rating");
-				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
-				// Log.i("displayData newReleaseArray", "Rating: " + criticRating);
-				audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
+				releaseDate = newReleaseArray.getJSONObject(i)
+						.getJSONObject("release_dates").getString("dvd");
+				// Log.i("displayData newReleaseArray", "Release Date: " +
+				// releaseDate);
+				movieRating = newReleaseArray.getJSONObject(i).getString(
+						"mpaa_rating");
+				criticRating = newReleaseArray.getJSONObject(i)
+						.getJSONObject("ratings").getString("critics_rating");
+				// Log.i("displayData newReleaseArray", "Rating: " +
+				// criticRating);
+				audienceRating = newReleaseArray.getJSONObject(i)
+						.getJSONObject("ratings").getString("audience_rating");
 
-				// Instantiate Hash Map for array and pass in strings with key/value pairs
+				// Instantiate Hash Map for array and pass in strings with
+				// key/value pairs
 				HashMap<String, String> displayMap = new HashMap<String, String>();
 				displayMap.put("dvdTitle", dvdTitle);
 				displayMap.put("releaseDate", releaseDate);
