@@ -1,0 +1,7 @@
+package com.elijahfreestone.java2project3;
+
+import android.app.Activity;
+
+public class DetailsActivity extends Activity {
+
+}
