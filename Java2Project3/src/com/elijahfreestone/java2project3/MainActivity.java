@@ -260,6 +260,7 @@ public class MainActivity extends Activity {
 	} // onSaveInstanceState Close
 
 	// onRestore grabs my array list from the bundle if it exists and redisplays it
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -284,9 +285,9 @@ public class MainActivity extends Activity {
 		Log.i(TAG, "On Activity Result");
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			if (detailsBackIntent.hasExtra("dvdTitle")&& detailsBackIntent.hasExtra("ratingSelected")) {
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
-				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
-				ratingSelectedAlert(dvdTitle, ratingSelected);
+//				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+//				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+//				ratingSelectedAlert(dvdTitle, ratingSelected);
 			}
 		}
 	} // onActivityResult Close
