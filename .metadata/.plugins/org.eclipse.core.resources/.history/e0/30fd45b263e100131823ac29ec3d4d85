@@ -14,7 +14,7 @@
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:padding="3dp"
-        android:text="Movie Title" />
+        android:text="Details Activity" />
     
     <TextView
         android:id="@+id/releaseTextView"

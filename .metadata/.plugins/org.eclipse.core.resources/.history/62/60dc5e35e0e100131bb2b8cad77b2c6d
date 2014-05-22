@@ -132,7 +132,6 @@ public class MainActivityFragment extends Fragment implements OnItemClickListene
 		return mainView;
 	} // onCreateView Close
 
-	// onItemClick grabs movie object selected and passes its info to details as extras
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		// Grab object selected from ArrayList as a HashMap and split
