@@ -156,10 +156,8 @@ public class MainActivityFragment extends Fragment implements OnItemClickListene
 		
 		// Check if details fragment exists and is visible, true if in landscape mode
 		if (detailsFragment != null && detailsFragment.isInLayout()) {
-			// Call displayMovieDetails if in landscape mode, skipping intent
 			detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 		} else {
-			// Pass intent to be parsed/displayed from details fragment
 			parentActivity.startActivityForResult(detailsIntent, 0);
 		}
  
