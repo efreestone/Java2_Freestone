@@ -23,28 +23,17 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class DetailsActivityFragment handles all UI elements on DetailsActivity.
- */
 public class DetailsActivityFragment extends Fragment {
 	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
 	RatingBar movieRatingBar;
 	Float ratingSelected;
 	
-	/**
-	 * The Interface OnGetMoreInfoClicked.
-	 */
 	public interface OnGetMoreInfoClicked {
-		// onGetMoreInfoClicked creates and calls implicit intent in DetailsActivity
 		void onGetMoreInfoClicked();
 	}
 	
 	private OnGetMoreInfoClicked parentActivity;
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onAttach(android.app.Activity)
-	 */
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
@@ -58,9 +47,6 @@ public class DetailsActivityFragment extends Fragment {
 		 
 	} // onAttach Close
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// Create/inflate view and return

@@ -25,7 +25,7 @@ import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DetailsActivityFragment handles all UI elements on DetailsActivity.
+ * The Class DetailsActivityFragment.
  */
 public class DetailsActivityFragment extends Fragment {
 	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
@@ -97,6 +97,15 @@ public class DetailsActivityFragment extends Fragment {
 	} // onCreateView Close
 	
 	// displayMovieDetails displays details of the movie selected, called from DetailsActivity
+	/**
+	 * Display movie details.
+	 *
+	 * @param dvdTitle the dvd title
+	 * @param releaseDate the release date
+	 * @param movieRating the movie rating
+	 * @param criticRating the critic rating
+	 * @param audienceRating the audience rating
+	 */
 	public void displayMovieDetails(String dvdTitle, String releaseDate,
 			String movieRating, String criticRating, String audienceRating) {
 		// Set textviews with strings from intent extras

@@ -29,7 +29,7 @@ import android.widget.ListView;
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
 /**
- * The Class MainActivityFragment handles all UI elements on MainActivity.
+ * The Class MainActivityFragment controls all UI elements on MainActivity.
  */
 public class MainActivityFragment extends Fragment {
 	Button newReleaseButton;
