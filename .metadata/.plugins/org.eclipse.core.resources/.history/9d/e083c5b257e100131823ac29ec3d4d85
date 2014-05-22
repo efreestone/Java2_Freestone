@@ -1,0 +1,45 @@
+/*
+ * @author	Elijah Freestone 
+ *
+ * Project	Java2Project3
+ * 
+ * Package	com.elijahfreestone.java2project3
+ * 
+ * date		May 21, 2014
+ */
+
+package com.elijahfreestone.java2project3;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+public class DetailsActivityFragment extends Fragment {
+	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
+
+	@Override
+	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
+		super.onAttach(activity);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		// Create/inflate view and return
+		View detailsView = inflater.inflate(R.layout.activity_details, container);
+		
+		// Grab all text views by id
+		titleTextView = (TextView) detailsView.findViewById(R.id.titleTextView);
+		releaseTextView = (TextView) detailsView.findViewById(R.id.releaseTextView);
+		movieRatingTextView = (TextView) detailsView.findViewById(R.id.movieRatingTextView);
+		criticRatingTextView = (TextView) detailsView.findViewById(R.id.criticRatingTextView);
+		audienceRatingTextView = (TextView) detailsView.findViewById(R.id.audienceRatingTextView);
+		
+		return detailsView;
+	}
+
+}

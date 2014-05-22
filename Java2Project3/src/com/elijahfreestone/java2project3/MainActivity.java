@@ -35,7 +35,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements MainActivityFragment.onListItemSelected {
+public class MainActivity extends Activity implements MainActivityFragment.OnListItemSelected {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
