@@ -67,7 +67,7 @@ public class MainActivityFragment extends Fragment {
 					JSONData.displayDataFromFile();
 				} else {
 					// Show no connection alert
-					MainActivity.noConnectionAlert();
+					//noConnectionAlert();
 					
 					Log.i(TAG, "No Network!!");
 				}

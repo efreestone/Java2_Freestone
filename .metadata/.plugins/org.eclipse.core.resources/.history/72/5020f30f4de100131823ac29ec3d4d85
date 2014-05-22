@@ -100,26 +100,26 @@ public class MainActivity extends Activity {
 			Log.i("File", "File DOESN'T exist!!");
 		}
 
-//		// Grab button by id and set onClick with network connection check
-//		newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
-//		newReleaseButton.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				// System.out.println("Button Clicked");
-//
-//				if (NetworkConnection.connectionStatus(myContext)) {
-//					// System.out.println("Network Works!!");
-//					Log.i(TAG, "Network Works!!");
-//
-//					JSONData.displayDataFromFile();
-//				} else {
-//					// Show no connection alert
-//					noConnectionAlert();
-//
-//					Log.i(TAG, "No Network!!");
-//				}
-//			} // onClick Close
-//		}); // onClickListener Close
+		// Grab button by id and set onClick with network connection check
+		newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+		newReleaseButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// System.out.println("Button Clicked");
+
+				if (NetworkConnection.connectionStatus(myContext)) {
+					// System.out.println("Network Works!!");
+					Log.i(TAG, "Network Works!!");
+
+					JSONData.displayDataFromFile();
+				} else {
+					// Show no connection alert
+					noConnectionAlert();
+
+					Log.i(TAG, "No Network!!");
+				}
+			} // onClick Close
+		}); // onClickListener Close
 
 		// Create onItemClickListener for the listview. This grabs details of the object selected,
 		// creates new intent, and passes object details to Deatils Activty for display
@@ -210,9 +210,9 @@ public class MainActivity extends Activity {
 
 	// Custom methods to show no connection, no file, and rating alerts
 	// noConnectionAlert provides an alert dialog when no network connection is available
-	public static void noConnectionAlert() {
+	public void noConnectionAlert() {
 		// Create alert dialog for no connection
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.myContext).create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 		alertDialog.setTitle(R.string.noConnectionTitle);
 		// Set alert message. setMessage only has a charSequence
 		// version so getString must be used.

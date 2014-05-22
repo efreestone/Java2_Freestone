@@ -10,18 +10,19 @@
 
 package com.elijahfreestone.java2project3;
 
+import com.elijahfreestone.networkConnection.NetworkConnection;
+
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.elijahfreestone.networkConnection.NetworkConnection;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -30,6 +31,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 public class MainActivityFragment extends Fragment {
 	Button newReleaseButton;
 	static ListView myListView;
+	Context myContext;
 	
 	static String TAG = "Main Fragment";
 
@@ -47,7 +49,7 @@ public class MainActivityFragment extends Fragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		
+		myContext = MainActivity.myContext;
 		// Create/inflate view and return
 		View mainView = inflater.inflate(R.layout.activity_main, container);
 		
@@ -60,14 +62,17 @@ public class MainActivityFragment extends Fragment {
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (NetworkConnection.connectionStatus(MainActivity.myContext)) { 
+				// System.out.println("Button Clicked");
+				Boolean test = true;
+
+				if (NetworkConnection.connectionStatus(myContext)) { 
 					// System.out.println("Network Works!!");
 					Log.i(TAG, "Network Works!!");
 
 					JSONData.displayDataFromFile();
 				} else {
 					// Show no connection alert
-					MainActivity.noConnectionAlert();
+					//noConnectionAlert();
 					
 					Log.i(TAG, "No Network!!");
 				}
