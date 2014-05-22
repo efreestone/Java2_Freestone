@@ -32,6 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -43,16 +44,17 @@ public class MainActivity extends Activity {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
+	static ListView myListView;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
 	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
+	static TextView testTextView;
+
+	Boolean restoreFlag;
 
 	ArrayList<HashMap<String, String>> currentMovieList;
-	
-	Button newReleaseButton;
-	static ListView myListView;
-	
+
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
@@ -65,14 +67,13 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_fragment);
+		setContentView(R.layout.activity_main);
 
 		// Instantiate the list view and add header
 		myListView = (ListView) this.findViewById(R.id.listView);
-//		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
-//		myListView.addHeaderView(listHeader);
+		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
+		myListView.addHeaderView(listHeader);
 
-		
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
 
@@ -101,7 +102,7 @@ public class MainActivity extends Activity {
 		}
 
 		// Grab button by id and set onClick with network connection check
-		newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+		Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
 		newReleaseButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -248,6 +249,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
+		restoreFlag = true;
 		// Grab entire array list from JSON Data
 		currentMovieList = JSONData.myList;
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {

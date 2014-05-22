@@ -91,7 +91,7 @@ public class JSONData {
 							"releaseDate", "movieRating" }, new int[] {
 							R.id.dvdTitle, R.id.releaseDate, R.id.movieRating });
 
-			MainActivityFragment.myListView.setAdapter(listAdapter);
+			MainActivity.myListView.setAdapter(listAdapter);
 
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile ERROR", e.getMessage().toString());

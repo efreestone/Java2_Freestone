@@ -32,6 +32,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -69,10 +70,9 @@ public class MainActivity extends Activity {
 
 		// Instantiate the list view and add header
 		myListView = (ListView) this.findViewById(R.id.listView);
-//		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
-//		myListView.addHeaderView(listHeader);
+		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
+		myListView.addHeaderView(listHeader);
 
-		
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
 

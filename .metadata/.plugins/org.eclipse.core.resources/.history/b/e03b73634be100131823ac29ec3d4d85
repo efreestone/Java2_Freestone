@@ -69,10 +69,9 @@ public class MainActivity extends Activity {
 
 		// Instantiate the list view and add header
 		myListView = (ListView) this.findViewById(R.id.listView);
-//		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
-//		myListView.addHeaderView(listHeader);
+		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
+		myListView.addHeaderView(listHeader);
 
-		
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
 
