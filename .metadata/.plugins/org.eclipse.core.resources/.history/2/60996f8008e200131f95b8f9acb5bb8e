@@ -28,7 +28,7 @@ import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataService handles API call and response.
+ * The Class DataService.
  */
 public class DataService extends IntentService {
 
@@ -42,7 +42,7 @@ public class DataService extends IntentService {
 
 	String urlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=xxnu68qnz6ap2ygf4qvu659t&page_limit=10";
 
-	/*
+	/**
 	 * Instantiates a new data service.
 	 */
 	public DataService() {
@@ -95,6 +95,13 @@ public class DataService extends IntentService {
 	} // onHandleIntent Close
 
 	// Method to get response from url
+	/**
+	 * Gets the response.
+	 * 
+	 * @param url
+	 *            the url
+	 * @return the response
+	 */
 	public static String getResponse(URL url) {
 		// Create string for response
 		String response = "";

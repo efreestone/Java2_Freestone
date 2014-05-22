@@ -33,7 +33,7 @@ import android.widget.SimpleAdapter;
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
 //TODO: Auto-generated Javadoc
-/**
+/*
  * The Class MainActivity.
  */
 public class MainActivity extends Activity implements MainActivityFragment.OnListItemSelected {
@@ -92,7 +92,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		}
 	} // onCreate Close
 
-	/*
+	/**
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to
 	 * the MainActivty. This is done to avoid the memory leak
 	 */
@@ -130,7 +130,8 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		} // HandleMessage Close
 	} // MyHandler Close
 
-	/* 
+	/**
+	 * 
 	 * Retrieve data creates the Service Intent, adds extras and finally starts
 	 * the Service.
 	 */

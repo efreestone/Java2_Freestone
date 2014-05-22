@@ -34,6 +34,11 @@ public class DataManager {
 	}
 
 	// Create getInstance method and check if instance exists
+	/**
+	 * Gets the single instance of DataManager.
+	 * 
+	 * @return single instance of DataManager
+	 */
 	public static DataManager getInstance() {
 		if (dataManagerInstance == null) {
 			dataManagerInstance = new DataManager();
@@ -43,6 +48,17 @@ public class DataManager {
 
 	// Create writeStringToFile. Is called from onClick in the Main Activity and
 	// saves file to the device
+	/**
+	 * Write string to file.
+	 * 
+	 * @param context
+	 *            the context
+	 * @param fileName
+	 *            the file name
+	 * @param content
+	 *            the content
+	 * @return the boolean
+	 */
 	public Boolean writeStringToFile(Context context, String fileName, String content) {
 		Boolean result = false;
 
@@ -65,6 +81,16 @@ public class DataManager {
 
 	// Method to read JSON file from the device. The string created is passed to
 	// be parsed and displayed
+	/**
+	 * Read string from file. This method pulls in the file input stream and
+	 * appends the content buffer to a string for parsing
+	 * 
+	 * @param context
+	 *            the context
+	 * @param fileName
+	 *            the file name
+	 * @return the string
+	 */
 	public static String readStringFromFile(Context context, String fileName) {
 		String fileContent = "";
 

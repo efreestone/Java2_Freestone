@@ -100,7 +100,34 @@ public class MainActivityFragment extends Fragment implements OnItemClickListene
 		
 		// Create onItemClickListener for the listview. This grabs details of the object selected,
 		// creates new intent, and passes object details to Details Activity for display
-		myListView.setOnItemClickListener(this); 
+		myListView.setOnItemClickListener(this); //new OnItemClickListener() {
+//			HashMap<String, String> selectedMovie;
+//			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
+
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				// Grab object selected from ArrayList as a HashMap and split
+//				// into details strings.
+//				selectedMovie = JSONData.myList.get(position - 1);
+//				dvdTitle = selectedMovie.get("dvdTitle");
+//				releaseDate = selectedMovie.get("releaseDate");
+//				movieRating = selectedMovie.get("movieRating");
+//				criticRating = selectedMovie.get("criticRating");
+//				audienceRating = selectedMovie.get("audienceRating");
+//				Log.i("File Selected", dvdTitle);
+//
+//				// Create explicit intent and pass dvd details as extras
+//				Intent detailsIntent = new Intent(MainActivity.myContext, DetailsActivity.class);
+//				detailsIntent.putExtra("dvdTitle", dvdTitle);
+//				detailsIntent.putExtra("releaseDate", releaseDate);
+//				detailsIntent.putExtra("movieRating", movieRating);
+//				detailsIntent.putExtra("criticRating", criticRating);
+//				detailsIntent.putExtra("audienceRating", audienceRating);
+//
+//				parentActivity.startActivityForResult(detailsIntent, 0);
+//			} // onItemClick Close
+		//}); // setOnItemClickListener Close
+		
 		
 		return mainView;
 	} // onCreateView Close

@@ -20,7 +20,7 @@ import android.content.Context;
 import android.util.Log;
 
 // TODO: Auto-generated Javadoc
-/**
+/*
  * The Class DataManager handles reading and writing files to the device.
  */
 public class DataManager {

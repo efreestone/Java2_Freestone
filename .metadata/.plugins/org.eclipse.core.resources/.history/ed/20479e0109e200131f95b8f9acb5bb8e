@@ -32,7 +32,7 @@ public class DetailsActivityFragment extends Fragment {
 	RatingBar movieRatingBar;
 	Float ratingSelected;
 	
-	/*
+	/**
 	 * The Interface OnGetMoreInfoClicked.
 	 */
 	public interface OnGetMoreInfoClicked {

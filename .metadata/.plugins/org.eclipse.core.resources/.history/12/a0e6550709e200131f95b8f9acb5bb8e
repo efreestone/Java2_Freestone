@@ -33,7 +33,7 @@ import android.widget.SimpleAdapter;
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
 //TODO: Auto-generated Javadoc
-/**
+/*
  * The Class MainActivity.
  */
 public class MainActivity extends Activity implements MainActivityFragment.OnListItemSelected {

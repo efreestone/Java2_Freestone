@@ -23,7 +23,7 @@ import android.widget.SimpleAdapter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class JSONData creates/displays JSON Data from file.
+ * The Class JSONData.
  */
 public class JSONData {
 	static Context myContext;

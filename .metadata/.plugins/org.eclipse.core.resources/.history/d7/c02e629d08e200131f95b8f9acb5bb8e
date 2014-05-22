@@ -28,7 +28,7 @@ import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataService handles API call and response.
+ * The Class DataService.
  */
 public class DataService extends IntentService {
 
