@@ -2,11 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id=""@+id/mainFragment""
         android:name="com.elijahfreestone.java2project3.MainActivityFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.elijahfreestone.java2project3.DetailsActivityFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
