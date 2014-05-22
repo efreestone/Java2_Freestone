@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -23,7 +25,6 @@ import android.util.Log;
 public class DetailsActivity extends Activity implements DetailsActivityFragment.OnGetMoreInfoClicked {
 	static String dvdTitle;
 	String releaseDate, movieRating, criticRating, audienceRating;
-	static Float ratingSelected;
 	
 	/*
 	 * (non-Javadoc)

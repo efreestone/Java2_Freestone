@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -22,9 +24,14 @@ import android.util.Log;
  */
 public class DetailsActivity extends Activity implements DetailsActivityFragment.OnGetMoreInfoClicked {
 	static String dvdTitle;
-	String releaseDate, movieRating, criticRating, audienceRating;
+	String releaseDate;
+	String movieRating;
+	String criticRating;
+	String audienceRating;
+	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
 	static Float ratingSelected;
-	
+	RatingBar movieRatingBar;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -34,6 +41,15 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details_fragment);
+
+		ratingSelected = 0.0f;
+
+//		// Grab all text views by id
+//		titleTextView = (TextView) findViewById(R.id.titleTextView);
+//		releaseTextView = (TextView) findViewById(R.id.releaseTextView);
+//		movieRatingTextView = (TextView) findViewById(R.id.movieRatingTextView);
+//		criticRatingTextView = (TextView) findViewById(R.id.criticRatingTextView);
+//		audienceRatingTextView = (TextView) findViewById(R.id.audienceRatingTextView);
 		
 		// Grab intent extras to be displayed in textviews
 		Intent newDetailsIntent = getIntent();
@@ -52,6 +68,40 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 				Log.i("Details", "Details Frag is null!!");
 			}
 		}
+		
+
+//		// Set textviews with strings from intent extras
+//		titleTextView.setText("DVD Title: " + dvdTitle);
+//		releaseTextView.setText("Released: " + releaseDate);
+//		movieRatingTextView.setText("MPAA Rating: " + movieRating);
+//		criticRatingTextView.setText("Critic Rating: " + criticRating);
+//		audienceRatingTextView.setText("Audience Rating: " + audienceRating);
+
+//		// Grab button by id and set onClick for implicit intent
+//		Button moreInfoButton = (Button) findViewById(R.id.moreInfoButton);
+//		moreInfoButton.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				// Create implicit intent. This will pass a custom URL searching for the movie
+//				// title on RottenTomatoes.com and open it in a browser
+//
+//				String baseURLString = "http://www.rottentomatoes.com/m/";
+//				String moddedTitle = dvdTitle.replace(" ", "_");
+//				String urlSearchMod = baseURLString + moddedTitle;
+//				Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlSearchMod));
+//
+//				startActivity(moreInfoIntent);
+//			} // onClick Close
+//		}); // onClickListener Close
+
+//		movieRatingBar = (RatingBar) findViewById(R.id.movieRatingBar);
+//		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+//
+//			@Override
+//			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//						ratingSelected = movieRatingBar.getRating();
+//			}
+//		});
 
 	} // onCreate Close
 
