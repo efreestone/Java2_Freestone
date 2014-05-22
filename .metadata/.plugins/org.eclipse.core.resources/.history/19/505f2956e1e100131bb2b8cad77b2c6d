@@ -258,8 +258,8 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		// Grab listview and stored Array List from Bundle
 		myListView = (ListView) this.findViewById(R.id.listView);
+		// Grab stored Array List from Bundle
 		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
 		Log.i("File", "Size = " + currentMovieList.size());
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {

@@ -64,7 +64,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		setContentView(R.layout.activity_main_fragment);
 
 		// Instantiate the list view and add header
-		//myListView = (ListView) this.findViewById(R.id.listView);
+		myListView = (ListView) this.findViewById(R.id.listView);
 //		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
 //		myListView.addHeaderView(listHeader);
 
@@ -78,7 +78,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		File file = this.getFileStreamPath(myFileName);
 		Boolean fileExists = file.exists();
 		if (fileExists) {
-			// Display the data to the listview automatically if file exists
+			// Display the data to the listview automatically
 			JSONData.displayDataFromFile();
 
 			Log.i("File", "File exists");
@@ -258,8 +258,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		// Grab listview and stored Array List from Bundle
-		myListView = (ListView) this.findViewById(R.id.listView);
+		// Grab stored Array List from Bundle
 		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
 		Log.i("File", "Size = " + currentMovieList.size());
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {
