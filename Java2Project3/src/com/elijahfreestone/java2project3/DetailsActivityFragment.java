@@ -105,5 +105,7 @@ public class DetailsActivityFragment extends Fragment {
 		movieRatingTextView.setText("MPAA Rating: " + movieRating);
 		criticRatingTextView.setText("Critic Rating: " + criticRating);
 		audienceRatingTextView.setText("Audience Rating: " + audienceRating);
+		
+		Log.i("Details Fragment", "Display Movie Details Called");
 	}
 }

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-<fullyQualifiedTypeName name="java.lang.Byte"/>
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.R.id"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment.OnGetMoreInfoClick"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivity"/>
+<fullyQualifiedTypeName name="android.content.res.Configuration"/>
+<fullyQualifiedTypeName name="android.view.View"/>
 </qualifiedTypeNameHistroy>

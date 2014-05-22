@@ -27,7 +27,7 @@ import android.os.Messenger;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter; 
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -63,15 +63,9 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_fragment);
 
-		// Instantiate the list view and add header
-		//myListView = (ListView) this.findViewById(R.id.listView);
-//		View listHeader = this.getLayoutInflater().inflate(R.layout.listview_header, null);
-//		myListView.addHeaderView(listHeader);
-
-		
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
-
+		
 		myContext = this;
 
 		// Check if the file already exists
@@ -80,7 +74,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		if (fileExists) {
 			// Display the data to the listview automatically if file exists
 			JSONData.displayDataFromFile();
-
+			
 			Log.i("File", "File exists");
 		} else {
 			if (NetworkConnection.connectionStatus(myContext)) {
@@ -92,7 +86,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 				// Show No Connection alert
 				noConnectionAlert();
 			}
-
+			
 			Log.i("File", "File DOESN'T exist!!");
 		}
 
@@ -276,14 +270,16 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		}
 	} // onRestoreInstanceState Close
 
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
 		if (resultCode == RESULT_OK && requestCode == 0) {
-			if (detailsBackIntent.hasExtra("dvdTitle")&& detailsBackIntent.hasExtra("ratingSelected")) {
+			Log.i(TAG, "onActivityResult resultCode = OK");
+			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
 //				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
 //				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 //				ratingSelectedAlert(dvdTitle, ratingSelected);
 			}
-		}
+		} 
 	} // onActivityResult Close
 }
