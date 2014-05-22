@@ -39,17 +39,7 @@ public class MainActivityFragment extends Fragment {
 	Context myContext;
 	static String TAG = "Main Fragment";
 	
-	/**
-	 * The Interface onListItemSelected.
-	 */
 	public interface onListItemSelected {
-		
-		/**
-		 * Start activity for result.
-		 *
-		 * @param detailsIntent the details intent
-		 * @param requestCode the request code
-		 */
 		void startActivityForResult(Intent detailsIntent, int requestCode);
 	}
 	
@@ -65,8 +55,6 @@ public class MainActivityFragment extends Fragment {
 		
 		if (activity instanceof onListItemSelected) {
 			parentActivity = (onListItemSelected) activity;
-		} else {
-			Log.e(TAG, "Must implement onListItemSelected");
 		}
 		 
 	} // onAttach Close
@@ -122,14 +110,16 @@ public class MainActivityFragment extends Fragment {
 				Log.i("File Selected", dvdTitle);
 
 				// Create explicit intent and pass dvd details as extras
-				Intent detailsIntent = new Intent(MainActivity.myContext, DetailsActivity.class);
+				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
 				detailsIntent.putExtra("dvdTitle", dvdTitle);
 				detailsIntent.putExtra("releaseDate", releaseDate);
 				detailsIntent.putExtra("movieRating", movieRating);
 				detailsIntent.putExtra("criticRating", criticRating);
 				detailsIntent.putExtra("audienceRating", audienceRating);
+				
+				int requestCode = 0;
 
-				parentActivity.startActivityForResult(detailsIntent, 0);
+				//startActivityForResult(detailsIntent, 0);
 			} // onItemClick Close
 		}); // setOnItemClickListener Close
 		

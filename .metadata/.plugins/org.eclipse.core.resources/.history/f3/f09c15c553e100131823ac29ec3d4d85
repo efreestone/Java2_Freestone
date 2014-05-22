@@ -39,17 +39,7 @@ public class MainActivityFragment extends Fragment {
 	Context myContext;
 	static String TAG = "Main Fragment";
 	
-	/**
-	 * The Interface onListItemSelected.
-	 */
 	public interface onListItemSelected {
-		
-		/**
-		 * Start activity for result.
-		 *
-		 * @param detailsIntent the details intent
-		 * @param requestCode the request code
-		 */
 		void startActivityForResult(Intent detailsIntent, int requestCode);
 	}
 	
@@ -128,6 +118,8 @@ public class MainActivityFragment extends Fragment {
 				detailsIntent.putExtra("movieRating", movieRating);
 				detailsIntent.putExtra("criticRating", criticRating);
 				detailsIntent.putExtra("audienceRating", audienceRating);
+				
+				int requestCode = 0;
 
 				parentActivity.startActivityForResult(detailsIntent, 0);
 			} // onItemClick Close

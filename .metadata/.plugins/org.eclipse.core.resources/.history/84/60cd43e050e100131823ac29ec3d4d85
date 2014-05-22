@@ -25,6 +25,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -35,7 +39,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements MainActivityFragment.onListItemSelected {
+public class MainActivity extends Activity {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
@@ -117,34 +121,34 @@ public class MainActivity extends Activity implements MainActivityFragment.onLis
 //			} // onClick Close
 //		}); // onClickListener Close
 
-//		// Create onItemClickListener for the listview. This grabs details of the object selected,
-//		// creates new intent, and passes object details to Deatils Activty for display
-//		myListView.setOnItemClickListener(new OnItemClickListener() {
-//			HashMap<String, String> selectedMovie;
-//			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				// Grab object selected from ArrayList as a HashMap and split into details strings.
-//				selectedMovie = JSONData.myList.get(position - 1);
-//				dvdTitle = selectedMovie.get("dvdTitle");
-//				releaseDate = selectedMovie.get("releaseDate");
-//				movieRating = selectedMovie.get("movieRating");
-//				criticRating = selectedMovie.get("criticRating");
-//				audienceRating = selectedMovie.get("audienceRating");
-//				Log.i("File Selected", dvdTitle);
-//
-//				// Create explicit intent and pass dvd details as extras
-//				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
-//				detailsIntent.putExtra("dvdTitle", dvdTitle);
-//				detailsIntent.putExtra("releaseDate", releaseDate);
-//				detailsIntent.putExtra("movieRating", movieRating);
-//				detailsIntent.putExtra("criticRating", criticRating);
-//				detailsIntent.putExtra("audienceRating", audienceRating);
-//
-//				startActivityForResult(detailsIntent, 0);
-//			} // onItemClick Close
-//		}); // setOnItemClickListener Close
+		// Create onItemClickListener for the listview. This grabs details of the object selected,
+		// creates new intent, and passes object details to Deatils Activty for display
+		myListView.setOnItemClickListener(new OnItemClickListener() {
+			HashMap<String, String> selectedMovie;
+			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// Grab object selected from ArrayList as a HashMap and split into details strings.
+				selectedMovie = JSONData.myList.get(position - 1);
+				dvdTitle = selectedMovie.get("dvdTitle");
+				releaseDate = selectedMovie.get("releaseDate");
+				movieRating = selectedMovie.get("movieRating");
+				criticRating = selectedMovie.get("criticRating");
+				audienceRating = selectedMovie.get("audienceRating");
+				Log.i("File Selected", dvdTitle);
+
+				// Create explicit intent and pass dvd details as extras
+				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+				detailsIntent.putExtra("dvdTitle", dvdTitle);
+				detailsIntent.putExtra("releaseDate", releaseDate);
+				detailsIntent.putExtra("movieRating", movieRating);
+				detailsIntent.putExtra("criticRating", criticRating);
+				detailsIntent.putExtra("audienceRating", audienceRating);
+
+				startActivityForResult(detailsIntent, 0);
+			}
+		});
 
 	} // onCreate Close
 
