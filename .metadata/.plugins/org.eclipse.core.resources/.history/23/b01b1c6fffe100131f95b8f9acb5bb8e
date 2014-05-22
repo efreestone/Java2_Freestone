@@ -245,6 +245,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 					Log.i("TAG", "onActivityResult Landscape");
 				}
+				
 			}
 		} 
 	} // onActivityResult Close

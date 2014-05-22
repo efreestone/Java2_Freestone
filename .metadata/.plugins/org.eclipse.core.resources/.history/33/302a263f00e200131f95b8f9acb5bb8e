@@ -54,7 +54,6 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 			}
 		}  
 
-		// Finish activity if device is changed to Landscape. Land xml replaces this in 2 pane
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 			finish();
 			//detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
@@ -92,5 +91,14 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 
 		startActivity(moreInfoIntent);
 		
-	}	
+	}
+
+	@Override
+	public void displayMovieLandscape(String dvdTitle, String releaseDate,
+			String movieRating, String criticRating, String audienceRating) {
+		
+		
+	}
+
+	
 }

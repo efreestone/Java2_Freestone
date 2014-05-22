@@ -224,7 +224,9 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 	// Details passes movie object back via intent extras which are used for rating alert and or Details display
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
-		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager().findFragmentById(R.id.detailsFragment);
+		//DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager().findFragmentById(R.id.detailsFragment);
+		
+		DetailsActivity detailsActivity = new DetailsActivity();
 		
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			Log.i(TAG, "onActivityResult resultCode = OK");
@@ -242,9 +244,10 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 				// If the device is in landscape, display movie info in details pane
 				// This is only triggered when in Details in Portrait then changing device to landscape
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
+					detailsActivity.displayMovieLandscape(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 					Log.i("TAG", "onActivityResult Landscape");
 				}
+				
 			}
 		} 
 	} // onActivityResult Close

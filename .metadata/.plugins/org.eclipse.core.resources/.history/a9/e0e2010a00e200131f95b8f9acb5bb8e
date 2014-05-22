@@ -242,9 +242,10 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 				// If the device is in landscape, display movie info in details pane
 				// This is only triggered when in Details in Portrait then changing device to landscape
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
+					DetailsActivity.displayMovieLandscape(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 					Log.i("TAG", "onActivityResult Landscape");
 				}
+				
 			}
 		} 
 	} // onActivityResult Close

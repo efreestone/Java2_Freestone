@@ -38,6 +38,9 @@ public class DetailsActivityFragment extends Fragment {
 	public interface OnGetMoreInfoClicked {
 		// onGetMoreInfoClicked creates and calls implicit intent in DetailsActivity
 		void onGetMoreInfoClicked();
+		
+		void displayMovieDetails(String dvdTitle, String releaseDate, 
+				String movieRating, String criticRating, String audienceRating);
 	}
 	
 	private OnGetMoreInfoClicked parentActivity;

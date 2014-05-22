@@ -226,6 +226,8 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		Log.i(TAG, "On Activity Result");
 		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager().findFragmentById(R.id.detailsFragment);
 		
+		DetailsActivity detailsActivity = new DetailsActivity();
+		
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			Log.i(TAG, "onActivityResult resultCode = OK");
 			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
@@ -245,6 +247,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 					Log.i("TAG", "onActivityResult Landscape");
 				}
+				
 			}
 		} 
 	} // onActivityResult Close
