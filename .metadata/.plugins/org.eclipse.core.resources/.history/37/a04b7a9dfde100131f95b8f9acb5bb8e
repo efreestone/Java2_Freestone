@@ -92,4 +92,11 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 		startActivity(moreInfoIntent);
 		
 	}
+
+//	@Override
+//	public void displayMovieDetails(String dvdTitle, String releaseDate,
+//			String movieRating, String criticRating, String audienceRating) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

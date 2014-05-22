@@ -69,10 +69,6 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 		Log.i("Details Activity", "Finish called");
 		Intent detailsBackIntent = new Intent();
 		detailsBackIntent.putExtra("dvdTitle", dvdTitle);
-		detailsBackIntent.putExtra("releaseDate", releaseDate);
-		detailsBackIntent.putExtra("movieRating", movieRating);
-		detailsBackIntent.putExtra("criticRating", criticRating);
-		detailsBackIntent.putExtra("audienceRating", audienceRating);
 		detailsBackIntent.putExtra("ratingSelected", ratingSelected);
 		setResult(RESULT_OK, detailsBackIntent);
 		super.finish();

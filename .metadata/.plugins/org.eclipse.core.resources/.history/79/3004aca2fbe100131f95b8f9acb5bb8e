@@ -38,8 +38,6 @@ public class DetailsActivityFragment extends Fragment {
 	public interface OnGetMoreInfoClicked {
 		// onGetMoreInfoClicked creates and calls implicit intent in DetailsActivity
 		void onGetMoreInfoClicked();
-		
-		
 	}
 	
 	private OnGetMoreInfoClicked parentActivity;

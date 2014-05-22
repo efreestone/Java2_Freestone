@@ -38,8 +38,6 @@ public class DetailsActivityFragment extends Fragment {
 	public interface OnGetMoreInfoClicked {
 		// onGetMoreInfoClicked creates and calls implicit intent in DetailsActivity
 		void onGetMoreInfoClicked();
-		
-		
 	}
 	
 	private OnGetMoreInfoClicked parentActivity;
@@ -99,7 +97,7 @@ public class DetailsActivityFragment extends Fragment {
 	} // onCreateView Close
 	
 	// displayMovieDetails displays details of the movie selected, called from DetailsActivity
-	public void displayMovieDetails(String dvdTitle, String releaseDate,
+	public static void displayMovieDetails(String dvdTitle, String releaseDate,
 			String movieRating, String criticRating, String audienceRating) {
 		// Set textviews with strings from intent extras
 		titleTextView.setText("DVD Title: " + dvdTitle);

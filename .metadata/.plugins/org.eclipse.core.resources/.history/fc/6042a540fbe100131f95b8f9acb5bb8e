@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -90,6 +89,57 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 			
 			Log.i("File", "File DOESN'T exist!!");
 		}
+
+//		// Grab button by id and set onClick with network connection check
+//		newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+//		newReleaseButton.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				// System.out.println("Button Clicked");
+//
+//				if (NetworkConnection.connectionStatus(myContext)) {
+//					// System.out.println("Network Works!!");
+//					Log.i(TAG, "Network Works!!");
+//
+//					JSONData.displayDataFromFile();
+//				} else {
+//					// Show no connection alert
+//					noConnectionAlert();
+//
+//					Log.i(TAG, "No Network!!");
+//				}
+//			} // onClick Close
+//		}); // onClickListener Close
+
+//		// Create onItemClickListener for the listview. This grabs details of the object selected,
+//		// creates new intent, and passes object details to Deatils Activty for display
+//		myListView.setOnItemClickListener(new OnItemClickListener() {
+//			HashMap<String, String> selectedMovie;
+//			String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				// Grab object selected from ArrayList as a HashMap and split into details strings.
+//				selectedMovie = JSONData.myList.get(position - 1);
+//				dvdTitle = selectedMovie.get("dvdTitle");
+//				releaseDate = selectedMovie.get("releaseDate");
+//				movieRating = selectedMovie.get("movieRating");
+//				criticRating = selectedMovie.get("criticRating");
+//				audienceRating = selectedMovie.get("audienceRating");
+//				Log.i("File Selected", dvdTitle);
+//
+//				// Create explicit intent and pass dvd details as extras
+//				Intent detailsIntent = new Intent(myContext, DetailsActivity.class);
+//				detailsIntent.putExtra("dvdTitle", dvdTitle);
+//				detailsIntent.putExtra("releaseDate", releaseDate);
+//				detailsIntent.putExtra("movieRating", movieRating);
+//				detailsIntent.putExtra("criticRating", criticRating);
+//				detailsIntent.putExtra("audienceRating", audienceRating);
+//
+//				startActivityForResult(detailsIntent, 0);
+//			} // onItemClick Close
+//		}); // setOnItemClickListener Close
+
 	} // onCreate Close
 
 	/**
@@ -220,32 +270,15 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		}
 	} // onRestoreInstanceState Close
 
-	// onActivityResult is called when returning from Details or Device orientation changes to Landscape on Details.
-	// Details passes movie object back via intent extras which are used for rating alert and or Details display
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
-		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager().findFragmentById(R.id.detailsFragment);
-		
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			Log.i(TAG, "onActivityResult resultCode = OK");
 			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
-				// Pull all extras from Intent
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
-				String releaseDate = detailsBackIntent.getExtras().getString("releaseDate");
-				String movieRating = detailsBackIntent.getExtras().getString("movieRating");
-				String criticRating = detailsBackIntent.getExtras().getString("criticRating");
-				String audienceRating = detailsBackIntent.getExtras().getString("audienceRating");
-				
+//				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
 //				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 //				ratingSelectedAlert(dvdTitle, ratingSelected);
-				
-				// If the device is in landscape, display movie info in details pane
-				// This is only triggered when in Details in Portrait then changing device to landscape
-				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
-					Log.i("TAG", "onActivityResult Landscape");
-				}
-				
 			}
 		} 
 	} // onActivityResult Close
