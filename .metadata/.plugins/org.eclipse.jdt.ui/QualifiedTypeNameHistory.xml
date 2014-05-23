@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Object"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.MainActivity.MyHandler"/>
-<fullyQualifiedTypeName name="org.json.JSONException"/>
-<fullyQualifiedTypeName name="java.net.URLConnection"/>
-<fullyQualifiedTypeName name="java.io.IOException"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.networkConnection.JSONData"/>
-<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.DataService"/>
-<fullyQualifiedTypeName name="java.io.FileInputStream"/>
-<fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
-<fullyQualifiedTypeName name="java.lang.Byte"/>
 <fullyQualifiedTypeName name="java.lang.StringBuffer"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.id"/>
@@ -23,7 +12,6 @@
 <fullyQualifiedTypeName name="android.os.Environment"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.MainActivity"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.JSONData"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="android.widget.Button"/>
 <fullyQualifiedTypeName name="android.os.Handler"/>
@@ -42,7 +30,6 @@
 <fullyQualifiedTypeName name="android.widget.AdapterView"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="java.lang.Float"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
@@ -58,6 +45,19 @@
 <fullyQualifiedTypeName name="android.widget.RatingBar.OnRatingBarChangeListener"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="android.graphics.Path"/>
-<fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project2.MainActivity"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivityFragment"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivityFragment.onListItemSelected"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivity"/>
+<fullyQualifiedTypeName name="android.app.Fragment"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.R.layout"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.R.id"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment.OnGetMoreInfoClick"/>
+<fullyQualifiedTypeName name="android.content.res.Configuration"/>
+<fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivity"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment"/>
 </qualifiedTypeNameHistroy>
