@@ -26,8 +26,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter; 
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -42,8 +43,11 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
+	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
+
 	ArrayList<HashMap<String, String>> currentMovieList;
 	
+	//Button newReleaseButton;
 	static ListView myListView;
 	
 	static final String DVD_TITLE = "dvdTitle";
@@ -243,5 +247,4 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 			}
 		} 
 	} // onActivityResult Close
-	
 }

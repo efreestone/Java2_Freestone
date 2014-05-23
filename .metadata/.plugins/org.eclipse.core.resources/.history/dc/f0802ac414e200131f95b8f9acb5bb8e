@@ -60,6 +60,7 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 			//detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 			Log.i("Details Fragment", "Details Fragment Finish called");
 		}
+		
 	} // onCreate Close
 
 	// finish is called when the activity is exited (such as the back button)
@@ -76,7 +77,7 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 		detailsBackIntent.putExtra("ratingSelected", ratingSelected);
 		setResult(RESULT_OK, detailsBackIntent);
 		super.finish();
-	} // finish Close
+	}
 
 	@Override
 	public void onGetMoreInfoClicked() {
@@ -91,6 +92,5 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 
 		startActivity(moreInfoIntent);
 		
-	} // onGetMoreInfoClicked Close
-	
+	}	
 }

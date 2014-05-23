@@ -26,8 +26,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter; 
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -243,5 +244,4 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 			}
 		} 
 	} // onActivityResult Close
-	
 }

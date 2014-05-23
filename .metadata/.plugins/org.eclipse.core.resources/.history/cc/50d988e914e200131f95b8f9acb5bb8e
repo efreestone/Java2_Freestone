@@ -108,5 +108,4 @@ public class DetailsActivityFragment extends Fragment {
 		
 		Log.i("Details Fragment", "Display Movie Details Called");
 	} // displayMovieDetails Close
-	
 }

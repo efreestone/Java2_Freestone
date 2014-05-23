@@ -54,10 +54,10 @@
 <fullyQualifiedTypeName name="android.app.Fragment"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.R.layout"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.R.id"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment.OnGetMoreInfoClick"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivity"/>
 <fullyQualifiedTypeName name="android.content.res.Configuration"/>
 <fullyQualifiedTypeName name="android.view.View"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivity"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project3.DetailsActivityFragment"/>
 </qualifiedTypeNameHistroy>

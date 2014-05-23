@@ -107,6 +107,5 @@ public class DetailsActivityFragment extends Fragment {
 		audienceRatingTextView.setText("Audience Rating: " + audienceRating);
 		
 		Log.i("Details Fragment", "Display Movie Details Called");
-	} // displayMovieDetails Close
-	
+	}
 }

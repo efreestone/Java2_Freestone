@@ -60,6 +60,7 @@ public class DetailsActivity extends Activity implements DetailsActivityFragment
 			//detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
 			Log.i("Details Fragment", "Details Fragment Finish called");
 		}
+		
 	} // onCreate Close
 
 	// finish is called when the activity is exited (such as the back button)

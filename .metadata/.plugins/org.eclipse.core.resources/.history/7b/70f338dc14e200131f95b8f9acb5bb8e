@@ -135,6 +135,7 @@ public class MainActivityFragment extends Fragment implements OnItemClickListene
 			// Pass intent to be parsed/displayed from details fragment
 			parentActivity.startActivityForResult(detailsIntent, 0);
 		}
+ 
+//		parentActivity.startActivityForResult(detailsIntent, 0);
 	} // onItemClick Close
-	
 }

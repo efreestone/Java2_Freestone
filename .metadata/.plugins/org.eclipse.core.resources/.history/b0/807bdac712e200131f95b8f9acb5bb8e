@@ -31,5 +31,8 @@
         android:layout_below="@id/releaseDate"
         android:layout_alignParentRight="true"
         android:textColor="#ffffff" />
+    
+
+    
 
 </RelativeLayout>

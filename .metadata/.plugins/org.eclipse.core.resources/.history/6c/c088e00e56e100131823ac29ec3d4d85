@@ -1,7 +1,0 @@
-package com.elijahfreestone.java2project3;
-
-import android.app.Fragment;
-
-public class DetailsActivityFragment extends Fragment {
-
-}

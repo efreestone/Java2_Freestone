@@ -243,5 +243,4 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 			}
 		} 
 	} // onActivityResult Close
-	
 }
