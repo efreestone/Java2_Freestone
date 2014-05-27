@@ -218,6 +218,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		}
 	} // onRestoreInstanceState Close
 
+	
 	// onActivityResult is called when returning from Details or Device
 	// orientation changes to Landscape on Details.
 	// Details passes movie object back via intent extras which are used for

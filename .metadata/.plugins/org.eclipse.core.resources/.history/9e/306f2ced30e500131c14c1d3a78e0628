@@ -35,7 +35,7 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements MainFragment.OnListItemSelected {
+public class MainActivity extends Activity implements MainActivityFragment.OnListItemSelected {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
@@ -224,7 +224,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	// rating alert and or Details display
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
-		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager()
 				.findFragmentById(R.id.detailsFragment);
 
 		if (resultCode == RESULT_OK && requestCode == 0) {

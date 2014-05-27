@@ -5,8 +5,8 @@
     android:orientation="vertical" >
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.elijahfreestone.java2project4.MainFragment"
+        android:id="@+id/detailsFragment"
+        android:name="com.elijahfreestone.java2project4.DetailsActivityFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

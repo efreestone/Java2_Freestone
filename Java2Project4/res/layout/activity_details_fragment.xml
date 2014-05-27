@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.elijahfreestone.java2project4.DetailsActivityFragment"
+        android:name="com.elijahfreestone.java2project4.DetailsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

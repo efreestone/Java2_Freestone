@@ -67,21 +67,18 @@ public class JSONData {
 
 				dvdTitle = newReleaseArray.getJSONObject(i).getString("title");
 				// Log.i("displayData newReleaseArray", "Title: " + dvdTitle);
-				releaseDate = newReleaseArray.getJSONObject(i).getJSONObject("release_dates").getString("dvd");
+				releaseDate = newReleaseArray.getJSONObject(i)
+						.getJSONObject("release_dates").getString("dvd");
 				// Log.i("displayData newReleaseArray", "Release Date: " +
 				// releaseDate);
-				movieRating = newReleaseArray.getJSONObject(i).getString("mpaa_rating");
-				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
+				movieRating = newReleaseArray.getJSONObject(i).getString(
+						"mpaa_rating");
+				criticRating = newReleaseArray.getJSONObject(i)
+						.getJSONObject("ratings").getString("critics_rating");
 				// Log.i("displayData newReleaseArray", "Rating: " +
 				// criticRating);
-				JSONObject ratingsObject = newReleaseArray.getJSONObject(i).getJSONObject("ratings");
-				
-				if (ratingsObject.length() == 4) {
-					audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
-				} else {
-					audienceRating = "N/A";
-				}
-				//audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
+				audienceRating = newReleaseArray.getJSONObject(i)
+						.getJSONObject("ratings").getString("audience_rating");
 
 				// Instantiate Hash Map for array and pass in strings with
 				// key/value pairs

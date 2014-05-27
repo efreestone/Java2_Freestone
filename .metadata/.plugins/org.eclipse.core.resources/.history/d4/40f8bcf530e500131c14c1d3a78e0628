@@ -22,7 +22,7 @@ import android.util.Log;
  * The Class DetailsActivity.
  */
 public class DetailsActivity extends Activity implements
-		DetailsFragment.OnGetMoreInfoClicked {
+		DetailsActivityFragment.OnGetMoreInfoClicked {
 	static String dvdTitle;
 	String releaseDate, movieRating, criticRating, audienceRating;
 	static Float ratingSelected;
@@ -37,7 +37,7 @@ public class DetailsActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_details_fragment);
 
-		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager()
 				.findFragmentById(R.id.detailsFragment);
 
 		// Grab intent extras to be displayed in textviews

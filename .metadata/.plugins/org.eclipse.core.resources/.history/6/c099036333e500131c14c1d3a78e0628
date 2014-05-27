@@ -75,7 +75,6 @@ public class JSONData {
 				// Log.i("displayData newReleaseArray", "Rating: " +
 				// criticRating);
 				JSONObject ratingsObject = newReleaseArray.getJSONObject(i).getJSONObject("ratings");
-				
 				if (ratingsObject.length() == 4) {
 					audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
 				} else {
