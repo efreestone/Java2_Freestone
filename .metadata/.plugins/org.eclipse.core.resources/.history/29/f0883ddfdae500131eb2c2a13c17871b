@@ -1,14 +1,14 @@
 /*
  * @author	Elijah Freestone 
  *
- * Project	Java2Project3
+ * Project	Java2Project4
  * 
- * Package	com.elijahfreestone.java2project3
+ * Package	com.elijahfreestone.java2project4
  * 
- * date		May 19, 2014
+ * date		May 23, 2014
  */
 
-package com.elijahfreestone.java2project3;
+package com.elijahfreestone.java2project4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import android.widget.SimpleAdapter;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class JSONData.
+ * The Class JSONData creates/displays JSON Data from file.
  */
 public class JSONData {
 	static Context myContext;
@@ -34,8 +34,9 @@ public class JSONData {
 	static String JSONString;
 	static ArrayList<HashMap<String, String>> myList;
 
-	/**
-	 * Display data from file.
+	/*
+	 * Display data from file pulls string from locally stored file and creates
+	 * ArrayList.
 	 */
 	public static void displayDataFromFile() {
 		// Grab instance of DataManager
@@ -71,7 +72,18 @@ public class JSONData {
 				movieRating = newReleaseArray.getJSONObject(i).getString("mpaa_rating");
 				criticRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("critics_rating");
 				// Log.i("displayData newReleaseArray", "Rating: " + criticRating);
-				audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
+				JSONObject ratingsObject = newReleaseArray.getJSONObject(i).getJSONObject("ratings");
+				
+				if (ratingsObject.length() == 4) {
+					audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
+				} else {
+					//audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
+					if (audienceRating == null) {
+						audienceRating = "N/A";
+					}
+					
+				}
+				//audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
 
 				// Instantiate Hash Map for array and pass in strings with key/value pairs
 				HashMap<String, String> displayMap = new HashMap<String, String>();
@@ -91,7 +103,7 @@ public class JSONData {
 							"releaseDate", "movieRating" }, new int[] {
 							R.id.dvdTitle, R.id.releaseDate, R.id.movieRating });
 
-			MainActivity.myListView.setAdapter(listAdapter);
+			MainFragment.myListView.setAdapter(listAdapter);
 
 		} catch (JSONException e) {
 			Log.e("displayDataFromFile ERROR", e.getMessage().toString());

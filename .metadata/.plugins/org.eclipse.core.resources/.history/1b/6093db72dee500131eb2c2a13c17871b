@@ -120,7 +120,7 @@ public class DataService extends IntentService {
 				responseBuffer.append(response);
 			}
 
-			// Fill response string with response buffer once while loop completes
+			// Fill response string with response buffer once while loopcompletes
 			response = responseBuffer.toString();
 			// Log response
 			Log.i(TAG, response);

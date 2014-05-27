@@ -74,12 +74,10 @@ public class JSONData {
 				// Log.i("displayData newReleaseArray", "Rating: " + criticRating);
 				JSONObject ratingsObject = newReleaseArray.getJSONObject(i).getJSONObject("ratings");
 				
-				/*
-				 * If statement to make sure ratingsObject has 4 objects in it.
+				/* If statement to make sure ratingsObject has 4 objects in it.
 				 * This is to fix an issue if a rating is missing. Only handles
 				 * audience rating as of now but this is the only object that
-				 * has ever been missing. Happened with 2 movies so far.
-				 */
+				 * has ever been missing so far. */
 				if (ratingsObject.length() == 4) {
 					audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
 				} else {

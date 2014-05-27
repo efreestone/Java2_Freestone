@@ -1,14 +1,14 @@
 /*
  * @author	Elijah Freestone 
  *
- * Project	Java2Project3
+ * Project	Java2Project4
  * 
- * Package	com.elijahfreestone.java2project3
+ * Package	com.elijahfreestone.java2project4
  * 
- * date		May 19, 2014
+ * date		May 23, 2014
  */
 
-package com.elijahfreestone.java2project3;
+package com.elijahfreestone.java2project4;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import android.util.Log;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DataService.
+ * The Class DataService handles API call and response.
  */
 public class DataService extends IntentService {
 
@@ -42,7 +42,7 @@ public class DataService extends IntentService {
 
 	String urlString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?apikey=xxnu68qnz6ap2ygf4qvu659t&page_limit=10";
 
-	/**
+	/*
 	 * Instantiates a new data service.
 	 */
 	public DataService() {
@@ -95,13 +95,6 @@ public class DataService extends IntentService {
 	} // onHandleIntent Close
 
 	// Method to get response from url
-	/**
-	 * Gets the response.
-	 * 
-	 * @param url
-	 *            the url
-	 * @return the response
-	 */
 	public static String getResponse(URL url) {
 		// Create string for response
 		String response = "";
@@ -127,8 +120,7 @@ public class DataService extends IntentService {
 				responseBuffer.append(response);
 			}
 
-			// Fill response string with response buffer once while
-			// loopcompletes
+			// Fill response string with response buffer once while loopcompletes
 			response = responseBuffer.toString();
 			// Log response
 			Log.i(TAG, response);
@@ -139,6 +131,7 @@ public class DataService extends IntentService {
 			// Log error
 			Log.e(TAG, "Something went wrong", e);
 		}
+		
 		// Return response string
 		return response;
 	} // getResponse Close

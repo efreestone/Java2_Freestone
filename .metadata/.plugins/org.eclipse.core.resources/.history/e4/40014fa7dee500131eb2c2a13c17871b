@@ -194,7 +194,8 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		}
 	} // onSaveInstanceState Close
 
-	// onRestore grabs my array list from the bundle if it exists and redisplays it
+	// onRestore grabs my array list from the bundle if it exists and redisplays
+	// it
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {

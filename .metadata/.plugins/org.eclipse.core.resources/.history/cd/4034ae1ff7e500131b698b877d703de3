@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
+	
 
 	/*
 	 * (non-Javadoc)
