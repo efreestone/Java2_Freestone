@@ -10,6 +10,8 @@
 
 package com.elijahfreestone.java2project4;
 
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -26,6 +28,8 @@ public class DetailsActivity extends Activity implements
 	static String dvdTitle;
 	String releaseDate, movieRating, criticRating, audienceRating;
 	static Float ratingSelected;
+	
+	HashMap<String, String> saveSelectedMovie;
 
 	/*
 	 * (non-Javadoc)
@@ -87,14 +91,68 @@ public class DetailsActivity extends Activity implements
 		// Create implicit intent. This will pass a custom URL searching for the movie
 		// title on RottenTomatoes.com and open it in a browser
 
-		String baseURLString = "http://www.rottentomatoes.com/m/";
-		String moddedTitle = dvdTitle.replace(" ", "_");
-		String urlSearchMod = baseURLString + moddedTitle;
-		Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
-				Uri.parse(urlSearchMod));
+		//if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+			String baseURLString = "http://www.rottentomatoes.com/m/";
+			String moddedTitle = dvdTitle.replace(" ", "_");
+			String urlSearchMod = baseURLString + moddedTitle;
+			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(urlSearchMod));
 
-		startActivity(moreInfoIntent);
-
+			startActivity(moreInfoIntent);
+		//}
 	} // onGetMoreInfoClicked Close
+	
+	// onSaveInstanceState grabs my array list and saves it to the bundle
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		// Grab entire array list from JSON Data
+		saveSelectedMovie = MainFragment.selectedMovie;
+		if (saveSelectedMovie != null && !saveSelectedMovie.isEmpty()) {
+			savedInstanceState.putSerializable("stored movie",
+					saveSelectedMovie);
+			// Log.i("Save", "" + currentMovieList);
+			Log.i("Details Save", "Movie Object Instance State Saved");
+		}
+	} // onSaveInstanceState Close
+	
+	// onRestore grabs my array list from the bundle if it exists and redisplays it
+	@SuppressWarnings("unchecked")
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		// Grab Movie object from the bundle
+		saveSelectedMovie = (HashMap<String, String>) savedInstanceState
+				.getSerializable("stored");
+		Log.i("File", "Size = " + saveSelectedMovie.size());
+
+		if (saveSelectedMovie != null && !saveSelectedMovie.isEmpty()) {
+			Log.i("Details Save", "Movie Details Being Restored");
+
+			DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+					.findFragmentById(R.id.detailsFragment);
+
+			// Pull all extras from Intent
+			String dvdTitle = saveSelectedMovie.get("dvdTitle");
+			String releaseDate = saveSelectedMovie.get("releaseDate");
+			String movieRating = saveSelectedMovie.get("movieRating");
+			String criticRating = saveSelectedMovie.get("criticRating");
+			String audienceRating = saveSelectedMovie.get("audienceRating");
+
+			// Float ratingSelected =
+			// detailsBackIntent.getExtras().getFloat("ratingSelected");
+			// ratingSelectedAlert(dvdTitle, ratingSelected);
+
+			// If the device is in landscape, display movie info in details pane
+			// This is only triggered when in Details in Portrait then changing
+			// device to landscape
+			if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+				detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+						movieRating, criticRating, audienceRating);
+				Log.i("Details", "Details Landscape");
+			}
+
+		}
+	} // onRestoreInstanceState Close
 
 }

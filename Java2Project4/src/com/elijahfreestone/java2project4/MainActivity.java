@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,13 +36,15 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements MainFragment.OnListItemSelected {
+public class MainActivity extends Activity implements MainFragment.OnListItemSelected, DetailsFragment.OnGetMoreInfoClicked {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
+	static String dvdTitle;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
+	static String userRatingFile = "user_rating.txt";
 	ArrayList<HashMap<String, String>> currentMovieList;
 
 	static ListView myListView;
@@ -215,6 +218,16 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 
 			myListView.setAdapter(listAdapter);
 		}
+		
+		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+				.findFragmentById(R.id.detailsFragment);
+		
+//		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//			detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+//					movieRating, criticRating, audienceRating);
+//			Log.i("Details", "Details Landscape");
+//		}
+		
 	} // onRestoreInstanceState Close
 
 	// onActivityResult is called when returning from Details or Device
@@ -230,14 +243,16 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 			Log.i(TAG, "onActivityResult resultCode = OK");
 			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
 				// Pull all extras from Intent
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+				dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
 				String releaseDate = detailsBackIntent.getExtras().getString("releaseDate");
 				String movieRating = detailsBackIntent.getExtras().getString("movieRating");
 				String criticRating = detailsBackIntent.getExtras().getString("criticRating");
 				String audienceRating = detailsBackIntent.getExtras().getString("audienceRating");
-
-				// Float ratingSelected =
-				// detailsBackIntent.getExtras().getFloat("ratingSelected");
+				
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+				
+				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars";
+				
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 
 				// If the device is in landscape, display movie info in details pane
@@ -247,8 +262,26 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 							movieRating, criticRating, audienceRating);
 					Log.i("TAG", "onActivityResult Landscape");
 				}
+				
+				// Save rating selected to file with movie title. Currently rewrites file but working on a fix
+				myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
 			}
 		}
 	} // onActivityResult Close
+
+	@Override
+	public void onGetMoreInfoClicked() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
+			Log.i(TAG, "dvdTitle in onGetMoreInfoClick = " + dvdTitle);
+			String baseURLString = "http://www.rottentomatoes.com/m/";
+			String moddedTitle = dvdTitle.replace(" ", "_");
+			String urlSearchMod = baseURLString + moddedTitle;
+			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(urlSearchMod));
+
+			startActivity(moreInfoIntent);
+		}
+		
+	}
 
 }

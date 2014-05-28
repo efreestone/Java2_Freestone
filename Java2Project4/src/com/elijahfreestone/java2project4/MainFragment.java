@@ -37,7 +37,7 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 	// Context myContext;
 	static String TAG = "Main Fragment";
 
-	HashMap<String, String> selectedMovie;
+	static HashMap<String, String> selectedMovie;
 	String dvdTitle, releaseDate, movieRating, criticRating, audienceRating;
 
 	/**
@@ -136,6 +136,10 @@ public class MainFragment extends Fragment implements OnItemClickListener {
 
 		// Check if details fragment exists and is visible, true if in landscape mode
 		if (detailsFragment != null && detailsFragment.isInLayout()) {
+			// Set dvdTitle on MainActivity. This is used for onGetMoreInfoClick as part of intent URL
+			// It is never set on MainActivity if device is in landscape when a movie is selected
+			MainActivity.dvdTitle = dvdTitle;
+			
 			// Call displayMovieDetails if in landscape mode, skipping intent
 			detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
 					movieRating, criticRating, audienceRating);

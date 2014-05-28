@@ -97,18 +97,14 @@ public class DetailsFragment extends Fragment {
 			} // onClick Close
 		}); // onClickListener Close
 
-		movieRatingBar = (RatingBar) detailsView
-				.findViewById(R.id.movieRatingBar);
-		movieRatingBar
-				.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+		movieRatingBar = (RatingBar) detailsView.findViewById(R.id.movieRatingBar);
+		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
-					@Override
-					public void onRatingChanged(RatingBar ratingBar,
-							float rating, boolean fromUser) {
-						DetailsActivity.ratingSelected = movieRatingBar
-								.getRating();
-					}
-				});
+				@Override
+				public void onRatingChanged(RatingBar ratingBar,float rating, boolean fromUser) {
+					DetailsActivity.ratingSelected = movieRatingBar.getRating();
+				}
+			});
 
 		return detailsView;
 	} // onCreateView Close
