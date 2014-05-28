@@ -46,7 +46,6 @@ public class DataManager {
 	public Boolean writeStringToFile(Context context, String fileName,
 			String content) {
 		Boolean result = false;
-		
 
 		// Create and open file output stream
 		FileOutputStream fileOutputStream = null;
