@@ -251,7 +251,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 				
 				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 				
-				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+				String userRatingString = "\r\n" + dvdTitle + " - Rated " + ratingSelected + " stars";
 				
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 
@@ -269,8 +269,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		}
 	} // onActivityResult Close
 
-	// onGetMoreInfoInfo Click is an interface method from DetailsFragment that handles 
-	// Implicit Intent. This version overrides only if the device is in landscape
 	@Override
 	public void onGetMoreInfoClicked() {
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
@@ -283,6 +281,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 
 			startActivity(moreInfoIntent);
 		}
-	} // onGetMoreInfoClick Close
+		
+	}
 
 }

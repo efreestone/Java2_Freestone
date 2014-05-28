@@ -251,7 +251,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 				
 				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 				
-				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+				String userRatingString = "\r\n" + dvdTitle + " - Rated " + ratingSelected + " stars";
 				
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.R.id"/>
-<fullyQualifiedTypeName name="android.R.layout"/>
 <fullyQualifiedTypeName name="org.json.JSONArray"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.DataManager"/>
 <fullyQualifiedTypeName name="android.widget.SimpleAdapter"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="networkConnection.NetworkConnection"/>
 <fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project4.MainFragment"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project4.DetailsFragment.OnGetMoreInfoClicked"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project4.MainActivity"/>
 </qualifiedTypeNameHistroy>
