@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +35,7 @@ import android.widget.SimpleAdapter;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
+// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 /**
  * The Class MainActivity.
@@ -56,8 +56,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
-	
-	public enum DialogType {SEARCH, FAVORITES, PREFERENCES};
 
 	/*
 	 * (non-Javadoc)
@@ -106,11 +104,8 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
         inflater.inflate(R.menu.action_bar, menu);
         
         return super.onCreateOptionsMenu(menu);
-    } // onCreateOptionsMenu Close
+    }
 	
-	/* (non-Javadoc)
-	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Take appropriate action for each action item click
@@ -130,10 +125,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	} // onOptionsItemSelected Close
-	
-	public void launchDialogFragment(DialogFragment type) {
-		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
 	}
 
 	/*

@@ -56,8 +56,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
-	
-	public enum DialogType {SEARCH, FAVORITES, PREFERENCES};
 
 	/*
 	 * (non-Javadoc)
@@ -133,7 +131,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	} // onOptionsItemSelected Close
 	
 	public void launchDialogFragment(DialogFragment type) {
-		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+		
 	}
 
 	/*
