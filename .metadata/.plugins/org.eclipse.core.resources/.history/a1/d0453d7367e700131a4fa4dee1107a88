@@ -18,16 +18,9 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class AlertDialogFragment handles alert dialog fragments for the action bar.
- */
 public class AlertDialogFragment extends DialogFragment {
 	public static DialogType type;
 	
-	/* (non-Javadoc)
-	 * @see android.app.DialogFragment#onCreateDialog(android.os.Bundle)
-	 */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
@@ -54,9 +47,6 @@ public class AlertDialogFragment extends DialogFragment {
 		return alertBuilder.create();
 	} // onCreateDialog Close
 	
-	/*
-	 * newInstance returns a new instance of AlertDialogFragment
-	 */
 	public static AlertDialogFragment newInstance(DialogType dialogType) {
 		type = dialogType;
 		return new AlertDialogFragment();

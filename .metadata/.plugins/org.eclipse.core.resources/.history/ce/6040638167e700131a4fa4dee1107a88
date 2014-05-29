@@ -20,7 +20,7 @@ import android.view.LayoutInflater;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class AlertDialogFragment handles alert dialog fragments for the action bar.
+ * The Class AlertDialogFragment.
  */
 public class AlertDialogFragment extends DialogFragment {
 	public static DialogType type;
