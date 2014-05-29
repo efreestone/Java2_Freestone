@@ -114,8 +114,7 @@ public class JSONData {
 	} // displayDataFromFile Close
 	
 	public static void displayUserRatingFromFile() {
-		myContext = MainActivity.myContext;
-		String userRatingString = DataManager.readStringFromFile(myContext, userRatingFile);
+		String userRatingString = 
 		Log.i("File", userRatingString);
 	}
 

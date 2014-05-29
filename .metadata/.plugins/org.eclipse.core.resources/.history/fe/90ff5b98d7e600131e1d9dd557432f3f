@@ -1,3 +1,13 @@
+/*
+ * @author	Elijah Freestone 
+ *
+ * Project	Java2Project4
+ * 
+ * Package	com.elijahfreestone.java2project4
+ * 
+ * date		May 23, 2014
+ */
+
 package com.elijahfreestone.java2project4;
 
 import java.io.File;
@@ -11,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,14 +36,15 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements
-		MainActivityFragment.OnListItemSelected {
+public class MainActivity extends Activity implements MainFragment.OnListItemSelected, DetailsFragment.OnGetMoreInfoClicked {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
+	static String dvdTitle;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
+	static String userRatingFile = "user_rating.txt";
 	ArrayList<HashMap<String, String>> currentMovieList;
 
 	static ListView myListView;
@@ -118,7 +130,7 @@ public class MainActivity extends Activity implements
 		} // HandleMessage Close
 	} // MyHandler Close
 
-	/*
+	/* 
 	 * Retrieve data creates the Service Intent, adds extras and finally starts
 	 * the Service.
 	 */
@@ -136,33 +148,27 @@ public class MainActivity extends Activity implements
 	} // retrieveData Close
 
 	// Custom methods to show no connection, no file, and rating alerts
-	// noConnectionAlert provides an alert dialog when no network connection is
-	// available
+	// noConnectionAlert provides an alert dialog when no network connection is available
 	public static void noConnectionAlert() {
 		// Create alert dialog for no connection
-		AlertDialog alertDialog = new AlertDialog.Builder(
-				MainActivity.myContext).create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.myContext).create();
 		alertDialog.setTitle(R.string.noConnectionTitle);
 		// Set alert message. setMessage only has a charSequence
 		// version so getString must be used.
 		alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-				(DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	}
 
-	// noFileAlert provides an alert dialog when a file doesn't exist on the
-	// device
+	// noFileAlert provides an alert dialog when a file doesn't exist on the device
 	public void noFileAlert() {
 		// Create alert dialog for no file
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-				.create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 		alertDialog.setTitle(R.string.noFileTitle);
 		// Set alert message. setMessage only has a charSequence
 		// version so getString must be used.
 		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-				(DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	}
 
@@ -170,14 +176,11 @@ public class MainActivity extends Activity implements
 	// the detail activity
 	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
 		// Create alert dialog for rating selected
-		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-				.create();
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
 		alertDialog.setTitle(R.string.ratingSelectedTitle);
-		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected
-				+ " stars";
+		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected + " stars";
 		alertDialog.setMessage(setMessage);
-		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
-				(DialogInterface.OnClickListener) null);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
 		alertDialog.show();
 	} // Alert methods Close
 
@@ -194,16 +197,14 @@ public class MainActivity extends Activity implements
 		}
 	} // onSaveInstanceState Close
 
-	// onRestore grabs my array list from the bundle if it exists and redisplays
-	// it
+	// onRestore grabs my array list from the bundle if it exists and redisplays it
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		// Grab listview and stored Array List from Bundle
 		myListView = (ListView) this.findViewById(R.id.listView);
-		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState
-				.getSerializable("stored");
+		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
 		Log.i("File", "Size = " + currentMovieList.size());
 		if (currentMovieList != null && !currentMovieList.isEmpty()) {
 			Log.i("Save", "Array List Being Restored");
@@ -217,49 +218,72 @@ public class MainActivity extends Activity implements
 
 			myListView.setAdapter(listAdapter);
 		}
+		
+//		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+//				.findFragmentById(R.id.detailsFragment);
+		
+//		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//			detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+//					movieRating, criticRating, audienceRating);
+//			Log.i("Details", "Details Landscape");
+//		}
+		
 	} // onRestoreInstanceState Close
 
 	// onActivityResult is called when returning from Details or Device
 	// orientation changes to Landscape on Details.
 	// Details passes movie object back via intent extras which are used for
 	// rating alert and or Details display
-	protected void onActivityResult(int requestCode, int resultCode,
-			Intent detailsBackIntent) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
-		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager()
+		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
 				.findFragmentById(R.id.detailsFragment);
 
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			Log.i(TAG, "onActivityResult resultCode = OK");
-			if (detailsBackIntent.hasExtra("dvdTitle")
-					&& detailsBackIntent.hasExtra("ratingSelected")) {
+			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
 				// Pull all extras from Intent
-				String dvdTitle = detailsBackIntent.getExtras().getString(
-						"dvdTitle");
-				String releaseDate = detailsBackIntent.getExtras().getString(
-						"releaseDate");
-				String movieRating = detailsBackIntent.getExtras().getString(
-						"movieRating");
-				String criticRating = detailsBackIntent.getExtras().getString(
-						"criticRating");
-				String audienceRating = detailsBackIntent.getExtras()
-						.getString("audienceRating");
-
-				// Float ratingSelected =
-				// detailsBackIntent.getExtras().getFloat("ratingSelected");
+				dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+				String releaseDate = detailsBackIntent.getExtras().getString("releaseDate");
+				String movieRating = detailsBackIntent.getExtras().getString("movieRating");
+				String criticRating = detailsBackIntent.getExtras().getString("criticRating");
+				String audienceRating = detailsBackIntent.getExtras().getString("audienceRating");
+				
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+				
+				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+				
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 
-				// If the device is in landscape, display movie info in details
-				// pane
-				// This is only triggered when in Details in Portrait then
-				// changing device to landscape
+				// If the device is in landscape, display movie info in details pane
+				// This is only triggered when in Details starts in Portrait and changed to landscape
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-					detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, 
 							movieRating, criticRating, audienceRating);
-					Log.i("TAG", "onActivityResult Landscape");
+					Log.i(TAG, "onActivityResult Landscape");
+				} else {
+					// Save rating selected to file with movie title. Currently rewrites file but working on a fix
+					myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
+					Log.i(TAG, "Rating Saved form onActivityResult else");
 				}
 			}
 		}
 	} // onActivityResult Close
+
+	// onGetMoreInfoInfo Click is an interface method from DetailsFragment that handles 
+	// Implicit Intent. This version overrides only if the device is in landscape
+	@Override
+	public void onGetMoreInfoClicked() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
+			Log.i(TAG, "dvdTitle in onGetMoreInfoClick = " + dvdTitle);
+			String baseURLString = "http://www.rottentomatoes.com/m/";
+			String moddedTitle = dvdTitle.replace(" ", "_");
+			String urlSearchMod = baseURLString + moddedTitle;
+			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(urlSearchMod));
+
+			startActivity(moreInfoIntent);
+		}
+	} // onGetMoreInfoClick Close
 
 }

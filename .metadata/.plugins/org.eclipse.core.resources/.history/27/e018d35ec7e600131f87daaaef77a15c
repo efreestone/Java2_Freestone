@@ -112,7 +112,7 @@ public class DetailsFragment extends Fragment {
 //						DataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
 //						Log.i("Details Frag", "Rating Saved from Landscape Details Frag");
 //					}
-				} 
+				}
 			});
 
 		return detailsView;

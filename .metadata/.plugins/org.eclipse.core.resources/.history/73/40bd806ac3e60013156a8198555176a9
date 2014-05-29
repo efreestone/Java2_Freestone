@@ -104,15 +104,8 @@ public class DetailsFragment extends Fragment {
 				public void onRatingChanged(RatingBar ratingBar,float rating, boolean fromUser) {
 					DetailsActivity.ratingSelected = movieRatingBar.getRating();
 					
-//					if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//						String userRatingFile = "user_rating.txt";
-//						
-//						String userRatingString = DetailsActivity.dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
-//						
-//						DataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
-//						Log.i("Details Frag", "Rating Saved from Landscape Details Frag");
-//					}
-				} 
+					
+				}
 			});
 
 		return detailsView;

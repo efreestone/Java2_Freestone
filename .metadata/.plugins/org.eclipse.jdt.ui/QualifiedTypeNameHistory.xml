@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.json.JSONArray"/>
-<fullyQualifiedTypeName name="com.elijahfreestone.java2project1.DataManager"/>
 <fullyQualifiedTypeName name="android.widget.SimpleAdapter"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project1.R.layout"/>
 <fullyQualifiedTypeName name="android.os.Environment"/>
@@ -43,7 +41,6 @@
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project2.MainActivity"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivityFragment"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivityFragment.onListItemSelected"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project3.MainActivity"/>
 <fullyQualifiedTypeName name="android.app.Fragment"/>
@@ -59,5 +56,8 @@
 <fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project4.MainFragment"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project4.DetailsFragment.OnGetMoreInfoClicked"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project4.DataManager"/>
+<fullyQualifiedTypeName name="com.elijahfreestone.java2project4.DetailsActivity"/>
 <fullyQualifiedTypeName name="com.elijahfreestone.java2project4.MainActivity"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
 </qualifiedTypeNameHistroy>

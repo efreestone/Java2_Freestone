@@ -274,7 +274,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 				
 				if (fileExists) {
 					JSONData.displayUserRatingFromFile();
-					Log.i(TAG, "User Rating File Read");
 				}
 				
 			}

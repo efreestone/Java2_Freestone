@@ -29,7 +29,6 @@ public class JSONData {
 	static Context myContext;
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
-	static String userRatingFile = "user_rating.txt";
 	static String filePathDir = "data/data/com.elijahfreestone.java2project3/files/string_from_url.txt";
 
 	static String JSONString;
@@ -112,11 +111,5 @@ public class JSONData {
 			Log.e("displayDataFromFile ERROR", e.getMessage().toString());
 		}
 	} // displayDataFromFile Close
-	
-	public static void displayUserRatingFromFile() {
-		myContext = MainActivity.myContext;
-		String userRatingString = DataManager.readStringFromFile(myContext, userRatingFile);
-		Log.i("File", userRatingString);
-	}
 
 }

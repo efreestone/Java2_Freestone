@@ -262,21 +262,12 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 							movieRating, criticRating, audienceRating);
 					Log.i(TAG, "onActivityResult Landscape");
 				} else {
-					// Save rating selected to file with movie title only if rating selected.
-					if (ratingSelected != 0) {
+					// Save rating selected to file with movie title. Currently rewrites file but working on a fix
+					if (ratingSelected >= 0.5f) {
 						myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
-						Log.i(TAG, "Rating Saved form onActivityResult else"); 
+						Log.i(TAG, "Rating Saved form onActivityResult else");
 					}
 				}
-				
-				File file = this.getFileStreamPath(userRatingFile);
-				Boolean fileExists = file.exists();
-				
-				if (fileExists) {
-					JSONData.displayUserRatingFromFile();
-					Log.i(TAG, "User Rating File Read");
-				}
-				
 			}
 		}
 	} // onActivityResult Close

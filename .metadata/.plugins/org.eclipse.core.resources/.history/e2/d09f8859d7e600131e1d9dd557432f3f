@@ -256,27 +256,16 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 
 				// If the device is in landscape, display movie info in details pane
-				// This is only triggered when in Details starts in Portrait and changed to landscape
+				// This is only triggered when in Details in Portrait then changing device to landscape
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, 
 							movieRating, criticRating, audienceRating);
 					Log.i(TAG, "onActivityResult Landscape");
 				} else {
-					// Save rating selected to file with movie title only if rating selected.
-					if (ratingSelected != 0) {
-						myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
-						Log.i(TAG, "Rating Saved form onActivityResult else"); 
-					}
+					// Save rating selected to file with movie title. Currently rewrites file but working on a fix
+					myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
+					Log.i(TAG, "Rating Saved form onActivityResult else");
 				}
-				
-				File file = this.getFileStreamPath(userRatingFile);
-				Boolean fileExists = file.exists();
-				
-				if (fileExists) {
-					JSONData.displayUserRatingFromFile();
-					Log.i(TAG, "User Rating File Read");
-				}
-				
 			}
 		}
 	} // onActivityResult Close

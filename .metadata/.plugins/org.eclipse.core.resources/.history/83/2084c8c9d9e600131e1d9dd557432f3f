@@ -268,15 +268,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 						Log.i(TAG, "Rating Saved form onActivityResult else"); 
 					}
 				}
-				
-				File file = this.getFileStreamPath(userRatingFile);
-				Boolean fileExists = file.exists();
-				
-				if (fileExists) {
-					JSONData.displayUserRatingFromFile();
-					Log.i(TAG, "User Rating File Read");
-				}
-				
 			}
 		}
 	} // onActivityResult Close
