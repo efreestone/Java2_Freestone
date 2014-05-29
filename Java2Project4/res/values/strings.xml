@@ -6,6 +6,10 @@
     <string name="action_settings">Settings</string>
     <string name="titleString">DVD New Releases</string>
     
+    <string name="searchTitle">Search</string>
+    <string name="favoritesTitle">Favorites</string>
+    <string name="preferencesTitle">Preferences</string>
+    
     <string name="buttonString">Get New Releases</string>
     <string name="moreInfoButtonString">Get More Info</string>
     

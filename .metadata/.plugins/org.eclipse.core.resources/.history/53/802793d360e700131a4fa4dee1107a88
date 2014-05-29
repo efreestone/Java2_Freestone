@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/searchActionItem"
+        android:icon="@drawable/ic_action_search"
+        android:showAsAction="ifRoom"
+        android:title="@string/searchTitle" />
+    
+    <item 
+        android:id="@+id/"
+        android:icon="@drawable/ic_action_important"
+        android:showAsAction="ifRoom"
+        android:title="@string/favoritesTitle" />
+    
+    <item android:id="@+id/favoritesActionItem"
+          android:icon="@drawable/ic_action_important"
+          android:title="@string/action_location_found"
+          android:showAsAction="ifRoom" />
+     
+
+</menu>

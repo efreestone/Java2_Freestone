@@ -27,11 +27,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
+// TODO: Auto-generated Javadoc
 //TODO: Auto-generated Javadoc
 /**
  * The Class MainActivity.
@@ -90,6 +94,38 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 			Log.i("File", "File DOESN'T exist!!");
 		}
 	} // onCreate Close
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        
+        return super.onCreateOptionsMenu(menu);
+    }
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+		case R.id.searchActionItem:
+			// Search Action
+			Log.i("Action", "Search Clicked");
+			return true;
+		case R.id.favoritesActionItem:
+			// Favorites Action
+			Log.i("Action", "Favorites Clicked");
+			return true;
+		case R.id.preferencesActionItem:
+			// Preferences Action
+			Log.i("Action", "Preferences Clicked");
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
 	/*
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to
@@ -146,8 +182,11 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		startService(startDataIntent);
 	} // retrieveData Close
 
-	// Custom methods to show no connection, no file, and rating alerts
-	// noConnectionAlert provides an alert dialog when no network connection is available
+	/*
+	 * Custom methods to show no connection, no file, and rating alerts
+	 * noConnectionAlert provides an alert dialog when no network connection is
+	 * available
+	 */
 	public static void noConnectionAlert() {
 		// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.myContext).create();
@@ -171,8 +210,10 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		alertDialog.show();
 	}
 
-	// ratingSelectedAlert provides an alert dialog when a movie was rated on
-	// the detail activity
+	/*
+	 * ratingSelectedAlert provides an alert dialog when a movie was rated on
+	 * the detail activity
+	 */
 	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
 		// Create alert dialog for rating selected
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -229,10 +270,12 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		
 	} // onRestoreInstanceState Close
 
-	// onActivityResult is called when returning from Details or Device
-	// orientation changes to Landscape on Details.
-	// Details passes movie object back via intent extras which are used for
-	// rating alert and or Details display
+	/*
+	 * onActivityResult is called when returning from Details or Device
+	 * orientation changes to Landscape on Details. Details passes movie object
+	 * back via intent extras which are used for rating alert and or Details
+	 * display
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
 		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
@@ -254,8 +297,11 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 				
 				// ratingSelectedAlert(dvdTitle, ratingSelected);
 
-				// If the device is in landscape, display movie info in details pane
-				// This is only triggered when in Details starts in Portrait and changed to landscape
+				/*
+				 * If the device is in landscape, display movie info in details
+				 * pane. This is only triggered when in Details starts in
+				 * Portrait and changed to landscape
+				 */
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, 
 							movieRating, criticRating, audienceRating);
@@ -280,8 +326,11 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		}
 	} // onActivityResult Close
 
-	// onGetMoreInfoInfo Click is an interface method from DetailsFragment that handles 
-	// Implicit Intent. This version overrides only if the device is in landscape
+	/*
+	 * onGetMoreInfoInfo Click is an interface method from DetailsFragment that
+	 * handles Implicit Intent. This version overrides only if the device is in
+	 * landscape
+	 */
 	@Override
 	public void onGetMoreInfoClicked() {
 		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
