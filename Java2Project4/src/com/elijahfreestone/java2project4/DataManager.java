@@ -31,7 +31,7 @@ public class DataManager {
 	// Create Constructor
 	private DataManager() {
 
-	}
+	}  
 
 	// Create getInstance method and check if instance exists
 	public static DataManager getInstance() {

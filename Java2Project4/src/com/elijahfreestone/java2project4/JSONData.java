@@ -34,6 +34,7 @@ public class JSONData {
 
 	static String JSONString;
 	static ArrayList<HashMap<String, String>> myList;
+	public static String userRatingString;
 
 	/*
 	 * Display data from file pulls string from locally stored file and creates
@@ -115,7 +116,7 @@ public class JSONData {
 	
 	public static void displayUserRatingFromFile() {
 		myContext = MainActivity.myContext;
-		String userRatingString = DataManager.readStringFromFile(myContext, userRatingFile);
+		userRatingString = DataManager.readStringFromFile(myContext, userRatingFile);
 		Log.i("File", userRatingString);
 	}
 

@@ -1,0 +1,384 @@
+/*
+ * @author	Elijah Freestone 
+ *
+ * Project	Java2Project4
+ * 
+ * Package	com.elijahfreestone.java2project4
+ * 
+ * date		May 23, 2014
+ */
+
+package com.elijahfreestone.java2project4;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+
+import com.elijahfreestone.networkConnection.NetworkConnection;
+
+//TODO: Auto-generated Javadoc
+/**
+ * The Class MainActivity.
+ */
+public class MainActivity extends Activity implements MainFragment.OnListItemSelected, DetailsFragment.OnGetMoreInfoClicked {
+	static Context myContext;
+	static String TAG = "MainActivity";
+	static String responseString = null;
+	static String dvdTitle;
+	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
+	static DataManager myDataManager;
+	static String myFileName = "string_from_url.txt";
+	static String userRatingFile = "user_rating.txt";
+	ArrayList<HashMap<String, String>> currentMovieList;
+
+	static ListView myListView;
+
+	static final String DVD_TITLE = "dvdTitle";
+	static final String RELEASE_DATE = "releaseDate";
+	static final String MOVIE_RATING = "movieRating";
+	
+	public enum DialogType {SEARCH, FAVORITES, INFO, PREFERENCES};
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main_fragment);
+
+		// Grab instance of DataManager
+		myDataManager = DataManager.getInstance();
+
+		myContext = this;
+
+		// Check if the file already exists
+		File file = this.getFileStreamPath(myFileName);
+		Boolean fileExists = file.exists();
+		if (fileExists) {
+			// Display the data to the listview automatically if file exists
+			JSONData.displayDataFromFile();
+
+			Log.i("File", "File exists");
+		} else {
+			if (NetworkConnection.connectionStatus(myContext)) {
+				// Show No File alert
+				noFileAlert();
+				// Call retrieveData to start the Service and get JSON data from the API
+				retrieveData();
+			} else {
+				// Show No Connection alert
+				noConnectionAlert();
+			}
+
+			Log.i("File", "File DOESN'T exist!!");
+		}
+	} // onCreate Close
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        
+        return super.onCreateOptionsMenu(menu);
+    } // onCreateOptionsMenu Close
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+		case R.id.searchActionItem:
+			// Search Action
+			launchDialogFragment(DialogType.SEARCH);
+			Log.i("Action", "Search Clicked");
+			return true;
+		case R.id.favoritesActionItem:
+			// Favorites Action
+			launchDialogFragment(DialogType.FAVORITES);
+			View favoritesFragment = AlertDialogFragment.favoritesView;
+			TextView ratedMovies = (TextView) favoritesFragment.findViewById(R.id.ratedMovies);
+			// Check if user rating file exists and log out its content if it does
+			File file = this.getFileStreamPath(userRatingFile);
+			Boolean fileExists = file.exists();
+			if (fileExists && ratedMovies != null) {
+				JSONData.displayUserRatingFromFile();
+				String ratedMoviesFromFile = JSONData.userRatingString;
+				if (ratedMoviesFromFile != null) {
+					ratedMovies.setText(ratedMoviesFromFile);
+				} else {
+					ratedMovies.setText("ratedMoviesFromFile is null");
+				}
+			}
+			
+			
+			Log.i("Action", "Favorites Clicked");
+			return true;
+		case R.id.infoActionItem:
+			// Favorites Action
+			launchDialogFragment(DialogType.INFO);
+			Log.i("Action", "Info Clicked");
+			return true;
+		case R.id.preferencesActionItem:
+			// Preferences Action
+			launchDialogFragment(DialogType.PREFERENCES);
+			Log.i("Action", "Preferences Clicked");
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	} // onOptionsItemSelected Close
+	
+	public void launchDialogFragment(DialogType type) {
+		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+		dialogFragment.show(getFragmentManager(), "search_dialog");
+	}
+
+	/*
+	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to
+	 * the MainActivty. This is done to avoid the memory leak
+	 */
+	private static class MyServiceHandler extends Handler {
+		private final WeakReference<MainActivity> myActivity;
+
+		// Instantiate the handler
+		public MyServiceHandler(MainActivity activity) {
+			myActivity = new WeakReference<MainActivity>(activity);
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.Handler#handleMessage(android.os.Message)
+		 */
+		@Override
+		public void handleMessage(Message message) {
+
+			MainActivity activity = myActivity.get();
+			if (activity != null) {
+				Object returnObject = message.obj;
+				if (message.arg1 == RESULT_OK && returnObject != null) {
+					try {
+						responseString = (String) message.obj;
+						Log.i(TAG, "handleMessage " + responseString);
+					} catch (Exception e) {
+						Log.e("handleMessage", e.getMessage().toString());
+					}
+				} else {
+					Log.i(TAG, "Data NOT created!!");
+				}
+			}
+
+		} // HandleMessage Close
+	} // MyHandler Close
+
+	/* 
+	 * Retrieve data creates the Service Intent, adds extras and finally starts
+	 * the Service.
+	 */
+	public void retrieveData() {
+		Log.i(TAG, "retrieveData called");
+		// Create Messenger class for ref to handler
+		Messenger dataMessenger = new Messenger(myServiceHandler);
+
+		// Create Intent to start service
+		Intent startDataIntent = new Intent(myContext, DataService.class);
+		startDataIntent.putExtra(DataService.MESSENGER_KEY, dataMessenger);
+
+		// Start the service
+		startService(startDataIntent);
+	} // retrieveData Close
+
+	/*
+	 * Custom methods to show no connection, no file, and rating alerts
+	 * noConnectionAlert provides an alert dialog when no network connection is
+	 * available
+	 */
+	public static void noConnectionAlert() {
+		// Create alert dialog for no connection
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.myContext).create();
+		alertDialog.setTitle(R.string.noConnectionTitle);
+		// Set alert message. setMessage only has a charSequence
+		// version so getString must be used.
+		alertDialog.setMessage(myContext.getString(R.string.noConnectionAlert));
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.show();
+	}
+
+	// noFileAlert provides an alert dialog when a file doesn't exist on the device
+	public void noFileAlert() {
+		// Create alert dialog for no file
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		alertDialog.setTitle(R.string.noFileTitle);
+		// Set alert message. setMessage only has a charSequence
+		// version so getString must be used.
+		alertDialog.setMessage(myContext.getString(R.string.noFileAlert));
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.show();
+	}
+
+	/*
+	 * ratingSelectedAlert provides an alert dialog when a movie was rated on
+	 * the detail activity
+	 */
+	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
+		// Create alert dialog for rating selected
+		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		alertDialog.setTitle(R.string.ratingSelectedTitle);
+		String setMessage = "You have rated " + dvdTitle + " " + ratingSelected + " stars";
+		alertDialog.setMessage(setMessage);
+		alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (DialogInterface.OnClickListener) null);
+		alertDialog.show();
+	} // Alert methods Close
+
+	// onSaveInstanceState grabs my array list and saves it to the bundle
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		// Grab entire array list from JSON Data
+		currentMovieList = JSONData.myList;
+		if (currentMovieList != null && !currentMovieList.isEmpty()) {
+			savedInstanceState.putSerializable("stored", currentMovieList);
+			// Log.i("Save", "" + currentMovieList);
+			Log.i("Save", "Movie List Instance State Saved");
+		}
+	} // onSaveInstanceState Close
+
+	// onRestore grabs my array list from the bundle if it exists and redisplays it
+	@SuppressWarnings("unchecked")
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		// Grab listview and stored Array List from Bundle
+		myListView = (ListView) this.findViewById(R.id.listView);
+		currentMovieList = (ArrayList<HashMap<String, String>>) savedInstanceState.getSerializable("stored");
+		Log.i("File", "Size = " + currentMovieList.size());
+		if (currentMovieList != null && !currentMovieList.isEmpty()) {
+			Log.i("Save", "Array List Being Restored");
+
+			// Create simple adapter and set up with array
+			SimpleAdapter listAdapter = new SimpleAdapter(myContext,
+					currentMovieList, R.layout.listview_row, new String[] {
+							"dvdTitle", "releaseDate", "movieRating" },
+					new int[] { R.id.dvdTitle, R.id.releaseDate,
+							R.id.movieRating });
+
+			myListView.setAdapter(listAdapter);
+		}
+		
+//		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+//				.findFragmentById(R.id.detailsFragment);
+		
+//		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//			detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+//					movieRating, criticRating, audienceRating);
+//			Log.i("Details", "Details Landscape");
+//		}
+		
+	} // onRestoreInstanceState Close
+
+	/*
+	 * onActivityResult is called when returning from Details or Device
+	 * orientation changes to Landscape on Details. Details passes movie object
+	 * back via intent extras which are used for rating alert and or Details
+	 * display
+	 */
+	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
+		Log.i(TAG, "On Activity Result");
+		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+				.findFragmentById(R.id.detailsFragment);
+
+		if (resultCode == RESULT_OK && requestCode == 0) {
+			Log.i(TAG, "onActivityResult resultCode = OK");
+			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
+				// Pull all extras from Intent
+				dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+				String releaseDate = detailsBackIntent.getExtras().getString("releaseDate");
+				String movieRating = detailsBackIntent.getExtras().getString("movieRating");
+				String criticRating = detailsBackIntent.getExtras().getString("criticRating");
+				String audienceRating = detailsBackIntent.getExtras().getString("audienceRating");
+				
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
+				
+				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+				
+				// ratingSelectedAlert(dvdTitle, ratingSelected);
+
+				/*
+				 * If the device is in landscape, display movie info in details
+				 * pane. This is only triggered when in Details starts in
+				 * Portrait and changed to landscape
+				 */
+				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, 
+							movieRating, criticRating, audienceRating);
+					Log.i(TAG, "onActivityResult Landscape");
+				} else {
+					// Save rating selected to file with movie title only if rating selected.
+					if (ratingSelected != 0) {
+						myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
+						Log.i(TAG, "Rating Saved form onActivityResult else"); 
+					}
+				}
+				
+				// Check if user rating file exists and log out its content if it does
+				File file = this.getFileStreamPath(userRatingFile);
+				Boolean fileExists = file.exists();
+				if (fileExists) {
+					JSONData.displayUserRatingFromFile();
+					Log.i(TAG, "User Rating File Read");
+				}
+				
+			}
+		}
+	} // onActivityResult Close
+
+	/*
+	 * onGetMoreInfoInfo Click is an interface method from DetailsFragment that
+	 * handles Implicit Intent. This version overrides only if the device is in
+	 * landscape
+	 */
+	@Override
+	public void onGetMoreInfoClicked() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
+			Log.i(TAG, "dvdTitle in onGetMoreInfoClick = " + dvdTitle);
+			String baseURLString = "http://www.rottentomatoes.com/m/";
+			String moddedTitle = dvdTitle.replace(" ", "_");
+			String urlSearchMod = baseURLString + moddedTitle;
+			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(urlSearchMod));
+
+			startActivity(moreInfoIntent);
+		}
+	} // onGetMoreInfoClick Close
+
+}

@@ -31,8 +31,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -57,7 +59,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
 	
-	public enum DialogType {SEARCH, FAVORITES, PREFERENCES};
+	public enum DialogType {SEARCH, FAVORITES, INFO, PREFERENCES};
 
 	/*
 	 * (non-Javadoc)
@@ -117,14 +119,37 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		switch (item.getItemId()) {
 		case R.id.searchActionItem:
 			// Search Action
+			launchDialogFragment(DialogType.SEARCH);
 			Log.i("Action", "Search Clicked");
 			return true;
 		case R.id.favoritesActionItem:
 			// Favorites Action
+			launchDialogFragment(DialogType.FAVORITES);
+			//View favoritesFragment = AlertDialogFragment.favoritesView;
+			TextView ratedMovies = AlertDialogFragment.ratedMovies;
+			// Check if user rating file exists and log out its content if it does
+			File file = this.getFileStreamPath(userRatingFile);
+			Boolean fileExists = file.exists();
+			if (fileExists && ratedMovies != null) { 
+				JSONData.displayUserRatingFromFile();
+				String ratedMoviesFromFile = JSONData.userRatingString;
+				if (ratedMoviesFromFile != null) {
+					AlertDialogFragment.ratedMovies.setText(ratedMoviesFromFile);
+				} else {
+					AlertDialogFragment.ratedMovies.setText("ratedMoviesFromFile is null");
+				}
+			}
+			
 			Log.i("Action", "Favorites Clicked");
+			return true;
+		case R.id.infoActionItem:
+			// Favorites Action
+			launchDialogFragment(DialogType.INFO);
+			Log.i("Action", "Info Clicked");
 			return true;
 		case R.id.preferencesActionItem:
 			// Preferences Action
+			launchDialogFragment(DialogType.PREFERENCES);
 			Log.i("Action", "Preferences Clicked");
 			return true;
 		default:
@@ -132,8 +157,9 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		}
 	} // onOptionsItemSelected Close
 	
-	public void launchDialogFragment(DialogFragment type) {
+	public void launchDialogFragment(DialogType type) {
 		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+		dialogFragment.show(getFragmentManager(), "search_dialog");
 	}
 
 	/*

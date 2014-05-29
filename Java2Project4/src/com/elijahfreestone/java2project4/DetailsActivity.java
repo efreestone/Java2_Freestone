@@ -85,21 +85,21 @@ public class DetailsActivity extends Activity implements
 		setResult(RESULT_OK, detailsBackIntent);
 		super.finish();
 	} // finish Close
-
+ 
+	
 	@Override
 	public void onGetMoreInfoClicked() {
-		// Create implicit intent. This will pass a custom URL searching for the movie
-		// title on RottenTomatoes.com and open it in a browser
+		/*
+		 * Create implicit intent. This will pass a custom URL searching for the
+		 * movie title on RottenTomatoes.com and open it in a browser
+		 */
+		String baseURLString = "http://www.rottentomatoes.com/m/";
+		String moddedTitle = dvdTitle.replace(" ", "_");
+		String urlSearchMod = baseURLString + moddedTitle;
+		Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+				Uri.parse(urlSearchMod));
 
-		//if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-			String baseURLString = "http://www.rottentomatoes.com/m/";
-			String moddedTitle = dvdTitle.replace(" ", "_");
-			String urlSearchMod = baseURLString + moddedTitle;
-			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
-					Uri.parse(urlSearchMod));
-
-			startActivity(moreInfoIntent);
-		//}
+		startActivity(moreInfoIntent);
 	} // onGetMoreInfoClicked Close
 	
 	// onSaveInstanceState grabs my array list and saves it to the bundle

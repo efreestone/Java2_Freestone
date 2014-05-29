@@ -9,6 +9,9 @@
     <string name="searchTitle">Search</string>
     <string name="favoritesTitle">Favorites</string>
     <string name="preferencesTitle">Preferences</string>
+    <string name="infoTitle">Info</string>
+    
+    
     
     <string name="buttonString">Get New Releases</string>
     <string name="moreInfoButtonString">Get More Info</string>

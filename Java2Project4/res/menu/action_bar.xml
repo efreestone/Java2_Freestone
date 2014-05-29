@@ -12,6 +12,11 @@
           android:title="@string/favoritesTitle"
           android:showAsAction="ifRoom" />
     
+    <item android:id="@+id/infoActionItem"
+          android:icon="@drawable/ic_action_about"
+          android:title="@string/infoTitle"
+          android:showAsAction="ifRoom" />
+    
     <item android:id="@+id/preferencesActionItem"
           android:title="@string/preferencesTitle"
           android:showAsAction="ifRoom" />
