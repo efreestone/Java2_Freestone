@@ -10,8 +10,6 @@
 
 package com.elijahfreestone.java2project4;
 
-import java.io.File;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -65,18 +63,6 @@ public class AlertDialogFragment extends DialogFragment {
 		case FAVORITES:
 			favoritesView = layoutInflater.inflate(R.layout.favorites_dialog_fragment, null);
 			ratedMovies = (TextView) favoritesView.findViewById(R.id.ratedMovies);
-			
-			File ratingFile = MainActivity.myContext.getFileStreamPath(userRatingFile);
-			Boolean fileExists = ratingFile.exists();
-			if (fileExists && ratedMovies != null) { 
-				JSONData.displayUserRatingFromFile();
-				String ratedMoviesFromFile = JSONData.userRatingString;
-				if (ratedMoviesFromFile != null) {
-					AlertDialogFragment.ratedMovies.setText(ratedMoviesFromFile);
-				} else {
-					AlertDialogFragment.ratedMovies.setText("ratedMoviesFromFile is null");
-				}
-			}
 			
 			alertBuilder.setView(favoritesView)
 			// Set action button to dismiss

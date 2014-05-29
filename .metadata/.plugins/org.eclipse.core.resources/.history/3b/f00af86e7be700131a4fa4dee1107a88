@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +31,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -125,6 +127,21 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		case R.id.favoritesActionItem:
 			// Favorites Action
 			launchDialogFragment(DialogType.FAVORITES);
+			//View favoritesFragment = AlertDialogFragment.favoritesView;
+			TextView ratedMovies = AlertDialogFragment.ratedMovies;
+			// Check if user rating file exists and log out its content if it does
+			File file = this.getFileStreamPath(userRatingFile);
+			Boolean fileExists = file.exists();
+			if (fileExists && ratedMovies != null) { 
+				JSONData.displayUserRatingFromFile();
+				String ratedMoviesFromFile = JSONData.userRatingString;
+				if (ratedMoviesFromFile != null) {
+					AlertDialogFragment.ratedMovies.setText(ratedMoviesFromFile);
+				} else {
+					AlertDialogFragment.ratedMovies.setText("ratedMoviesFromFile is null");
+				}
+			}
+			
 			Log.i("Action", "Favorites Clicked");
 			return true;
 		case R.id.infoActionItem:
@@ -278,6 +295,16 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 
 			myListView.setAdapter(listAdapter);
 		}
+		
+//		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+//				.findFragmentById(R.id.detailsFragment);
+		
+//		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//			detailsFragment.displayMovieDetails(dvdTitle, releaseDate,
+//					movieRating, criticRating, audienceRating);
+//			Log.i("Details", "Details Landscape");
+//		}
+		
 	} // onRestoreInstanceState Close
 
 	/*

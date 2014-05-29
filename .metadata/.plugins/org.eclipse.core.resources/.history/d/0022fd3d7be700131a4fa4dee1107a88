@@ -7,11 +7,11 @@
     <string name="titleString">DVD New Releases</string>
     
     <string name="searchTitle">Search</string>
-    <string name="searchMovies">Search Movies</string>
     <string name="favoritesTitle">Favorites</string>
-    <string name="noRatingString">No Movies Rated Yet</string>
     <string name="preferencesTitle">Preferences</string>
     <string name="infoTitle">Info</string>
+    
+    <string name="searchMovies">Search Movies</string>
     
     <string name="buttonString">Get New Releases</string>
     <string name="moreInfoButtonString">Get More Info</string>

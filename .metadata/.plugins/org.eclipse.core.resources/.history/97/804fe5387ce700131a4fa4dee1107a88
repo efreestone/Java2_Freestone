@@ -69,7 +69,7 @@ public class AlertDialogFragment extends DialogFragment {
 			File ratingFile = MainActivity.myContext.getFileStreamPath(userRatingFile);
 			Boolean fileExists = ratingFile.exists();
 			if (fileExists && ratedMovies != null) { 
-				JSONData.displayUserRatingFromFile();
+				//JSONData.displayUserRatingFromFile();
 				String ratedMoviesFromFile = JSONData.userRatingString;
 				if (ratedMoviesFromFile != null) {
 					AlertDialogFragment.ratedMovies.setText(ratedMoviesFromFile);

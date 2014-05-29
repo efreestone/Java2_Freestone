@@ -10,14 +10,14 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:text="Favorites" />
+        android:text="@string/favoritesTitle" />
     
     <TextView 
         android:id="@+id/ratedMovies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="No Movies Rated Yet" />
+        android:text="@string/noRatingString" />
     
 
 </LinearLayout>

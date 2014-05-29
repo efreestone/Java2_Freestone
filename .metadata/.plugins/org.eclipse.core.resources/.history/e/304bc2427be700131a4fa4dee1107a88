@@ -4,18 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
     
-    <TextView
-        android:id="@+id/searchTitle"
+    <TextView 
+        android:id="@+id/favoritesTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:text="@string/searchMovies" />
+        android:text="Favorites" />
     
-    <EditText
-        android:id="@+id/searchBox"
-        android:inputType="text"
+    <TextView 
+        android:id="@+id/ratedMovies"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="No Movies Rated Yet" />
+    
 
 </LinearLayout>

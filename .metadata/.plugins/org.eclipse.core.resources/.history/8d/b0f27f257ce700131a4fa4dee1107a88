@@ -125,6 +125,21 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		case R.id.favoritesActionItem:
 			// Favorites Action
 			launchDialogFragment(DialogType.FAVORITES);
+			//View favoritesFragment = AlertDialogFragment.favoritesView;
+			TextView ratedMovies = AlertDialogFragment.ratedMovies;
+			// Check if user rating file exists and log out its content if it does
+			File file = this.getFileStreamPath(userRatingFile);
+			Boolean fileExists = file.exists();
+			if (fileExists && ratedMovies != null) { 
+				JSONData.displayUserRatingFromFile();
+				String ratedMoviesFromFile = JSONData.userRatingString;
+				if (ratedMoviesFromFile != null) {
+					AlertDialogFragment.ratedMovies.setText(ratedMoviesFromFile);
+				} else {
+					AlertDialogFragment.ratedMovies.setText("ratedMoviesFromFile is null");
+				}
+			}
+			
 			Log.i("Action", "Favorites Clicked");
 			return true;
 		case R.id.infoActionItem:
