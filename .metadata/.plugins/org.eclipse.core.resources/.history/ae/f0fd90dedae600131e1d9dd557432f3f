@@ -80,7 +80,8 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 			if (NetworkConnection.connectionStatus(myContext)) {
 				// Show No File alert
 				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
+				// Call retrieveData to start the Service and get JSON data from
+				// the API
 				retrieveData();
 			} else {
 				// Show No Connection alert
@@ -268,9 +269,9 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 					}
 				}
 				
-				// Check if user rating file exists and log out its content if it does
 				File file = this.getFileStreamPath(userRatingFile);
 				Boolean fileExists = file.exists();
+				
 				if (fileExists) {
 					JSONData.displayUserRatingFromFile();
 					Log.i(TAG, "User Rating File Read");

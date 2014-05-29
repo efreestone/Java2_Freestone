@@ -80,7 +80,8 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 			if (NetworkConnection.connectionStatus(myContext)) {
 				// Show No File alert
 				noFileAlert();
-				// Call retrieveData to start the Service and get JSON data from the API
+				// Call retrieveData to start the Service and get JSON data from
+				// the API
 				retrieveData();
 			} else {
 				// Show No Connection alert
