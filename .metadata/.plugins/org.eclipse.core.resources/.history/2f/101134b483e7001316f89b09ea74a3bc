@@ -20,11 +20,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.elijahfreestone.java2project4.MainActivity.DialogType;
@@ -100,26 +97,19 @@ public class AlertDialogFragment extends DialogFragment {
 			break;
 			
 		case PREFERENCES:
-			final View preferencesView = layoutInflater.inflate(R.layout.preferences_dialog_fragment, null);
 			
-			alertBuilder.setView(preferencesView)
+			
+			alertBuilder.setView(layoutInflater.inflate(R.layout.preferences_dialog_fragment, null))
 			.setPositiveButton("Save", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					EditText userName = (EditText) preferencesView.findViewById(R.id.userName);
 					SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.myContext);
 					Editor editor = preferences.edit();
-					String enteredUsername = userName.getText().toString();
-					Log.i("Pref", enteredUsername);
-					if (enteredUsername.equalsIgnoreCase("")) {
-						enteredUsername = "guest";
+					if (preferences.getString("username", "").toString().isEmpty()) {
 						editor.putString("username", "guest");
 						editor.apply();
-					} else {
-						editor.putString("username", userName.getText().toString());
 					}
-					// Apply username entered to title on main activity
-					MainActivity.userNameTextView.setText("Welcome, " + preferences.getString("username", enteredUsername));
+					MainActivity.
 				}
 			})
 			.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -128,7 +118,7 @@ public class AlertDialogFragment extends DialogFragment {
 					AlertDialogFragment.this.getDialog().cancel();
 				}
 			});
-			 
+			
 			break;
 
 		default:

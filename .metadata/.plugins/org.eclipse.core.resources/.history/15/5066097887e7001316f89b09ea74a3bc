@@ -118,7 +118,14 @@ public class AlertDialogFragment extends DialogFragment {
 					} else {
 						editor.putString("username", userName.getText().toString());
 					}
-					// Apply username entered to title on main activity
+					
+					
+//					if (preferences.getString("username", "").toString().isEmpty()) {
+//						editor.putString("username", "guest");
+//						editor.apply();
+//					}
+					
+					
 					MainActivity.userNameTextView.setText("Welcome, " + preferences.getString("username", enteredUsername));
 				}
 			})

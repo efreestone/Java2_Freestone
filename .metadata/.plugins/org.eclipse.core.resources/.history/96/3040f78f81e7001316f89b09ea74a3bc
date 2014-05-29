@@ -57,8 +57,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
 	
-	static TextView userNameTextView;
-	
 	public enum DialogType {SEARCH, FAVORITES, INFO, PREFERENCES};
 
 	/*
@@ -75,8 +73,6 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		myDataManager = DataManager.getInstance();
 
 		myContext = this;
-		
-		userNameTextView = (TextView) findViewById(R.id.usernameTextview);
 
 		// Check if the file already exists
 		File file = this.getFileStreamPath(myFileName);

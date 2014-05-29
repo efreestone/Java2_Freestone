@@ -76,7 +76,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 
 		myContext = this;
 		
-		userNameTextView = (TextView) findViewById(R.id.usernameTextview);
+		userNameTextView = findViewById(R.id.usernameTextview);
 
 		// Check if the file already exists
 		File file = this.getFileStreamPath(myFileName);
