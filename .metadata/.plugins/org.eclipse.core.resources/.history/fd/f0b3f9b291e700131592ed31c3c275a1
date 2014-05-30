@@ -10,14 +10,14 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:text="@string/preferencesTitle" />
+        android:text="@string/favoritesTitle" />
     
     <EditText 
         android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:hint="@string/usernameHint" />
+        android:hint="@string/noRatingString" />
     
 
 </LinearLayout>

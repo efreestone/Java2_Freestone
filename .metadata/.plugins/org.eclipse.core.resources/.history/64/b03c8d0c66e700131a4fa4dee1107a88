@@ -1,7 +1,0 @@
-package com.elijahfreestone.java2project4;
-
-import android.app.DialogFragment;
-
-public class AlertDialogFragment extends DialogFragment {
-
-}

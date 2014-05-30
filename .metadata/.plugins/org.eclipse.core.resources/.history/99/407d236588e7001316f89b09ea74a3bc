@@ -128,7 +128,6 @@ public class AlertDialogFragment extends DialogFragment {
 						editor.apply();
 					} 
 					
-					
 					MainActivity.userNameTextView.setText("Welcome, " + preferences.getString("username", enteredUsername));
 				}
 			})

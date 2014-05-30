@@ -111,13 +111,13 @@ public class AlertDialogFragment extends DialogFragment {
 					Editor editor = preferences.edit();
 					String enteredUsername = userName.getText().toString();
 					Log.i("Pref", enteredUsername);
-//					if (enteredUsername.equalsIgnoreCase("")) {
-//						enteredUsername = "guest";
-//						editor.putString("username", "guest");
-//						editor.apply();
-//					} else {
-//						editor.putString("username", userName.getText().toString());
-//					}
+					if (enteredUsername.equalsIgnoreCase("")) {
+						enteredUsername = "guest";
+						editor.putString("username", "guest");
+						editor.apply();
+					} else {
+						editor.putString("username", userName.getText().toString());
+					}
 					
 					
 					if (preferences.getString("username", "").toString().isEmpty()) {

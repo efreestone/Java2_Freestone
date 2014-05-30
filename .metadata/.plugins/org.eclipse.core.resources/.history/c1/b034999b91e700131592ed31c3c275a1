@@ -11,7 +11,6 @@
     <string name="favoritesTitle">Favorites</string>
     <string name="noRatingString">No Movies Rated Yet</string>
     <string name="preferencesTitle">Preferences</string>
-    <string name="usernameHint">Username</string>
     <string name="infoTitle">Info</string>
     
     <string name="buttonString">Get New Releases</string>
