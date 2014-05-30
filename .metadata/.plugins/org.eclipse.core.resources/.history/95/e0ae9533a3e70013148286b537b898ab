@@ -87,6 +87,7 @@ public class JSONData {
 				} else {
 					audienceRating = "N/A";
 				}
+				//audienceRating = newReleaseArray.getJSONObject(i).getJSONObject("ratings").getString("audience_rating");
 
 				// Instantiate Hash Map for array and pass in strings with key/value pairs
 				HashMap<String, String> displayMap = new HashMap<String, String>();

@@ -95,14 +95,8 @@ public class AlertDialogFragment extends DialogFragment {
 			break;
 		
 		case INFO:
-			alertBuilder.setView(layoutInflater.inflate(R.layout.info_dialog_fragment, null))
-			.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			alertBuilder.setView(layoutInflater.inflate(R.id.info, null))
+			.setP
 			break;
 			
 		case PREFERENCES:
