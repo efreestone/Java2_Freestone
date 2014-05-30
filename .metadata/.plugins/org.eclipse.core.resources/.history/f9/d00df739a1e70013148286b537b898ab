@@ -1,14 +1,14 @@
 /*
  * @author	Elijah Freestone 
  *
- * Project	Java2Project3
+ * Project	Java2Project4
  * 
- * Package	com.elijahfreestone.java2project3
+ * Package	com.elijahfreestone.java2project4
  * 
- * date		May 21, 2014
+ * date		May 23, 2014
  */
 
-package com.elijahfreestone.java2project3;
+package com.elijahfreestone.java2project4;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -25,13 +25,14 @@ import android.widget.TextView;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class DetailsActivityFragment handles all UI elements on DetailsActivity.
+ * The Class DetailsFragment handles all UI elements on DetailsActivity.
  */
-public class DetailsActivityFragment extends Fragment {
-	TextView titleTextView, releaseTextView, movieRatingTextView, criticRatingTextView, audienceRatingTextView;
+public class DetailsFragment extends Fragment {
+	TextView titleTextView, releaseTextView, movieRatingTextView,
+			criticRatingTextView, audienceRatingTextView;
 	RatingBar movieRatingBar;
 	Float ratingSelected;
-	
+
 	/*
 	 * The Interface OnGetMoreInfoClicked.
 	 */
@@ -39,64 +40,86 @@ public class DetailsActivityFragment extends Fragment {
 		// onGetMoreInfoClicked creates and calls implicit intent in DetailsActivity
 		void onGetMoreInfoClicked();
 	}
-	
+
 	private OnGetMoreInfoClicked parentActivity;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Fragment#onAttach(android.app.Activity)
 	 */
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
-		
+
 		if (activity instanceof OnGetMoreInfoClicked) {
 			parentActivity = (OnGetMoreInfoClicked) activity;
 		} else {
 			Log.e("Detail Fragment", "Must implement OnGetMoreInfoClick");
 		}
-		 
+
 	} // onAttach Close
 
-	/* (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
 	 */
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		// Create/inflate view and return
-		View detailsView = inflater.inflate(R.layout.activity_details, container);
-		
+		View detailsView = inflater.inflate(R.layout.activity_details,
+				container);
+
 		ratingSelected = 0.0f;
-		
+
 		// Grab all text views by id
 		titleTextView = (TextView) detailsView.findViewById(R.id.titleTextView);
-		releaseTextView = (TextView) detailsView.findViewById(R.id.releaseTextView);
-		movieRatingTextView = (TextView) detailsView.findViewById(R.id.movieRatingTextView);
-		criticRatingTextView = (TextView) detailsView.findViewById(R.id.criticRatingTextView);
-		audienceRatingTextView = (TextView) detailsView.findViewById(R.id.audienceRatingTextView);
-		
+		releaseTextView = (TextView) detailsView
+				.findViewById(R.id.releaseTextView);
+		movieRatingTextView = (TextView) detailsView
+				.findViewById(R.id.movieRatingTextView);
+		criticRatingTextView = (TextView) detailsView
+				.findViewById(R.id.criticRatingTextView);
+		audienceRatingTextView = (TextView) detailsView
+				.findViewById(R.id.audienceRatingTextView);
+
 		// Grab button by id and set onClick for implicit intent
-		Button moreInfoButton = (Button) detailsView.findViewById(R.id.moreInfoButton);
+		Button moreInfoButton = (Button) detailsView
+				.findViewById(R.id.moreInfoButton);
 		moreInfoButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				parentActivity.onGetMoreInfoClicked();
 			} // onClick Close
 		}); // onClickListener Close
-		
+
 		movieRatingBar = (RatingBar) detailsView.findViewById(R.id.movieRatingBar);
 		movieRatingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
-			@Override
-			public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-				DetailsActivity.ratingSelected = movieRatingBar.getRating();
-			}
-		});
-		
+				@Override
+				public void onRatingChanged(RatingBar ratingBar,float rating, boolean fromUser) {
+					DetailsActivity.ratingSelected = movieRatingBar.getRating();
+					
+//					if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//						String userRatingFile = "user_rating.txt";
+//						
+//						String userRatingString = DetailsActivity.dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+//						
+//						DataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
+//						Log.i("Details Frag", "Rating Saved from Landscape Details Frag");
+//					}
+				} 
+			});
+
 		return detailsView;
 	} // onCreateView Close
-	
-	// displayMovieDetails displays details of the movie selected, called from DetailsActivity
+
+	// displayMovieDetails displays details of the movie selected, called from
+	// DetailsActivity
 	public void displayMovieDetails(String dvdTitle, String releaseDate,
 			String movieRating, String criticRating, String audienceRating) {
 		// Set textviews with strings from intent extras
@@ -105,7 +128,8 @@ public class DetailsActivityFragment extends Fragment {
 		movieRatingTextView.setText("MPAA Rating: " + movieRating);
 		criticRatingTextView.setText("Critic Rating: " + criticRating);
 		audienceRatingTextView.setText("Audience Rating: " + audienceRating);
-		
+
 		Log.i("Details Fragment", "Display Movie Details Called");
 	} // displayMovieDetails Close
+
 }

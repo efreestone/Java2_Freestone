@@ -23,6 +23,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView.FindListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -110,6 +111,14 @@ public class AlertDialogFragment extends DialogFragment {
 					Editor editor = preferences.edit();
 					String enteredUsername = userName.getText().toString();
 					Log.i("Pref", enteredUsername);
+//					if (enteredUsername.equalsIgnoreCase("")) {
+//						enteredUsername = "guest";
+//						editor.putString("username", "guest");
+//						editor.apply();
+//					} else {
+//						editor.putString("username", userName.getText().toString());
+//					}
+					
 					
 					if (preferences.getString("username", "").toString().isEmpty()) {
 						editor.putString("username", "guest");

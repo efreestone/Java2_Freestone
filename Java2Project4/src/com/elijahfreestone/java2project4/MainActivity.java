@@ -70,7 +70,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_fragment);
-
+ 
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
 
@@ -150,6 +150,7 @@ public class MainActivity extends Activity implements MainFragment.OnListItemSel
 		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
 		dialogFragment.show(getFragmentManager(), "search_dialog");
 	}
+	
 
 	/*
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to

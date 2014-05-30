@@ -1,14 +1,14 @@
 /*
  * @author	Elijah Freestone 
  *
- * Project	Java2Project3
+ * Project	Java2Project4
  * 
- * Package	com.elijahfreestone.java2project3
+ * Package	com.elijahfreestone.java2project4
  * 
- * date		May 19, 2014
+ * date		May 23, 2014
  */
 
-package com.elijahfreestone.java2project3;
+package com.elijahfreestone.java2project4;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -21,14 +21,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.SimpleAdapter; 
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.elijahfreestone.networkConnection.NetworkConnection;
 
@@ -36,23 +40,26 @@ import com.elijahfreestone.networkConnection.NetworkConnection;
 /**
  * The Class MainActivity.
  */
-public class MainActivity extends Activity implements MainActivityFragment.OnListItemSelected {
+public class MainActivity extends Activity implements MainFragment.OnListItemSelected, DetailsFragment.OnGetMoreInfoClicked {
 	static Context myContext;
 	static String TAG = "MainActivity";
 	static String responseString = null;
+	static String dvdTitle;
 	final MyServiceHandler myServiceHandler = new MyServiceHandler(this);
 	static DataManager myDataManager;
 	static String myFileName = "string_from_url.txt";
-	static String filePathDir = "data/data/com.elijahfreestone.java2project1/files/string_from_url.txt";
-
+	static String userRatingFile = "user_rating.txt";
 	ArrayList<HashMap<String, String>> currentMovieList;
-	
-//	Button newReleaseButton;
-//	static ListView myListView;
-	
+
+	static ListView myListView;
+
 	static final String DVD_TITLE = "dvdTitle";
 	static final String RELEASE_DATE = "releaseDate";
 	static final String MOVIE_RATING = "movieRating";
+	
+	static TextView userNameTextView;
+	
+	public enum DialogType {SEARCH, FAVORITES, INFO, PREFERENCES};
 
 	/*
 	 * (non-Javadoc)
@@ -66,8 +73,10 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 
 		// Grab instance of DataManager
 		myDataManager = DataManager.getInstance();
-		
+
 		myContext = this;
+		
+		userNameTextView = (TextView) findViewById(R.id.usernameTextview);
 
 		// Check if the file already exists
 		File file = this.getFileStreamPath(myFileName);
@@ -75,7 +84,7 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		if (fileExists) {
 			// Display the data to the listview automatically if file exists
 			JSONData.displayDataFromFile();
-			
+
 			Log.i("File", "File exists");
 		} else {
 			if (NetworkConnection.connectionStatus(myContext)) {
@@ -87,10 +96,60 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 				// Show No Connection alert
 				noConnectionAlert();
 			}
-			
+
 			Log.i("File", "File DOESN'T exist!!");
 		}
+		
+		
 	} // onCreate Close
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        
+        return super.onCreateOptionsMenu(menu);
+    } // onCreateOptionsMenu Close
+	
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {
+		case R.id.searchActionItem:
+			// Search Action
+			launchDialogFragment(DialogType.SEARCH);
+			Log.i("Action", "Search Clicked");
+			return true;
+		case R.id.favoritesActionItem:
+			// Favorites Action
+			launchDialogFragment(DialogType.FAVORITES);
+			Log.i("Action", "Favorites Clicked");
+			return true;
+		case R.id.infoActionItem:
+			// Favorites Action
+			launchDialogFragment(DialogType.INFO);
+			Log.i("Action", "Info Clicked");
+			return true;
+		case R.id.preferencesActionItem:
+			// Preferences Action
+			launchDialogFragment(DialogType.PREFERENCES);
+			Log.i("Action", "Preferences Clicked");
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	} // onOptionsItemSelected Close
+	
+	public void launchDialogFragment(DialogType type) {
+		AlertDialogFragment dialogFragment = AlertDialogFragment.newInstance(type);
+		dialogFragment.show(getFragmentManager(), "search_dialog");
+	}
 
 	/*
 	 * The Class MyServiceHandler creates a Service Handler with a Weak Ref to
@@ -147,8 +206,11 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		startService(startDataIntent);
 	} // retrieveData Close
 
-	// Custom methods to show no connection, no file, and rating alerts
-	// noConnectionAlert provides an alert dialog when no network connection is available
+	/*
+	 * Custom methods to show no connection, no file, and rating alerts
+	 * noConnectionAlert provides an alert dialog when no network connection is
+	 * available
+	 */
 	public static void noConnectionAlert() {
 		// Create alert dialog for no connection
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.myContext).create();
@@ -172,7 +234,10 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		alertDialog.show();
 	}
 
-	// ratingSelectedAlert provides an alert dialog when a movie was rated on the detail activity
+	/*
+	 * ratingSelectedAlert provides an alert dialog when a movie was rated on
+	 * the detail activity
+	 */
 	public void ratingSelectedAlert(String dvdTitle, Float ratingSelected) {
 		// Create alert dialog for rating selected
 		AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -219,32 +284,79 @@ public class MainActivity extends Activity implements MainActivityFragment.OnLis
 		}
 	} // onRestoreInstanceState Close
 
-	// onActivityResult is called when returning from Details or Device orientation changes to Landscape on Details.
-	// Details passes movie object back via intent extras which are used for rating alert and or Details display
+	/*
+	 * onActivityResult is called when returning from Details or Device
+	 * orientation changes to Landscape on Details. Details passes movie object
+	 * back via intent extras which are used for rating alert and or Details
+	 * display
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent detailsBackIntent) {
 		Log.i(TAG, "On Activity Result");
-		DetailsActivityFragment detailsFragment = (DetailsActivityFragment) getFragmentManager().findFragmentById(R.id.detailsFragment);
-		
+		DetailsFragment detailsFragment = (DetailsFragment) getFragmentManager()
+				.findFragmentById(R.id.detailsFragment);
+
 		if (resultCode == RESULT_OK && requestCode == 0) {
 			Log.i(TAG, "onActivityResult resultCode = OK");
 			if (detailsBackIntent.hasExtra("dvdTitle") && detailsBackIntent.hasExtra("ratingSelected")) {
 				// Pull all extras from Intent
-				String dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
+				dvdTitle = detailsBackIntent.getExtras().getString("dvdTitle");
 				String releaseDate = detailsBackIntent.getExtras().getString("releaseDate");
 				String movieRating = detailsBackIntent.getExtras().getString("movieRating");
 				String criticRating = detailsBackIntent.getExtras().getString("criticRating");
 				String audienceRating = detailsBackIntent.getExtras().getString("audienceRating");
 				
-//				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
-//				ratingSelectedAlert(dvdTitle, ratingSelected);
+				Float ratingSelected = detailsBackIntent.getExtras().getFloat("ratingSelected");
 				
-				// If the device is in landscape, display movie info in details pane
-				// This is only triggered when in Details in Portrait then changing device to landscape
+				String userRatingString = dvdTitle + " - Rated " + ratingSelected + " stars \r\n";
+				
+				// ratingSelectedAlert(dvdTitle, ratingSelected);
+
+				/*
+				 * If the device is in landscape, display movie info in details
+				 * pane. This is only triggered when in Details starts in
+				 * Portrait and changed to landscape
+				 */
 				if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, movieRating, criticRating, audienceRating);
-					Log.i("TAG", "onActivityResult Landscape");
+					detailsFragment.displayMovieDetails(dvdTitle, releaseDate, 
+							movieRating, criticRating, audienceRating);
+					Log.i(TAG, "onActivityResult Landscape");
+				} else {
+					// Save rating selected to file with movie title only if rating selected.
+					if (ratingSelected != 0) {
+						myDataManager.writeStringToFile(myContext, userRatingFile, userRatingString);
+						Log.i(TAG, "Rating Saved form onActivityResult else"); 
+					}
 				}
+				
+				// Check if user rating file exists and log out its content if it does
+				File file = this.getFileStreamPath(userRatingFile);
+				Boolean fileExists = file.exists();
+				if (fileExists) {
+					JSONData.displayUserRatingFromFile();
+					Log.i(TAG, "User Rating File Read");
+				}
+				
 			}
-		} 
+		}
 	} // onActivityResult Close
+
+	/*
+	 * onGetMoreInfoInfo Click is an interface method from DetailsFragment that
+	 * handles Implicit Intent. This version overrides only if the device is in
+	 * landscape
+	 */
+	@Override
+	public void onGetMoreInfoClicked() {
+		if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && dvdTitle != null) {
+			Log.i(TAG, "dvdTitle in onGetMoreInfoClick = " + dvdTitle);
+			String baseURLString = "http://www.rottentomatoes.com/m/";
+			String moddedTitle = dvdTitle.replace(" ", "_");
+			String urlSearchMod = baseURLString + moddedTitle;
+			Intent moreInfoIntent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse(urlSearchMod));
+
+			startActivity(moreInfoIntent);
+		}
+	} // onGetMoreInfoClick Close
+
 }
